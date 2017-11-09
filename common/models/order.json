@@ -1,0 +1,38 @@
+{
+  "name": "Order",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "customerName": {
+      "type": "string",
+      "required": true
+    },
+    "orderAddress": {
+      "type": "object",
+      "required": true
+    },
+    "phoneNumber": {
+      "type": "string",
+      "required": true
+    },
+    "ccInfo": {
+      "type": "object",
+      "required": true
+    },
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "totalAmount": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,46 @@
+{
+  "name": "Restaurant",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "ownerName": {
+      "type": "string",
+      "required": true
+    },
+    "restaurantName": {
+      "type": "string",
+      "required": true
+    },
+    "restaurantPhone": {
+      "type": "string",
+      "required": true
+    },
+    "restaurantEmail": {
+      "type": "string",
+      "required": true
+    },
+    "password": {
+      "type": "string",
+      "required": true
+    },
+    "location": {
+      "type": "object",
+      "required": true
+    },
+    "prepTime": {
+      "type": "number",
+      "required": true
+    },
+    "hoursOfOperation": {
+      "type": "object",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
