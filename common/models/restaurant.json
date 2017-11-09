@@ -40,7 +40,33 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "orders": {
+      "type": "hasMany",
+      "model": "Order",
+      "foreignKey": ""
+    },
+    "reviews": {
+      "type": "hasMany",
+      "model": "Review",
+      "foreignKey": ""
+    },
+    "menuItems": {
+      "type": "hasMany",
+      "model": "MenuItem",
+      "foreignKey": ""
+    },
+    "tags": {
+      "type": "hasMany",
+      "model": "Tag",
+      "foreignKey": ""
+    },
+    "pictures": {
+      "type": "hasMany",
+      "model": "Picture",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": {}
 }

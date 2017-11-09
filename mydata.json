@@ -1,0 +1,32 @@
+{
+  "ids": {
+    "User": 1,
+    "AccessToken": 1,
+    "ACL": 1,
+    "RoleMapping": 1,
+    "Role": 1,
+    "MenuItem": 1,
+    "Tag": 1,
+    "Restaurant": 1,
+    "Picture": 1,
+    "Order": 1,
+    "Review": 1,
+    "Customer": 2
+  },
+  "models": {
+    "User": {},
+    "AccessToken": {},
+    "ACL": {},
+    "RoleMapping": {},
+    "Role": {},
+    "MenuItem": {},
+    "Tag": {},
+    "Restaurant": {},
+    "Picture": {},
+    "Order": {},
+    "Review": {},
+    "Customer": {
+      "1": "{\"name\":\"test\",\"email\":\"test@gmail.com\",\"password\":\"string\",\"phoneNumber\":\"string\",\"address\":{\"street\":\"101 broadway\"},\"id\":1}"
+    }
+  }
+}
