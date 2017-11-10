@@ -18235,6 +18235,10 @@ var _axios = __webpack_require__(35);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _Navbar = __webpack_require__(54);
+
+var _Navbar2 = _interopRequireDefault(_Navbar);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18258,24 +18262,23 @@ var App = function (_React$Component) {
   }
 
   _createClass(App, [{
-    key: 'componentDidMount',
+    key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
 
-      _axios2.default.get('/api/Customers/').then(function (res) {
+      _axios2.default.get("/api/Customers/").then(function (res) {
         return _this2.setState({
           customer: res.data[0].name
         });
       });
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       return _react2.default.createElement(
-        'p',
-        null,
-        ' ',
-        this.state.customer
+        "div",
+        { className: "container" },
+        _react2.default.createElement(_Navbar2.default, null)
       );
     }
   }]);
@@ -19854,6 +19857,93 @@ module.exports = function spread(callback) {
   };
 };
 
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Navbar = function (_React$Component) {
+  _inherits(Navbar, _React$Component);
+
+  function Navbar() {
+    _classCallCheck(this, Navbar);
+
+    return _possibleConstructorReturn(this, (Navbar.__proto__ || Object.getPrototypeOf(Navbar)).apply(this, arguments));
+  }
+
+  _createClass(Navbar, [{
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "nav",
+        { className: "navbar navbar-toggleable-md navbar-light bg-faded fixed-top" },
+        _react2.default.createElement(
+          "button",
+          {
+            className: "navbar-toggler navbar-toggler-right",
+            type: "button",
+            "data-toggle": "collapse",
+            "data-target": "#navbarNavAltMarkup"
+          },
+          _react2.default.createElement("span", { className: "navbar-toggler-icon" })
+        ),
+        _react2.default.createElement(
+          "a",
+          { className: "navbar-brand", href: "#" },
+          "MealHouse"
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "collapse navbar-collapse justify-content-end", id: "navbarNavAltMarkup" },
+          _react2.default.createElement(
+            "div",
+            { className: "navbar-nav" },
+            _react2.default.createElement(
+              "a",
+              { className: "nav-item nav-link active", href: "#" },
+              "Sign Up ",
+              _react2.default.createElement(
+                "span",
+                { className: "sr-only" },
+                "(current)"
+              )
+            ),
+            _react2.default.createElement(
+              "a",
+              { className: "nav-item nav-link", href: "#" },
+              "Login"
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Navbar;
+}(_react2.default.Component);
+
+exports.default = Navbar;
 
 /***/ })
 /******/ ]);
