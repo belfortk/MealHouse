@@ -1,7 +1,9 @@
 import axios from "axios";
 import Navbar from "./Navbar";
 import LoginModal from './LoginModal.jsx';
+import SearchBar from "./SearchBar";
 import React, { Component } from 'react';
+
 
 import SignupPage from './SignupPage/SignupPage'
 
@@ -23,6 +25,7 @@ class App extends Component {
           <LoginModal/>
         </header>
 
+      <SearchBar />
         <div className="container">
         {/* <SignupPage /> */}
 
