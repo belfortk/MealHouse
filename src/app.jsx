@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Navbar from "./Navbar";
+import LoginModal from './LoginModal.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -21,6 +22,7 @@ class App extends React.Component {
     return (
       <div className="container">
         <Navbar />
+        <LoginModal/>
       </div>
     );
   }

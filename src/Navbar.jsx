@@ -19,9 +19,14 @@ class Navbar extends React.Component {
             <a className="nav-item nav-link active" href="#">
               Sign Up <span className="sr-only">(current)</span>
             </a>
-            <a className="nav-item nav-link" href="#">
-              Login
-            </a>
+            <a
+          href="#"
+          className="nav-item nav-link active"
+          data-toggle="modal"
+          data-target="#myModal"
+        >
+          Login
+        </a>
           </div>
         </div>
       </nav>
