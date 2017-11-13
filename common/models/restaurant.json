@@ -35,7 +35,15 @@
       "required": true
     },
     "hoursOfOperation": {
-      "type": "object",
+      "type": "array",
+      "required": true
+    },
+    "priceRange": {
+      "type": "number",
+      "required": true
+    },
+    "minDeliveryCharge": {
+      "type": "number",
       "required": true
     }
   },
@@ -70,3 +78,7 @@
   "acls": [],
   "methods": {}
 }
+
+
+
+

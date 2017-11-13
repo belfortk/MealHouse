@@ -7,10 +7,10 @@
     "Role": 1,
     "MenuItem": 1,
     "Tag": 1,
-    "Restaurant": 1,
-    "Picture": 1,
+    "Restaurant": 4,
+    "Picture": 2,
     "Order": 1,
-    "Review": 1,
+    "Review": 2,
     "Customer": 6
   },
   "models": {
@@ -21,10 +21,17 @@
     "Role": {},
     "MenuItem": {},
     "Tag": {},
-    "Restaurant": {},
-    "Picture": {},
+    "Restaurant": {
+      "2": "{\"ownerName\":\"string\",\"restaurantName\":\"string\",\"restaurantPhone\":\"string\",\"restaurantEmail\":\"string\",\"password\":\"string\",\"location\":{},\"prepTime\":0,\"hoursOfOperation\":{},\"priceRange\":0,\"minDeliveryCharge\":0,\"id\":2}",
+      "3": "{\"ownerName\":\"string\",\"restaurantName\":\"string\",\"restaurantPhone\":\"string\",\"restaurantEmail\":\"string\",\"password\":\"string\",\"location\":{\"street\":\"address\"},\"prepTime\":0,\"hoursOfOperation\":[{\"Mon\":{\"start\":\"9:00AM\",\"end\":\"10:00PM\"}},{\"Tues\":{\"start\":\"9:00AM\",\"end\":\"10:00PM\"}},{\"Wed\":{\"start\":\"9:00AM\",\"end\":\"10:00PM\"}},{\"Thu\":{\"start\":\"9:00AM\",\"end\":\"10:00PM\"}},{\"Fri\":{\"start\":\"9:00AM\",\"end\":\"10:00PM\"}},{\"Sat\":{\"start\":\"9:00AM\",\"end\":\"10:00PM\"}},{\"Sun\":{\"start\":\"9:00AM\",\"end\":\"10:00PM\"}}],\"priceRange\":0,\"minDeliveryCharge\":0,\"id\":3}"
+    },
+    "Picture": {
+      "1": "{\"description\":\"dummy picture\",\"date\":\"2017-11-13T06:45:28.595Z\",\"src\":\"https://static.pexels.com/photos/461198/pexels-photo-461198.jpeg\",\"restaurantId\":1,\"id\":1}"
+    },
     "Order": {},
-    "Review": {},
+    "Review": {
+      "1": "{\"date\":\"2017-11-13T06:45:29.063Z\",\"stars\":3,\"restaurantId\":1,\"customerId\":2,\"id\":1}"
+    },
     "Customer": {
       "1": "{\"name\":\"test\",\"email\":\"test@gmail.com\",\"password\":\"string\",\"phoneNumber\":\"string\",\"address\":{\"street\":\"101 broadway\"},\"id\":1}",
       "2": "{\"name\":\"test1\",\"email\":\"test1@gmail.com\",\"password\":\"string\",\"phoneNumber\":\"string\",\"address\":{},\"id\":2}",
