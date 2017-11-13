@@ -3,47 +3,28 @@ import Navbar from "./Navbar";
 import LoginModal from './LoginModal.jsx';
 import React, { Component } from 'react';
 
-import NavBar from './NavBar';
-import CustomerSignUpForm from './SignupPage/CustomerSignUpForm'
-import RestaurantSignUpForm from './SignupPage/RestaurantSignUpForm'
+import SignupPage from './SignupPage/SignupPage'
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      isCustomer: "true",
-  }
-  this.handleSelectType =  this.handleSelectType.bind(this);
-
+   
   }
 
-  handleSelectType(e){
-    this.setState({
-      isCustomer : e.target.value
-    })
   }
+
 
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <NavBar />
+          <Navbar />
           <LoginModal/>
         </header>
 
         <div className="container">
-          <div className="btn-group" data-toggle="buttons">
-            <label className="btn btn-primary active">
-              <button type="radio" name="options" id="customer-button" autoComplete="off" value={'true'} onClick={this.handleSelectType} />
-              Customer
-            </label>
-            <label className="btn btn-primary">
-              <button type="radio" name="options" id="restaurant-button" autoComplete="off"  value={"false"} onClick={this.handleSelectType}/> Restaurant
-            </label>
-          </div>
-
-          { (this.state.isCustomer == "true")? <CustomerSignUpForm /> : <RestaurantSignUpForm /> }
-
+        {/* <SignupPage /> */}
 
         </div>
 
