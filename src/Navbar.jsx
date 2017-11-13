@@ -21,7 +21,7 @@ class Navbar extends React.Component {
             </a>
             <a
           href="#"
-          class="nav-item nav-link active"
+          className="nav-item nav-link active"
           data-toggle="modal"
           data-target="#myModal"
         >

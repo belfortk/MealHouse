@@ -568,6 +568,21 @@ process.umask = function() { return 0; };
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports = __webpack_require__(22);
+} else {
+  module.exports = __webpack_require__(23);
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 
 
 /**
@@ -604,21 +619,6 @@ emptyFunction.thatReturnsArgument = function (arg) {
 };
 
 module.exports = emptyFunction;
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(22);
-} else {
-  module.exports = __webpack_require__(23);
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 4 */
@@ -816,7 +816,7 @@ module.exports = invariant;
 
 
 
-var emptyFunction = __webpack_require__(2);
+var emptyFunction = __webpack_require__(3);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -1092,7 +1092,7 @@ module.exports = ExecutionEnvironment;
  * @typechecks
  */
 
-var emptyFunction = __webpack_require__(2);
+var emptyFunction = __webpack_require__(3);
 
 /**
  * Upstream version of event listener. Does not take into account specific
@@ -1620,7 +1620,7 @@ module.exports = Cancel;
 "use strict";
 
 
-var _react = __webpack_require__(3);
+var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -1650,7 +1650,7 @@ _reactDom2.default.render(_react2.default.createElement(_app2.default, null), ro
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var m=__webpack_require__(4),n=__webpack_require__(5),p=__webpack_require__(2);
+var m=__webpack_require__(4),n=__webpack_require__(5),p=__webpack_require__(3);
 function q(a){for(var b=arguments.length-1,e="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,d=0;d<b;d++)e+="\x26args[]\x3d"+encodeURIComponent(arguments[d+1]);b=Error(e+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}
 var r={isMounted:function(){return!1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}};function t(a,b,e){this.props=a;this.context=b;this.refs=n;this.updater=e||r}t.prototype.isReactComponent={};t.prototype.setState=function(a,b){"object"!==typeof a&&"function"!==typeof a&&null!=a?q("85"):void 0;this.updater.enqueueSetState(this,a,b,"setState")};t.prototype.forceUpdate=function(a){this.updater.enqueueForceUpdate(this,a,"forceUpdate")};
 function u(a,b,e){this.props=a;this.context=b;this.refs=n;this.updater=e||r}function v(){}v.prototype=t.prototype;var w=u.prototype=new v;w.constructor=u;m(w,t.prototype);w.isPureReactComponent=!0;function x(a,b,e){this.props=a;this.context=b;this.refs=n;this.updater=e||r}var y=x.prototype=new v;y.constructor=x;m(y,t.prototype);y.unstable_isAsyncReactComponent=!0;y.render=function(){return this.props.children};
@@ -1690,7 +1690,7 @@ var _assign = __webpack_require__(4);
 var invariant = __webpack_require__(6);
 var emptyObject = __webpack_require__(5);
 var warning = __webpack_require__(7);
-var emptyFunction = __webpack_require__(2);
+var emptyFunction = __webpack_require__(3);
 var checkPropTypes = __webpack_require__(9);
 
 // TODO: this is special because it gets imported during build.
@@ -3098,7 +3098,7 @@ if (process.env.NODE_ENV === 'production') {
 /*
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var aa=__webpack_require__(3),m=__webpack_require__(10),A=__webpack_require__(4),B=__webpack_require__(2),ca=__webpack_require__(11),da=__webpack_require__(12),ea=__webpack_require__(13),ha=__webpack_require__(14),ia=__webpack_require__(15),C=__webpack_require__(5);
+var aa=__webpack_require__(2),m=__webpack_require__(10),A=__webpack_require__(4),B=__webpack_require__(3),ca=__webpack_require__(11),da=__webpack_require__(12),ea=__webpack_require__(13),ha=__webpack_require__(14),ia=__webpack_require__(15),C=__webpack_require__(5);
 function D(a){for(var b=arguments.length-1,c="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,d=0;d<b;d++)c+="\x26args[]\x3d"+encodeURIComponent(arguments[d+1]);b=Error(c+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}aa?void 0:D("227");
 var la={children:!0,dangerouslySetInnerHTML:!0,defaultValue:!0,defaultChecked:!0,innerHTML:!0,suppressContentEditableWarning:!0,suppressHydrationWarning:!0,style:!0};function qa(a,b){return(a&b)===b}
 var ra={MUST_USE_PROPERTY:1,HAS_BOOLEAN_VALUE:4,HAS_NUMERIC_VALUE:8,HAS_POSITIVE_NUMERIC_VALUE:24,HAS_OVERLOADED_BOOLEAN_VALUE:32,HAS_STRING_BOOLEAN_VALUE:64,injectDOMPropertyConfig:function(a){var b=ra,c=a.Properties||{},d=a.DOMAttributeNamespaces||{},e=a.DOMAttributeNames||{};a=a.DOMMutationMethods||{};for(var f in c){sa.hasOwnProperty(f)?D("48",f):void 0;var g=f.toLowerCase(),k=c[f];g={attributeName:g,attributeNamespace:null,propertyName:f,mutationMethod:null,mustUseProperty:qa(k,b.MUST_USE_PROPERTY),
@@ -3392,12 +3392,12 @@ if (process.env.NODE_ENV !== "production") {
   (function() {
 'use strict';
 
-var React = __webpack_require__(3);
+var React = __webpack_require__(2);
 var invariant = __webpack_require__(6);
 var warning = __webpack_require__(7);
 var ExecutionEnvironment = __webpack_require__(10);
 var _assign = __webpack_require__(4);
-var emptyFunction$1 = __webpack_require__(2);
+var emptyFunction$1 = __webpack_require__(3);
 var EventListener = __webpack_require__(11);
 var getActiveElement = __webpack_require__(12);
 var shallowEqual = __webpack_require__(13);
@@ -18907,7 +18907,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(3);
+var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -18918,6 +18918,14 @@ var _axios2 = _interopRequireDefault(_axios);
 var _Navbar = __webpack_require__(54);
 
 var _Navbar2 = _interopRequireDefault(_Navbar);
+
+var _LoginModal = __webpack_require__(55);
+
+var _LoginModal2 = _interopRequireDefault(_LoginModal);
+
+var _RestaurantProfile = __webpack_require__(56);
+
+var _RestaurantProfile2 = _interopRequireDefault(_RestaurantProfile);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -18959,93 +18967,8 @@ var App = function (_React$Component) {
         "div",
         { className: "container" },
         _react2.default.createElement(_Navbar2.default, null),
-        _react2.default.createElement(
-          "div",
-          { id: "myModal", "class": "modal fade", role: "dialog" },
-          _react2.default.createElement(
-            "div",
-            { "class": "modal-dialog" },
-            _react2.default.createElement(
-              "div",
-              { "class": "modal-content" },
-              _react2.default.createElement(
-                "div",
-                { "class": "modal-header" },
-                _react2.default.createElement(
-                  "button",
-                  { type: "button", "class": "close", "data-dismiss": "modal" },
-                  "\xD7"
-                ),
-                _react2.default.createElement(
-                  "h4",
-                  { "class": "modal-title" },
-                  "MealHouse Log-in"
-                )
-              ),
-              _react2.default.createElement(
-                "div",
-                { "class": "modal-body" },
-                _react2.default.createElement(
-                  "div",
-                  { "class": "form-group" },
-                  _react2.default.createElement(
-                    "label",
-                    { "for": "exampleInputEmail1" },
-                    "Email address"
-                  ),
-                  _react2.default.createElement("input", {
-                    "class": "form-control",
-                    id: "exampleInputEmail1",
-                    placeholder: "Enter email",
-                    type: "email"
-                  })
-                ),
-                _react2.default.createElement(
-                  "div",
-                  { "class": "form-group" },
-                  _react2.default.createElement(
-                    "label",
-                    { "for": "exampleInputPassword1" },
-                    "Password"
-                  ),
-                  _react2.default.createElement("input", {
-                    "class": "form-control",
-                    id: "exampleInputPassword1",
-                    placeholder: "Password",
-                    type: "password"
-                  })
-                ),
-                _react2.default.createElement(
-                  "p",
-                  { "class": "text-right" },
-                  _react2.default.createElement(
-                    "a",
-                    { href: "#" },
-                    "Forgot password?"
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                "div",
-                { "class": "modal-footer" },
-                _react2.default.createElement(
-                  "button",
-                  { type: "button", "class": "btn btn-default" },
-                  "Submit"
-                ),
-                _react2.default.createElement(
-                  "button",
-                  {
-                    type: "button",
-                    "class": "btn btn-default",
-                    "data-dismiss": "modal"
-                  },
-                  "Close"
-                )
-              )
-            )
-          )
-        )
+        _react2.default.createElement(_LoginModal2.default, null),
+        _react2.default.createElement(_RestaurantProfile2.default, null)
       );
     }
   }]);
@@ -19958,7 +19881,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(3);
+var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -20020,7 +19943,7 @@ var Navbar = function (_React$Component) {
               "a",
               {
                 href: "#",
-                "class": "nav-item nav-link active",
+                className: "nav-item nav-link active",
                 "data-toggle": "modal",
                 "data-target": "#myModal"
               },
@@ -20036,6 +19959,197 @@ var Navbar = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Navbar;
+
+/***/ }),
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var LoginModal = function (_React$Component) {
+  _inherits(LoginModal, _React$Component);
+
+  function LoginModal() {
+    _classCallCheck(this, LoginModal);
+
+    return _possibleConstructorReturn(this, (LoginModal.__proto__ || Object.getPrototypeOf(LoginModal)).apply(this, arguments));
+  }
+
+  _createClass(LoginModal, [{
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "div",
+        { id: "myModal", className: "modal fade", role: "dialog" },
+        _react2.default.createElement(
+          "div",
+          { className: "modal-dialog" },
+          _react2.default.createElement(
+            "div",
+            { className: "modal-content" },
+            _react2.default.createElement(
+              "div",
+              { className: "modal-header" },
+              _react2.default.createElement(
+                "button",
+                { type: "button", className: "close", "data-dismiss": "modal" },
+                "\xD7"
+              ),
+              _react2.default.createElement(
+                "h4",
+                { className: "modal-title" },
+                "MealHouse Log-in"
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "modal-body" },
+              _react2.default.createElement(
+                "div",
+                { className: "form-group" },
+                _react2.default.createElement(
+                  "label",
+                  { "for": "exampleInputEmail1" },
+                  "Email address"
+                ),
+                _react2.default.createElement("input", {
+                  className: "form-control",
+                  id: "exampleInputEmail1",
+                  placeholder: "Enter email",
+                  type: "email"
+                })
+              ),
+              _react2.default.createElement(
+                "div",
+                { className: "form-group" },
+                _react2.default.createElement(
+                  "label",
+                  { "for": "exampleInputPassword1" },
+                  "Password"
+                ),
+                _react2.default.createElement("input", {
+                  className: "form-control",
+                  id: "exampleInputPassword1",
+                  placeholder: "Password",
+                  type: "password"
+                })
+              ),
+              _react2.default.createElement(
+                "p",
+                { className: "text-right" },
+                _react2.default.createElement(
+                  "a",
+                  { href: "#" },
+                  "Forgot password?"
+                )
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "modal-footer" },
+              _react2.default.createElement(
+                "button",
+                { type: "button", className: "btn btn-default" },
+                "Submit"
+              ),
+              _react2.default.createElement(
+                "button",
+                {
+                  type: "button",
+                  className: "btn btn-default",
+                  "data-dismiss": "modal"
+                },
+                "Close"
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return LoginModal;
+}(_react2.default.Component);
+
+exports.default = LoginModal;
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Navbar = __webpack_require__(54);
+
+var _Navbar2 = _interopRequireDefault(_Navbar);
+
+var _LoginModal = __webpack_require__(55);
+
+var _LoginModal2 = _interopRequireDefault(_LoginModal);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var RestaurantProfile = function (_React$Component) {
+  _inherits(RestaurantProfile, _React$Component);
+
+  function RestaurantProfile(props) {
+    _classCallCheck(this, RestaurantProfile);
+
+    var _this = _possibleConstructorReturn(this, (RestaurantProfile.__proto__ || Object.getPrototypeOf(RestaurantProfile)).call(this, props));
+
+    _this.state = {
+      companyName: ""
+    };
+    return _this;
+  }
+
+  _createClass(RestaurantProfile, [{
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement("div", null);
+    }
+  }]);
+
+  return RestaurantProfile;
+}(_react2.default.Component);
+
+exports.default = RestaurantProfile;
 
 /***/ })
 /******/ ]);
