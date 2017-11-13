@@ -11,7 +11,7 @@
     "Picture": 1,
     "Order": 1,
     "Review": 1,
-    "Customer": 2
+    "Customer": 6
   },
   "models": {
     "User": {},
@@ -26,7 +26,11 @@
     "Order": {},
     "Review": {},
     "Customer": {
-      "1": "{\"name\":\"test\",\"email\":\"test@gmail.com\",\"password\":\"string\",\"phoneNumber\":\"string\",\"address\":{\"street\":\"101 broadway\"},\"id\":1}"
+      "1": "{\"name\":\"test\",\"email\":\"test@gmail.com\",\"password\":\"string\",\"phoneNumber\":\"string\",\"address\":{\"street\":\"101 broadway\"},\"id\":1}",
+      "2": "{\"name\":\"test1\",\"email\":\"test1@gmail.com\",\"password\":\"string\",\"phoneNumber\":\"string\",\"address\":{},\"id\":2}",
+      "3": "{\"name\":\"hello goodbye\",\"email\":\"test2@gmail.com\",\"password\":\"jfsadk;j\",\"phoneNumber\":\"231241241221\",\"address\":{\"street\":\"gfsga\",\"town\":\"reraf\",\"state\":\"AL\",\"zipcode\":\"23213\"},\"id\":3}",
+      "4": "{\"name\":\"what why\",\"email\":\"test3@gmail.com\",\"password\":\"ffdkjasd;jk\",\"phoneNumber\":\"43750987098\",\"address\":{\"street\":\"kjl;gfskdjo\",\"town\":\"gufkn\",\"state\":\"AL\",\"zipcode\":\"43245\"},\"id\":4}",
+      "5": "{\"name\":\"test4 test4\",\"email\":\"test4@gmail.com\",\"password\":\"dfjsad;kj\",\"phoneNumber\":\"o8098-9\",\"address\":{\"street\":\"afdjk\",\"town\":\"monijio\",\"state\":\"AL\",\"zipcode\":\"43537\"},\"id\":5}"
     }
   }
 }

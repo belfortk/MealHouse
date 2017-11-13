@@ -1,28 +1,52 @@
-import React from "react";
 import axios from "axios";
 import Navbar from "./Navbar";
 import LoginModal from './LoginModal.jsx';
+import React, { Component } from 'react';
 
-class App extends React.Component {
-  constructor(props) {
+import NavBar from './NavBar';
+import CustomerSignUpForm from './SignupPage/CustomerSignUpForm'
+import RestaurantSignUpForm from './SignupPage/RestaurantSignUpForm'
+
+class App extends Component {
+  constructor(props){
     super(props);
     this.state = {
-      customer: []
-    };
+      isCustomer: "true",
+  }
+  this.handleSelectType =  this.handleSelectType.bind(this);
+
   }
 
-  componentDidMount() {
-    axios.get("/api/Customers/").then(res =>
-      this.setState({
-        customer: res.data[0].name
-      })
-    );
+  handleSelectType(e){
+    this.setState({
+      isCustomer : e.target.value
+    })
   }
+
   render() {
     return (
-      <div className="container">
-        <Navbar />
-        <LoginModal/>
+      <div className="App">
+        <header className="App-header">
+          <NavBar />
+          <LoginModal/>
+        </header>
+
+        <div className="container">
+          <div className="btn-group" data-toggle="buttons">
+            <label className="btn btn-primary active">
+              <button type="radio" name="options" id="customer-button" autoComplete="off" value={'true'} onClick={this.handleSelectType} />
+              Customer
+            </label>
+            <label className="btn btn-primary">
+              <button type="radio" name="options" id="restaurant-button" autoComplete="off"  value={"false"} onClick={this.handleSelectType}/> Restaurant
+            </label>
+          </div>
+
+          { (this.state.isCustomer == "true")? <CustomerSignUpForm /> : <RestaurantSignUpForm /> }
+
+
+        </div>
+
       </div>
     );
   }

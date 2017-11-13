@@ -14,7 +14,7 @@ class LoginModal extends React.Component {
             </div>
             <div className="modal-body">
               <div className="form-group">
-                <label for="exampleInputEmail1">Email address</label>
+                <label htmlFor="exampleInputEmail1">Email address</label>
                 <input
                   className="form-control"
                   id="exampleInputEmail1"
@@ -23,7 +23,7 @@ class LoginModal extends React.Component {
                 />
               </div>
               <div className="form-group">
-                <label for="exampleInputPassword1">Password</label>
+                <label htmlFor="exampleInputPassword1">Password</label>
                 <input
                   className="form-control"
                   id="exampleInputPassword1"

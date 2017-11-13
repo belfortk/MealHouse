@@ -60,321 +60,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 21);
+/******/ 	return __webpack_require__(__webpack_require__.s = 14);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var bind = __webpack_require__(16);
-var isBuffer = __webpack_require__(37);
-
-/*global toString:true*/
-
-// utils is a library of generic helper functions non-specific to axios
-
-var toString = Object.prototype.toString;
-
-/**
- * Determine if a value is an Array
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is an Array, otherwise false
- */
-function isArray(val) {
-  return toString.call(val) === '[object Array]';
-}
-
-/**
- * Determine if a value is an ArrayBuffer
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is an ArrayBuffer, otherwise false
- */
-function isArrayBuffer(val) {
-  return toString.call(val) === '[object ArrayBuffer]';
-}
-
-/**
- * Determine if a value is a FormData
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is an FormData, otherwise false
- */
-function isFormData(val) {
-  return (typeof FormData !== 'undefined') && (val instanceof FormData);
-}
-
-/**
- * Determine if a value is a view on an ArrayBuffer
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is a view on an ArrayBuffer, otherwise false
- */
-function isArrayBufferView(val) {
-  var result;
-  if ((typeof ArrayBuffer !== 'undefined') && (ArrayBuffer.isView)) {
-    result = ArrayBuffer.isView(val);
-  } else {
-    result = (val) && (val.buffer) && (val.buffer instanceof ArrayBuffer);
-  }
-  return result;
-}
-
-/**
- * Determine if a value is a String
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is a String, otherwise false
- */
-function isString(val) {
-  return typeof val === 'string';
-}
-
-/**
- * Determine if a value is a Number
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is a Number, otherwise false
- */
-function isNumber(val) {
-  return typeof val === 'number';
-}
-
-/**
- * Determine if a value is undefined
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if the value is undefined, otherwise false
- */
-function isUndefined(val) {
-  return typeof val === 'undefined';
-}
-
-/**
- * Determine if a value is an Object
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is an Object, otherwise false
- */
-function isObject(val) {
-  return val !== null && typeof val === 'object';
-}
-
-/**
- * Determine if a value is a Date
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is a Date, otherwise false
- */
-function isDate(val) {
-  return toString.call(val) === '[object Date]';
-}
-
-/**
- * Determine if a value is a File
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is a File, otherwise false
- */
-function isFile(val) {
-  return toString.call(val) === '[object File]';
-}
-
-/**
- * Determine if a value is a Blob
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is a Blob, otherwise false
- */
-function isBlob(val) {
-  return toString.call(val) === '[object Blob]';
-}
-
-/**
- * Determine if a value is a Function
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is a Function, otherwise false
- */
-function isFunction(val) {
-  return toString.call(val) === '[object Function]';
-}
-
-/**
- * Determine if a value is a Stream
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is a Stream, otherwise false
- */
-function isStream(val) {
-  return isObject(val) && isFunction(val.pipe);
-}
-
-/**
- * Determine if a value is a URLSearchParams object
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is a URLSearchParams object, otherwise false
- */
-function isURLSearchParams(val) {
-  return typeof URLSearchParams !== 'undefined' && val instanceof URLSearchParams;
-}
-
-/**
- * Trim excess whitespace off the beginning and end of a string
- *
- * @param {String} str The String to trim
- * @returns {String} The String freed of excess whitespace
- */
-function trim(str) {
-  return str.replace(/^\s*/, '').replace(/\s*$/, '');
-}
-
-/**
- * Determine if we're running in a standard browser environment
- *
- * This allows axios to run in a web worker, and react-native.
- * Both environments support XMLHttpRequest, but not fully standard globals.
- *
- * web workers:
- *  typeof window -> undefined
- *  typeof document -> undefined
- *
- * react-native:
- *  navigator.product -> 'ReactNative'
- */
-function isStandardBrowserEnv() {
-  if (typeof navigator !== 'undefined' && navigator.product === 'ReactNative') {
-    return false;
-  }
-  return (
-    typeof window !== 'undefined' &&
-    typeof document !== 'undefined'
-  );
-}
-
-/**
- * Iterate over an Array or an Object invoking a function for each item.
- *
- * If `obj` is an Array callback will be called passing
- * the value, index, and complete array for each item.
- *
- * If 'obj' is an Object callback will be called passing
- * the value, key, and complete object for each property.
- *
- * @param {Object|Array} obj The object to iterate
- * @param {Function} fn The callback to invoke for each item
- */
-function forEach(obj, fn) {
-  // Don't bother if no value provided
-  if (obj === null || typeof obj === 'undefined') {
-    return;
-  }
-
-  // Force an array if not already something iterable
-  if (typeof obj !== 'object' && !isArray(obj)) {
-    /*eslint no-param-reassign:0*/
-    obj = [obj];
-  }
-
-  if (isArray(obj)) {
-    // Iterate over array values
-    for (var i = 0, l = obj.length; i < l; i++) {
-      fn.call(null, obj[i], i, obj);
-    }
-  } else {
-    // Iterate over object keys
-    for (var key in obj) {
-      if (Object.prototype.hasOwnProperty.call(obj, key)) {
-        fn.call(null, obj[key], key, obj);
-      }
-    }
-  }
-}
-
-/**
- * Accepts varargs expecting each argument to be an object, then
- * immutably merges the properties of each object and returns result.
- *
- * When multiple objects contain the same key the later object in
- * the arguments list will take precedence.
- *
- * Example:
- *
- * ```js
- * var result = merge({foo: 123}, {foo: 456});
- * console.log(result.foo); // outputs 456
- * ```
- *
- * @param {Object} obj1 Object to merge
- * @returns {Object} Result of all merge properties
- */
-function merge(/* obj1, obj2, obj3, ... */) {
-  var result = {};
-  function assignValue(val, key) {
-    if (typeof result[key] === 'object' && typeof val === 'object') {
-      result[key] = merge(result[key], val);
-    } else {
-      result[key] = val;
-    }
-  }
-
-  for (var i = 0, l = arguments.length; i < l; i++) {
-    forEach(arguments[i], assignValue);
-  }
-  return result;
-}
-
-/**
- * Extends object a by mutably adding to it the properties of object b.
- *
- * @param {Object} a The object to be extended
- * @param {Object} b The object to copy properties from
- * @param {Object} thisArg The object to bind function to
- * @return {Object} The resulting value of object a
- */
-function extend(a, b, thisArg) {
-  forEach(b, function assignValue(val, key) {
-    if (thisArg && typeof val === 'function') {
-      a[key] = bind(val, thisArg);
-    } else {
-      a[key] = val;
-    }
-  });
-  return a;
-}
-
-module.exports = {
-  isArray: isArray,
-  isArrayBuffer: isArrayBuffer,
-  isBuffer: isBuffer,
-  isFormData: isFormData,
-  isArrayBufferView: isArrayBufferView,
-  isString: isString,
-  isNumber: isNumber,
-  isObject: isObject,
-  isUndefined: isUndefined,
-  isDate: isDate,
-  isFile: isFile,
-  isBlob: isBlob,
-  isFunction: isFunction,
-  isStream: isStream,
-  isURLSearchParams: isURLSearchParams,
-  isStandardBrowserEnv: isStandardBrowserEnv,
-  forEach: forEach,
-  merge: merge,
-  extend: extend,
-  trim: trim
-};
-
-
-/***/ }),
-/* 1 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -564,22 +254,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(22);
-} else {
-  module.exports = __webpack_require__(23);
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
-/* 3 */
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -621,7 +296,22 @@ emptyFunction.thatReturnsArgument = function (arg) {
 module.exports = emptyFunction;
 
 /***/ }),
-/* 4 */
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports = __webpack_require__(15);
+} else {
+  module.exports = __webpack_require__(16);
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -718,7 +408,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 5 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -739,10 +429,10 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = emptyObject;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -799,10 +489,10 @@ function invariant(condition, format, a, b, c, d, e, f) {
 }
 
 module.exports = invariant;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -816,7 +506,7 @@ module.exports = invariant;
 
 
 
-var emptyFunction = __webpack_require__(3);
+var emptyFunction = __webpack_require__(1);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -868,110 +558,10 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = warning;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(39);
-
-var DEFAULT_CONTENT_TYPE = {
-  'Content-Type': 'application/x-www-form-urlencoded'
-};
-
-function setContentTypeIfUnset(headers, value) {
-  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
-    headers['Content-Type'] = value;
-  }
-}
-
-function getDefaultAdapter() {
-  var adapter;
-  if (typeof XMLHttpRequest !== 'undefined') {
-    // For browsers use XHR adapter
-    adapter = __webpack_require__(17);
-  } else if (typeof process !== 'undefined') {
-    // For node use HTTP adapter
-    adapter = __webpack_require__(17);
-  }
-  return adapter;
-}
-
-var defaults = {
-  adapter: getDefaultAdapter(),
-
-  transformRequest: [function transformRequest(data, headers) {
-    normalizeHeaderName(headers, 'Content-Type');
-    if (utils.isFormData(data) ||
-      utils.isArrayBuffer(data) ||
-      utils.isBuffer(data) ||
-      utils.isStream(data) ||
-      utils.isFile(data) ||
-      utils.isBlob(data)
-    ) {
-      return data;
-    }
-    if (utils.isArrayBufferView(data)) {
-      return data.buffer;
-    }
-    if (utils.isURLSearchParams(data)) {
-      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
-      return data.toString();
-    }
-    if (utils.isObject(data)) {
-      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
-      return JSON.stringify(data);
-    }
-    return data;
-  }],
-
-  transformResponse: [function transformResponse(data) {
-    /*eslint no-param-reassign:0*/
-    if (typeof data === 'string') {
-      try {
-        data = JSON.parse(data);
-      } catch (e) { /* Ignore */ }
-    }
-    return data;
-  }],
-
-  timeout: 0,
-
-  xsrfCookieName: 'XSRF-TOKEN',
-  xsrfHeaderName: 'X-XSRF-TOKEN',
-
-  maxContentLength: -1,
-
-  validateStatus: function validateStatus(status) {
-    return status >= 200 && status < 300;
-  }
-};
-
-defaults.headers = {
-  common: {
-    'Accept': 'application/json, text/plain, */*'
-  }
-};
-
-utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
-  defaults.headers[method] = {};
-});
-
-utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
-  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
-});
-
-module.exports = defaults;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
-/* 9 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -985,9 +575,9 @@ module.exports = defaults;
 
 
 if (process.env.NODE_ENV !== 'production') {
-  var invariant = __webpack_require__(6);
-  var warning = __webpack_require__(7);
-  var ReactPropTypesSecret = __webpack_require__(24);
+  var invariant = __webpack_require__(5);
+  var warning = __webpack_require__(6);
+  var ReactPropTypesSecret = __webpack_require__(17);
   var loggedTypeFailures = {};
 }
 
@@ -1035,10 +625,10 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
 
 module.exports = checkPropTypes;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 10 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1077,7 +667,7 @@ var ExecutionEnvironment = {
 module.exports = ExecutionEnvironment;
 
 /***/ }),
-/* 11 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1092,7 +682,7 @@ module.exports = ExecutionEnvironment;
  * @typechecks
  */
 
-var emptyFunction = __webpack_require__(3);
+var emptyFunction = __webpack_require__(1);
 
 /**
  * Upstream version of event listener. Does not take into account specific
@@ -1155,10 +745,10 @@ var EventListener = {
 };
 
 module.exports = EventListener;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 12 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1200,7 +790,7 @@ function getActiveElement(doc) /*?DOMElement*/{
 module.exports = getActiveElement;
 
 /***/ }),
-/* 13 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1271,7 +861,7 @@ function shallowEqual(objA, objB) {
 module.exports = shallowEqual;
 
 /***/ }),
-/* 14 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1286,7 +876,7 @@ module.exports = shallowEqual;
  * 
  */
 
-var isTextNode = __webpack_require__(27);
+var isTextNode = __webpack_require__(20);
 
 /*eslint-disable no-bitwise */
 
@@ -1314,7 +904,7 @@ function containsNode(outerNode, innerNode) {
 module.exports = containsNode;
 
 /***/ }),
-/* 15 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1344,277 +934,7 @@ function focusNode(node) {
 module.exports = focusNode;
 
 /***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function bind(fn, thisArg) {
-  return function wrap() {
-    var args = new Array(arguments.length);
-    for (var i = 0; i < args.length; i++) {
-      args[i] = arguments[i];
-    }
-    return fn.apply(thisArg, args);
-  };
-};
-
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-var utils = __webpack_require__(0);
-var settle = __webpack_require__(40);
-var buildURL = __webpack_require__(42);
-var parseHeaders = __webpack_require__(43);
-var isURLSameOrigin = __webpack_require__(44);
-var createError = __webpack_require__(18);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(45);
-
-module.exports = function xhrAdapter(config) {
-  return new Promise(function dispatchXhrRequest(resolve, reject) {
-    var requestData = config.data;
-    var requestHeaders = config.headers;
-
-    if (utils.isFormData(requestData)) {
-      delete requestHeaders['Content-Type']; // Let the browser set it
-    }
-
-    var request = new XMLHttpRequest();
-    var loadEvent = 'onreadystatechange';
-    var xDomain = false;
-
-    // For IE 8/9 CORS support
-    // Only supports POST and GET calls and doesn't returns the response headers.
-    // DON'T do this for testing b/c XMLHttpRequest is mocked, not XDomainRequest.
-    if (!window.XMLHttpRequest &&
-        process.env.NODE_ENV !== 'test' &&
-        typeof window !== 'undefined' &&
-        window.XDomainRequest && !('withCredentials' in request) &&
-        !isURLSameOrigin(config.url)) {
-      request = new window.XDomainRequest();
-      loadEvent = 'onload';
-      xDomain = true;
-      request.onprogress = function handleProgress() {};
-      request.ontimeout = function handleTimeout() {};
-    }
-
-    // HTTP basic authentication
-    if (config.auth) {
-      var username = config.auth.username || '';
-      var password = config.auth.password || '';
-      requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
-    }
-
-    request.open(config.method.toUpperCase(), buildURL(config.url, config.params, config.paramsSerializer), true);
-
-    // Set the request timeout in MS
-    request.timeout = config.timeout;
-
-    // Listen for ready state
-    request[loadEvent] = function handleLoad() {
-      if (!request || (request.readyState !== 4 && !xDomain)) {
-        return;
-      }
-
-      // The request errored out and we didn't get a response, this will be
-      // handled by onerror instead
-      // With one exception: request that using file: protocol, most browsers
-      // will return status as 0 even though it's a successful request
-      if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
-        return;
-      }
-
-      // Prepare the response
-      var responseHeaders = 'getAllResponseHeaders' in request ? parseHeaders(request.getAllResponseHeaders()) : null;
-      var responseData = !config.responseType || config.responseType === 'text' ? request.responseText : request.response;
-      var response = {
-        data: responseData,
-        // IE sends 1223 instead of 204 (https://github.com/axios/axios/issues/201)
-        status: request.status === 1223 ? 204 : request.status,
-        statusText: request.status === 1223 ? 'No Content' : request.statusText,
-        headers: responseHeaders,
-        config: config,
-        request: request
-      };
-
-      settle(resolve, reject, response);
-
-      // Clean up request
-      request = null;
-    };
-
-    // Handle low level network errors
-    request.onerror = function handleError() {
-      // Real errors are hidden from us by the browser
-      // onerror should only fire if it's a network error
-      reject(createError('Network Error', config, null, request));
-
-      // Clean up request
-      request = null;
-    };
-
-    // Handle timeout
-    request.ontimeout = function handleTimeout() {
-      reject(createError('timeout of ' + config.timeout + 'ms exceeded', config, 'ECONNABORTED',
-        request));
-
-      // Clean up request
-      request = null;
-    };
-
-    // Add xsrf header
-    // This is only done if running in a standard browser environment.
-    // Specifically not if we're in a web worker, or react-native.
-    if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(46);
-
-      // Add xsrf header
-      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
-          cookies.read(config.xsrfCookieName) :
-          undefined;
-
-      if (xsrfValue) {
-        requestHeaders[config.xsrfHeaderName] = xsrfValue;
-      }
-    }
-
-    // Add headers to the request
-    if ('setRequestHeader' in request) {
-      utils.forEach(requestHeaders, function setRequestHeader(val, key) {
-        if (typeof requestData === 'undefined' && key.toLowerCase() === 'content-type') {
-          // Remove Content-Type if data is undefined
-          delete requestHeaders[key];
-        } else {
-          // Otherwise add header to the request
-          request.setRequestHeader(key, val);
-        }
-      });
-    }
-
-    // Add withCredentials to request if needed
-    if (config.withCredentials) {
-      request.withCredentials = true;
-    }
-
-    // Add responseType to request if needed
-    if (config.responseType) {
-      try {
-        request.responseType = config.responseType;
-      } catch (e) {
-        // Expected DOMException thrown by browsers not compatible XMLHttpRequest Level 2.
-        // But, this can be suppressed for 'json' type as it can be parsed by default 'transformResponse' function.
-        if (config.responseType !== 'json') {
-          throw e;
-        }
-      }
-    }
-
-    // Handle progress if needed
-    if (typeof config.onDownloadProgress === 'function') {
-      request.addEventListener('progress', config.onDownloadProgress);
-    }
-
-    // Not all browsers support upload events
-    if (typeof config.onUploadProgress === 'function' && request.upload) {
-      request.upload.addEventListener('progress', config.onUploadProgress);
-    }
-
-    if (config.cancelToken) {
-      // Handle cancellation
-      config.cancelToken.promise.then(function onCanceled(cancel) {
-        if (!request) {
-          return;
-        }
-
-        request.abort();
-        reject(cancel);
-        // Clean up request
-        request = null;
-      });
-    }
-
-    if (requestData === undefined) {
-      requestData = null;
-    }
-
-    // Send the request
-    request.send(requestData);
-  });
-};
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var enhanceError = __webpack_require__(41);
-
-/**
- * Create an Error with the specified message, config, error code, request and response.
- *
- * @param {string} message The error message.
- * @param {Object} config The config.
- * @param {string} [code] The error code (for example, 'ECONNABORTED').
- * @param {Object} [request] The request.
- * @param {Object} [response] The response.
- * @returns {Error} The created error.
- */
-module.exports = function createError(message, config, code, request, response) {
-  var error = new Error(message);
-  return enhanceError(error, config, code, request, response);
-};
-
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function isCancel(value) {
-  return !!(value && value.__CANCEL__);
-};
-
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * A `Cancel` is an object that is thrown when an operation is canceled.
- *
- * @class
- * @param {string=} message The message.
- */
-function Cancel(message) {
-  this.message = message;
-}
-
-Cancel.prototype.toString = function toString() {
-  return 'Cancel' + (this.message ? ': ' + this.message : '');
-};
-
-Cancel.prototype.__CANCEL__ = true;
-
-module.exports = Cancel;
-
-
-/***/ }),
-/* 21 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1624,11 +944,11 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(25);
+var _reactDom = __webpack_require__(18);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _app = __webpack_require__(34);
+var _app = __webpack_require__(27);
 
 var _app2 = _interopRequireDefault(_app);
 
@@ -1638,7 +958,7 @@ var rootElement = document.getElementById('root');
 _reactDom2.default.render(_react2.default.createElement(_app2.default, null), rootElement);
 
 /***/ }),
-/* 22 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1650,7 +970,7 @@ _reactDom2.default.render(_react2.default.createElement(_app2.default, null), ro
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var m=__webpack_require__(4),n=__webpack_require__(5),p=__webpack_require__(3);
+var m=__webpack_require__(3),n=__webpack_require__(4),p=__webpack_require__(1);
 function q(a){for(var b=arguments.length-1,e="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,d=0;d<b;d++)e+="\x26args[]\x3d"+encodeURIComponent(arguments[d+1]);b=Error(e+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}
 var r={isMounted:function(){return!1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}};function t(a,b,e){this.props=a;this.context=b;this.refs=n;this.updater=e||r}t.prototype.isReactComponent={};t.prototype.setState=function(a,b){"object"!==typeof a&&"function"!==typeof a&&null!=a?q("85"):void 0;this.updater.enqueueSetState(this,a,b,"setState")};t.prototype.forceUpdate=function(a){this.updater.enqueueForceUpdate(this,a,"forceUpdate")};
 function u(a,b,e){this.props=a;this.context=b;this.refs=n;this.updater=e||r}function v(){}v.prototype=t.prototype;var w=u.prototype=new v;w.constructor=u;m(w,t.prototype);w.isPureReactComponent=!0;function x(a,b,e){this.props=a;this.context=b;this.refs=n;this.updater=e||r}var y=x.prototype=new v;y.constructor=x;m(y,t.prototype);y.unstable_isAsyncReactComponent=!0;y.render=function(){return this.props.children};
@@ -1667,7 +987,7 @@ version:"16.1.0",__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:{ReactCurren
 
 
 /***/ }),
-/* 23 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1686,12 +1006,12 @@ if (process.env.NODE_ENV !== "production") {
   (function() {
 'use strict';
 
-var _assign = __webpack_require__(4);
-var invariant = __webpack_require__(6);
-var emptyObject = __webpack_require__(5);
-var warning = __webpack_require__(7);
-var emptyFunction = __webpack_require__(3);
-var checkPropTypes = __webpack_require__(9);
+var _assign = __webpack_require__(3);
+var invariant = __webpack_require__(5);
+var emptyObject = __webpack_require__(4);
+var warning = __webpack_require__(6);
+var emptyFunction = __webpack_require__(1);
+var checkPropTypes = __webpack_require__(7);
 
 // TODO: this is special because it gets imported during build.
 
@@ -3015,10 +2335,10 @@ module.exports = react;
   })();
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 24 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3037,7 +2357,7 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
-/* 25 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3075,15 +2395,15 @@ if (process.env.NODE_ENV === 'production') {
   // DCE check should happen before ReactDOM bundle executes so that
   // DevTools can report bad minification during injection.
   checkDCE();
-  module.exports = __webpack_require__(26);
+  module.exports = __webpack_require__(19);
 } else {
-  module.exports = __webpack_require__(29);
+  module.exports = __webpack_require__(22);
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 26 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3098,7 +2418,7 @@ if (process.env.NODE_ENV === 'production') {
 /*
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var aa=__webpack_require__(2),m=__webpack_require__(10),A=__webpack_require__(4),B=__webpack_require__(3),ca=__webpack_require__(11),da=__webpack_require__(12),ea=__webpack_require__(13),ha=__webpack_require__(14),ia=__webpack_require__(15),C=__webpack_require__(5);
+var aa=__webpack_require__(2),m=__webpack_require__(8),A=__webpack_require__(3),B=__webpack_require__(1),ca=__webpack_require__(9),da=__webpack_require__(10),ea=__webpack_require__(11),ha=__webpack_require__(12),ia=__webpack_require__(13),C=__webpack_require__(4);
 function D(a){for(var b=arguments.length-1,c="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,d=0;d<b;d++)c+="\x26args[]\x3d"+encodeURIComponent(arguments[d+1]);b=Error(c+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}aa?void 0:D("227");
 var la={children:!0,dangerouslySetInnerHTML:!0,defaultValue:!0,defaultChecked:!0,innerHTML:!0,suppressContentEditableWarning:!0,suppressHydrationWarning:!0,style:!0};function qa(a,b){return(a&b)===b}
 var ra={MUST_USE_PROPERTY:1,HAS_BOOLEAN_VALUE:4,HAS_NUMERIC_VALUE:8,HAS_POSITIVE_NUMERIC_VALUE:24,HAS_OVERLOADED_BOOLEAN_VALUE:32,HAS_STRING_BOOLEAN_VALUE:64,injectDOMPropertyConfig:function(a){var b=ra,c=a.Properties||{},d=a.DOMAttributeNamespaces||{},e=a.DOMAttributeNames||{};a=a.DOMMutationMethods||{};for(var f in c){sa.hasOwnProperty(f)?D("48",f):void 0;var g=f.toLowerCase(),k=c[f];g={attributeName:g,attributeNamespace:null,propertyName:f,mutationMethod:null,mustUseProperty:qa(k,b.MUST_USE_PROPERTY),
@@ -3317,7 +2637,7 @@ Z.injectIntoDevTools({findFiberByHostInstance:pb,bundleType:0,version:"16.1.0",r
 
 
 /***/ }),
-/* 27 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3332,7 +2652,7 @@ Z.injectIntoDevTools({findFiberByHostInstance:pb,bundleType:0,version:"16.1.0",r
  * @typechecks
  */
 
-var isNode = __webpack_require__(28);
+var isNode = __webpack_require__(21);
 
 /**
  * @param {*} object The object to check.
@@ -3345,7 +2665,7 @@ function isTextNode(object) {
 module.exports = isTextNode;
 
 /***/ }),
-/* 28 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3373,7 +2693,7 @@ function isNode(object) {
 module.exports = isNode;
 
 /***/ }),
-/* 29 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3393,20 +2713,20 @@ if (process.env.NODE_ENV !== "production") {
 'use strict';
 
 var React = __webpack_require__(2);
-var invariant = __webpack_require__(6);
-var warning = __webpack_require__(7);
-var ExecutionEnvironment = __webpack_require__(10);
-var _assign = __webpack_require__(4);
-var emptyFunction$1 = __webpack_require__(3);
-var EventListener = __webpack_require__(11);
-var getActiveElement = __webpack_require__(12);
-var shallowEqual = __webpack_require__(13);
-var containsNode = __webpack_require__(14);
-var focusNode = __webpack_require__(15);
-var emptyObject = __webpack_require__(5);
-var checkPropTypes = __webpack_require__(9);
-var hyphenateStyleName = __webpack_require__(30);
-var camelizeStyleName = __webpack_require__(32);
+var invariant = __webpack_require__(5);
+var warning = __webpack_require__(6);
+var ExecutionEnvironment = __webpack_require__(8);
+var _assign = __webpack_require__(3);
+var emptyFunction$1 = __webpack_require__(1);
+var EventListener = __webpack_require__(9);
+var getActiveElement = __webpack_require__(10);
+var shallowEqual = __webpack_require__(11);
+var containsNode = __webpack_require__(12);
+var focusNode = __webpack_require__(13);
+var emptyObject = __webpack_require__(4);
+var checkPropTypes = __webpack_require__(7);
+var hyphenateStyleName = __webpack_require__(23);
+var camelizeStyleName = __webpack_require__(25);
 
 /**
  * WARNING: DO NOT manually require this module.
@@ -18736,10 +18056,10 @@ module.exports = reactDom;
   })();
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 30 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18754,7 +18074,7 @@ module.exports = reactDom;
 
 
 
-var hyphenate = __webpack_require__(31);
+var hyphenate = __webpack_require__(24);
 
 var msPattern = /^ms-/;
 
@@ -18781,7 +18101,7 @@ function hyphenateStyleName(string) {
 module.exports = hyphenateStyleName;
 
 /***/ }),
-/* 31 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18817,7 +18137,7 @@ function hyphenate(string) {
 module.exports = hyphenate;
 
 /***/ }),
-/* 32 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18832,7 +18152,7 @@ module.exports = hyphenate;
 
 
 
-var camelize = __webpack_require__(33);
+var camelize = __webpack_require__(26);
 
 var msPattern = /^-ms-/;
 
@@ -18860,7 +18180,7 @@ function camelizeStyleName(string) {
 module.exports = camelizeStyleName;
 
 /***/ }),
-/* 33 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18895,7 +18215,7 @@ function camelize(string) {
 module.exports = camelize;
 
 /***/ }),
-/* 34 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18907,10 +18227,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(2);
-
-var _react2 = _interopRequireDefault(_react);
-
 var _axios = __webpack_require__(35);
 
 var _axios2 = _interopRequireDefault(_axios);
@@ -18919,13 +18235,25 @@ var _Navbar = __webpack_require__(54);
 
 var _Navbar2 = _interopRequireDefault(_Navbar);
 
-var _LoginModal = __webpack_require__(55);
+var _LoginModal = __webpack_require__(58);
 
 var _LoginModal2 = _interopRequireDefault(_LoginModal);
 
-var _RestaurantProfile = __webpack_require__(56);
+var _react = __webpack_require__(2);
 
-var _RestaurantProfile2 = _interopRequireDefault(_RestaurantProfile);
+var _react2 = _interopRequireDefault(_react);
+
+var _NavBar = __webpack_require__(57);
+
+var _NavBar2 = _interopRequireDefault(_NavBar);
+
+var _CustomerSignUpForm = __webpack_require__(55);
+
+var _CustomerSignUpForm2 = _interopRequireDefault(_CustomerSignUpForm);
+
+var _RestaurantSignUpForm = __webpack_require__(56);
+
+var _RestaurantSignUpForm2 = _interopRequireDefault(_RestaurantSignUpForm);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -18935,8 +18263,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var App = function (_React$Component) {
-  _inherits(App, _React$Component);
+var App = function (_Component) {
+  _inherits(App, _Component);
 
   function App(props) {
     _classCallCheck(this, App);
@@ -18944,20 +18272,18 @@ var App = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
     _this.state = {
-      customer: []
+      isCustomer: "true"
     };
+    _this.handleSelectType = _this.handleSelectType.bind(_this);
+
     return _this;
   }
 
   _createClass(App, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      _axios2.default.get("/api/Customers/").then(function (res) {
-        return _this2.setState({
-          customer: res.data[0].name
-        });
+    key: "handleSelectType",
+    value: function handleSelectType(e) {
+      this.setState({
+        isCustomer: e.target.value
       });
     }
   }, {
@@ -18965,18 +18291,722 @@ var App = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         "div",
-        { className: "container" },
-        _react2.default.createElement(_Navbar2.default, null),
-        _react2.default.createElement(_LoginModal2.default, null),
-        _react2.default.createElement(_RestaurantProfile2.default, null)
+        { className: "App" },
+        _react2.default.createElement(
+          "header",
+          { className: "App-header" },
+          _react2.default.createElement(_NavBar2.default, null),
+          _react2.default.createElement(_LoginModal2.default, null)
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "container" },
+          _react2.default.createElement(
+            "div",
+            { className: "btn-group", "data-toggle": "buttons" },
+            _react2.default.createElement(
+              "label",
+              { className: "btn btn-primary active" },
+              _react2.default.createElement("button", { type: "radio", name: "options", id: "customer-button", autoComplete: "off", value: 'true', onClick: this.handleSelectType }),
+              "Customer"
+            ),
+            _react2.default.createElement(
+              "label",
+              { className: "btn btn-primary" },
+              _react2.default.createElement("button", { type: "radio", name: "options", id: "restaurant-button", autoComplete: "off", value: "false", onClick: this.handleSelectType }),
+              " Restaurant"
+            )
+          ),
+          this.state.isCustomer == "true" ? _react2.default.createElement(_CustomerSignUpForm2.default, null) : _react2.default.createElement(_RestaurantSignUpForm2.default, null)
+        )
       );
     }
   }]);
 
   return App;
-}(_react2.default.Component);
+}(_react.Component);
 
 exports.default = App;
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var bind = __webpack_require__(30);
+var isBuffer = __webpack_require__(37);
+
+/*global toString:true*/
+
+// utils is a library of generic helper functions non-specific to axios
+
+var toString = Object.prototype.toString;
+
+/**
+ * Determine if a value is an Array
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an Array, otherwise false
+ */
+function isArray(val) {
+  return toString.call(val) === '[object Array]';
+}
+
+/**
+ * Determine if a value is an ArrayBuffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an ArrayBuffer, otherwise false
+ */
+function isArrayBuffer(val) {
+  return toString.call(val) === '[object ArrayBuffer]';
+}
+
+/**
+ * Determine if a value is a FormData
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an FormData, otherwise false
+ */
+function isFormData(val) {
+  return (typeof FormData !== 'undefined') && (val instanceof FormData);
+}
+
+/**
+ * Determine if a value is a view on an ArrayBuffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a view on an ArrayBuffer, otherwise false
+ */
+function isArrayBufferView(val) {
+  var result;
+  if ((typeof ArrayBuffer !== 'undefined') && (ArrayBuffer.isView)) {
+    result = ArrayBuffer.isView(val);
+  } else {
+    result = (val) && (val.buffer) && (val.buffer instanceof ArrayBuffer);
+  }
+  return result;
+}
+
+/**
+ * Determine if a value is a String
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a String, otherwise false
+ */
+function isString(val) {
+  return typeof val === 'string';
+}
+
+/**
+ * Determine if a value is a Number
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Number, otherwise false
+ */
+function isNumber(val) {
+  return typeof val === 'number';
+}
+
+/**
+ * Determine if a value is undefined
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if the value is undefined, otherwise false
+ */
+function isUndefined(val) {
+  return typeof val === 'undefined';
+}
+
+/**
+ * Determine if a value is an Object
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an Object, otherwise false
+ */
+function isObject(val) {
+  return val !== null && typeof val === 'object';
+}
+
+/**
+ * Determine if a value is a Date
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Date, otherwise false
+ */
+function isDate(val) {
+  return toString.call(val) === '[object Date]';
+}
+
+/**
+ * Determine if a value is a File
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a File, otherwise false
+ */
+function isFile(val) {
+  return toString.call(val) === '[object File]';
+}
+
+/**
+ * Determine if a value is a Blob
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Blob, otherwise false
+ */
+function isBlob(val) {
+  return toString.call(val) === '[object Blob]';
+}
+
+/**
+ * Determine if a value is a Function
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Function, otherwise false
+ */
+function isFunction(val) {
+  return toString.call(val) === '[object Function]';
+}
+
+/**
+ * Determine if a value is a Stream
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Stream, otherwise false
+ */
+function isStream(val) {
+  return isObject(val) && isFunction(val.pipe);
+}
+
+/**
+ * Determine if a value is a URLSearchParams object
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a URLSearchParams object, otherwise false
+ */
+function isURLSearchParams(val) {
+  return typeof URLSearchParams !== 'undefined' && val instanceof URLSearchParams;
+}
+
+/**
+ * Trim excess whitespace off the beginning and end of a string
+ *
+ * @param {String} str The String to trim
+ * @returns {String} The String freed of excess whitespace
+ */
+function trim(str) {
+  return str.replace(/^\s*/, '').replace(/\s*$/, '');
+}
+
+/**
+ * Determine if we're running in a standard browser environment
+ *
+ * This allows axios to run in a web worker, and react-native.
+ * Both environments support XMLHttpRequest, but not fully standard globals.
+ *
+ * web workers:
+ *  typeof window -> undefined
+ *  typeof document -> undefined
+ *
+ * react-native:
+ *  navigator.product -> 'ReactNative'
+ */
+function isStandardBrowserEnv() {
+  if (typeof navigator !== 'undefined' && navigator.product === 'ReactNative') {
+    return false;
+  }
+  return (
+    typeof window !== 'undefined' &&
+    typeof document !== 'undefined'
+  );
+}
+
+/**
+ * Iterate over an Array or an Object invoking a function for each item.
+ *
+ * If `obj` is an Array callback will be called passing
+ * the value, index, and complete array for each item.
+ *
+ * If 'obj' is an Object callback will be called passing
+ * the value, key, and complete object for each property.
+ *
+ * @param {Object|Array} obj The object to iterate
+ * @param {Function} fn The callback to invoke for each item
+ */
+function forEach(obj, fn) {
+  // Don't bother if no value provided
+  if (obj === null || typeof obj === 'undefined') {
+    return;
+  }
+
+  // Force an array if not already something iterable
+  if (typeof obj !== 'object' && !isArray(obj)) {
+    /*eslint no-param-reassign:0*/
+    obj = [obj];
+  }
+
+  if (isArray(obj)) {
+    // Iterate over array values
+    for (var i = 0, l = obj.length; i < l; i++) {
+      fn.call(null, obj[i], i, obj);
+    }
+  } else {
+    // Iterate over object keys
+    for (var key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        fn.call(null, obj[key], key, obj);
+      }
+    }
+  }
+}
+
+/**
+ * Accepts varargs expecting each argument to be an object, then
+ * immutably merges the properties of each object and returns result.
+ *
+ * When multiple objects contain the same key the later object in
+ * the arguments list will take precedence.
+ *
+ * Example:
+ *
+ * ```js
+ * var result = merge({foo: 123}, {foo: 456});
+ * console.log(result.foo); // outputs 456
+ * ```
+ *
+ * @param {Object} obj1 Object to merge
+ * @returns {Object} Result of all merge properties
+ */
+function merge(/* obj1, obj2, obj3, ... */) {
+  var result = {};
+  function assignValue(val, key) {
+    if (typeof result[key] === 'object' && typeof val === 'object') {
+      result[key] = merge(result[key], val);
+    } else {
+      result[key] = val;
+    }
+  }
+
+  for (var i = 0, l = arguments.length; i < l; i++) {
+    forEach(arguments[i], assignValue);
+  }
+  return result;
+}
+
+/**
+ * Extends object a by mutably adding to it the properties of object b.
+ *
+ * @param {Object} a The object to be extended
+ * @param {Object} b The object to copy properties from
+ * @param {Object} thisArg The object to bind function to
+ * @return {Object} The resulting value of object a
+ */
+function extend(a, b, thisArg) {
+  forEach(b, function assignValue(val, key) {
+    if (thisArg && typeof val === 'function') {
+      a[key] = bind(val, thisArg);
+    } else {
+      a[key] = val;
+    }
+  });
+  return a;
+}
+
+module.exports = {
+  isArray: isArray,
+  isArrayBuffer: isArrayBuffer,
+  isBuffer: isBuffer,
+  isFormData: isFormData,
+  isArrayBufferView: isArrayBufferView,
+  isString: isString,
+  isNumber: isNumber,
+  isObject: isObject,
+  isUndefined: isUndefined,
+  isDate: isDate,
+  isFile: isFile,
+  isBlob: isBlob,
+  isFunction: isFunction,
+  isStream: isStream,
+  isURLSearchParams: isURLSearchParams,
+  isStandardBrowserEnv: isStandardBrowserEnv,
+  forEach: forEach,
+  merge: merge,
+  extend: extend,
+  trim: trim
+};
+
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+var utils = __webpack_require__(28);
+var normalizeHeaderName = __webpack_require__(39);
+
+var DEFAULT_CONTENT_TYPE = {
+  'Content-Type': 'application/x-www-form-urlencoded'
+};
+
+function setContentTypeIfUnset(headers, value) {
+  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
+    headers['Content-Type'] = value;
+  }
+}
+
+function getDefaultAdapter() {
+  var adapter;
+  if (typeof XMLHttpRequest !== 'undefined') {
+    // For browsers use XHR adapter
+    adapter = __webpack_require__(31);
+  } else if (typeof process !== 'undefined') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__(31);
+  }
+  return adapter;
+}
+
+var defaults = {
+  adapter: getDefaultAdapter(),
+
+  transformRequest: [function transformRequest(data, headers) {
+    normalizeHeaderName(headers, 'Content-Type');
+    if (utils.isFormData(data) ||
+      utils.isArrayBuffer(data) ||
+      utils.isBuffer(data) ||
+      utils.isStream(data) ||
+      utils.isFile(data) ||
+      utils.isBlob(data)
+    ) {
+      return data;
+    }
+    if (utils.isArrayBufferView(data)) {
+      return data.buffer;
+    }
+    if (utils.isURLSearchParams(data)) {
+      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+      return data.toString();
+    }
+    if (utils.isObject(data)) {
+      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
+      return JSON.stringify(data);
+    }
+    return data;
+  }],
+
+  transformResponse: [function transformResponse(data) {
+    /*eslint no-param-reassign:0*/
+    if (typeof data === 'string') {
+      try {
+        data = JSON.parse(data);
+      } catch (e) { /* Ignore */ }
+    }
+    return data;
+  }],
+
+  timeout: 0,
+
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
+
+  maxContentLength: -1,
+
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
+  }
+};
+
+defaults.headers = {
+  common: {
+    'Accept': 'application/json, text/plain, */*'
+  }
+};
+
+utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
+  defaults.headers[method] = {};
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
+});
+
+module.exports = defaults;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function bind(fn, thisArg) {
+  return function wrap() {
+    var args = new Array(arguments.length);
+    for (var i = 0; i < args.length; i++) {
+      args[i] = arguments[i];
+    }
+    return fn.apply(thisArg, args);
+  };
+};
+
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+var utils = __webpack_require__(28);
+var settle = __webpack_require__(40);
+var buildURL = __webpack_require__(42);
+var parseHeaders = __webpack_require__(43);
+var isURLSameOrigin = __webpack_require__(44);
+var createError = __webpack_require__(32);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(45);
+
+module.exports = function xhrAdapter(config) {
+  return new Promise(function dispatchXhrRequest(resolve, reject) {
+    var requestData = config.data;
+    var requestHeaders = config.headers;
+
+    if (utils.isFormData(requestData)) {
+      delete requestHeaders['Content-Type']; // Let the browser set it
+    }
+
+    var request = new XMLHttpRequest();
+    var loadEvent = 'onreadystatechange';
+    var xDomain = false;
+
+    // For IE 8/9 CORS support
+    // Only supports POST and GET calls and doesn't returns the response headers.
+    // DON'T do this for testing b/c XMLHttpRequest is mocked, not XDomainRequest.
+    if (!window.XMLHttpRequest &&
+        process.env.NODE_ENV !== 'test' &&
+        typeof window !== 'undefined' &&
+        window.XDomainRequest && !('withCredentials' in request) &&
+        !isURLSameOrigin(config.url)) {
+      request = new window.XDomainRequest();
+      loadEvent = 'onload';
+      xDomain = true;
+      request.onprogress = function handleProgress() {};
+      request.ontimeout = function handleTimeout() {};
+    }
+
+    // HTTP basic authentication
+    if (config.auth) {
+      var username = config.auth.username || '';
+      var password = config.auth.password || '';
+      requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
+    }
+
+    request.open(config.method.toUpperCase(), buildURL(config.url, config.params, config.paramsSerializer), true);
+
+    // Set the request timeout in MS
+    request.timeout = config.timeout;
+
+    // Listen for ready state
+    request[loadEvent] = function handleLoad() {
+      if (!request || (request.readyState !== 4 && !xDomain)) {
+        return;
+      }
+
+      // The request errored out and we didn't get a response, this will be
+      // handled by onerror instead
+      // With one exception: request that using file: protocol, most browsers
+      // will return status as 0 even though it's a successful request
+      if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
+        return;
+      }
+
+      // Prepare the response
+      var responseHeaders = 'getAllResponseHeaders' in request ? parseHeaders(request.getAllResponseHeaders()) : null;
+      var responseData = !config.responseType || config.responseType === 'text' ? request.responseText : request.response;
+      var response = {
+        data: responseData,
+        // IE sends 1223 instead of 204 (https://github.com/axios/axios/issues/201)
+        status: request.status === 1223 ? 204 : request.status,
+        statusText: request.status === 1223 ? 'No Content' : request.statusText,
+        headers: responseHeaders,
+        config: config,
+        request: request
+      };
+
+      settle(resolve, reject, response);
+
+      // Clean up request
+      request = null;
+    };
+
+    // Handle low level network errors
+    request.onerror = function handleError() {
+      // Real errors are hidden from us by the browser
+      // onerror should only fire if it's a network error
+      reject(createError('Network Error', config, null, request));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Handle timeout
+    request.ontimeout = function handleTimeout() {
+      reject(createError('timeout of ' + config.timeout + 'ms exceeded', config, 'ECONNABORTED',
+        request));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Add xsrf header
+    // This is only done if running in a standard browser environment.
+    // Specifically not if we're in a web worker, or react-native.
+    if (utils.isStandardBrowserEnv()) {
+      var cookies = __webpack_require__(46);
+
+      // Add xsrf header
+      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
+          cookies.read(config.xsrfCookieName) :
+          undefined;
+
+      if (xsrfValue) {
+        requestHeaders[config.xsrfHeaderName] = xsrfValue;
+      }
+    }
+
+    // Add headers to the request
+    if ('setRequestHeader' in request) {
+      utils.forEach(requestHeaders, function setRequestHeader(val, key) {
+        if (typeof requestData === 'undefined' && key.toLowerCase() === 'content-type') {
+          // Remove Content-Type if data is undefined
+          delete requestHeaders[key];
+        } else {
+          // Otherwise add header to the request
+          request.setRequestHeader(key, val);
+        }
+      });
+    }
+
+    // Add withCredentials to request if needed
+    if (config.withCredentials) {
+      request.withCredentials = true;
+    }
+
+    // Add responseType to request if needed
+    if (config.responseType) {
+      try {
+        request.responseType = config.responseType;
+      } catch (e) {
+        // Expected DOMException thrown by browsers not compatible XMLHttpRequest Level 2.
+        // But, this can be suppressed for 'json' type as it can be parsed by default 'transformResponse' function.
+        if (config.responseType !== 'json') {
+          throw e;
+        }
+      }
+    }
+
+    // Handle progress if needed
+    if (typeof config.onDownloadProgress === 'function') {
+      request.addEventListener('progress', config.onDownloadProgress);
+    }
+
+    // Not all browsers support upload events
+    if (typeof config.onUploadProgress === 'function' && request.upload) {
+      request.upload.addEventListener('progress', config.onUploadProgress);
+    }
+
+    if (config.cancelToken) {
+      // Handle cancellation
+      config.cancelToken.promise.then(function onCanceled(cancel) {
+        if (!request) {
+          return;
+        }
+
+        request.abort();
+        reject(cancel);
+        // Clean up request
+        request = null;
+      });
+    }
+
+    if (requestData === undefined) {
+      requestData = null;
+    }
+
+    // Send the request
+    request.send(requestData);
+  });
+};
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var enhanceError = __webpack_require__(41);
+
+/**
+ * Create an Error with the specified message, config, error code, request and response.
+ *
+ * @param {string} message The error message.
+ * @param {Object} config The config.
+ * @param {string} [code] The error code (for example, 'ECONNABORTED').
+ * @param {Object} [request] The request.
+ * @param {Object} [response] The response.
+ * @returns {Error} The created error.
+ */
+module.exports = function createError(message, config, code, request, response) {
+  var error = new Error(message);
+  return enhanceError(error, config, code, request, response);
+};
+
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function isCancel(value) {
+  return !!(value && value.__CANCEL__);
+};
+
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * A `Cancel` is an object that is thrown when an operation is canceled.
+ *
+ * @class
+ * @param {string=} message The message.
+ */
+function Cancel(message) {
+  this.message = message;
+}
+
+Cancel.prototype.toString = function toString() {
+  return 'Cancel' + (this.message ? ': ' + this.message : '');
+};
+
+Cancel.prototype.__CANCEL__ = true;
+
+module.exports = Cancel;
+
 
 /***/ }),
 /* 35 */
@@ -18991,10 +19021,10 @@ module.exports = __webpack_require__(36);
 "use strict";
 
 
-var utils = __webpack_require__(0);
-var bind = __webpack_require__(16);
+var utils = __webpack_require__(28);
+var bind = __webpack_require__(30);
 var Axios = __webpack_require__(38);
-var defaults = __webpack_require__(8);
+var defaults = __webpack_require__(29);
 
 /**
  * Create an instance of Axios
@@ -19027,9 +19057,9 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(20);
+axios.Cancel = __webpack_require__(34);
 axios.CancelToken = __webpack_require__(52);
-axios.isCancel = __webpack_require__(19);
+axios.isCancel = __webpack_require__(33);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -19077,8 +19107,8 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(8);
-var utils = __webpack_require__(0);
+var defaults = __webpack_require__(29);
+var utils = __webpack_require__(28);
 var InterceptorManager = __webpack_require__(47);
 var dispatchRequest = __webpack_require__(48);
 
@@ -19163,7 +19193,7 @@ module.exports = Axios;
 "use strict";
 
 
-var utils = __webpack_require__(0);
+var utils = __webpack_require__(28);
 
 module.exports = function normalizeHeaderName(headers, normalizedName) {
   utils.forEach(headers, function processHeader(value, name) {
@@ -19182,7 +19212,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 "use strict";
 
 
-var createError = __webpack_require__(18);
+var createError = __webpack_require__(32);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -19243,7 +19273,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 "use strict";
 
 
-var utils = __webpack_require__(0);
+var utils = __webpack_require__(28);
 
 function encode(val) {
   return encodeURIComponent(val).
@@ -19318,7 +19348,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 "use strict";
 
 
-var utils = __webpack_require__(0);
+var utils = __webpack_require__(28);
 
 // Headers whose duplicates are ignored by node
 // c.f. https://nodejs.org/api/http.html#http_message_headers
@@ -19378,7 +19408,7 @@ module.exports = function parseHeaders(headers) {
 "use strict";
 
 
-var utils = __webpack_require__(0);
+var utils = __webpack_require__(28);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -19496,7 +19526,7 @@ module.exports = btoa;
 "use strict";
 
 
-var utils = __webpack_require__(0);
+var utils = __webpack_require__(28);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -19556,7 +19586,7 @@ module.exports = (
 "use strict";
 
 
-var utils = __webpack_require__(0);
+var utils = __webpack_require__(28);
 
 function InterceptorManager() {
   this.handlers = [];
@@ -19615,10 +19645,10 @@ module.exports = InterceptorManager;
 "use strict";
 
 
-var utils = __webpack_require__(0);
+var utils = __webpack_require__(28);
 var transformData = __webpack_require__(49);
-var isCancel = __webpack_require__(19);
-var defaults = __webpack_require__(8);
+var isCancel = __webpack_require__(33);
+var defaults = __webpack_require__(29);
 var isAbsoluteURL = __webpack_require__(50);
 var combineURLs = __webpack_require__(51);
 
@@ -19708,7 +19738,7 @@ module.exports = function dispatchRequest(config) {
 "use strict";
 
 
-var utils = __webpack_require__(0);
+var utils = __webpack_require__(28);
 
 /**
  * Transform the data for a request or a response
@@ -19777,7 +19807,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 "use strict";
 
 
-var Cancel = __webpack_require__(20);
+var Cancel = __webpack_require__(34);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -19977,6 +20007,1302 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _axios = __webpack_require__(35);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var CustomerSignUpForm = function (_React$Component) {
+  _inherits(CustomerSignUpForm, _React$Component);
+
+  function CustomerSignUpForm(props) {
+    _classCallCheck(this, CustomerSignUpForm);
+
+    var _this = _possibleConstructorReturn(this, (CustomerSignUpForm.__proto__ || Object.getPrototypeOf(CustomerSignUpForm)).call(this, props));
+
+    _this.state = {
+      type: "customer",
+      firstName: "",
+      lastName: "",
+
+      street: "",
+      town: "",
+      state: "AL",
+      zipcode: "",
+
+      phone: "",
+      email: "",
+      password: ""
+    };
+
+    _this.handleFirstName = _this.handleFirstName.bind(_this);
+
+    _this.handleLastName = _this.handleLastName.bind(_this);
+
+    _this.handleAddressStreet = _this.handleAddressStreet.bind(_this);
+
+    _this.handleAddressTown = _this.handleAddressTown.bind(_this);
+    _this.handleAddressState = _this.handleAddressState.bind(_this);
+    _this.handleAddressZip = _this.handleAddressZip.bind(_this);
+
+    _this.handlePhone = _this.handlePhone.bind(_this);
+    _this.handleEmail = _this.handleEmail.bind(_this);
+
+    _this.handlePassword = _this.handlePassword.bind(_this);
+
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+
+    // this.postNewCustomer =  this.postNewCustomer.bind(this);
+    return _this;
+  }
+
+  _createClass(CustomerSignUpForm, [{
+    key: "handleFirstName",
+    value: function handleFirstName(e) {
+      this.setState({
+        firstName: e.target.value
+      });
+    }
+  }, {
+    key: "handleLastName",
+    value: function handleLastName(e) {
+      this.setState({
+        lastName: e.target.value
+      });
+    }
+  }, {
+    key: "handleAddressStreet",
+    value: function handleAddressStreet(e) {
+      this.setState({
+        street: e.target.value
+      });
+    }
+  }, {
+    key: "handleAddressTown",
+    value: function handleAddressTown(e) {
+      this.setState({
+        town: e.target.value
+      });
+    }
+  }, {
+    key: "handleAddressState",
+    value: function handleAddressState(e) {
+      this.setState({
+        state: e.target.value
+      });
+    }
+  }, {
+    key: "handleAddressZip",
+    value: function handleAddressZip(e) {
+      this.setState({
+        zipcode: e.target.value
+      });
+    }
+  }, {
+    key: "handlePhone",
+    value: function handlePhone(e) {
+      this.setState({
+        phone: e.target.value
+      });
+    }
+  }, {
+    key: "handleEmail",
+    value: function handleEmail(e) {
+      this.setState({
+        email: e.target.value
+      });
+    }
+  }, {
+    key: "handlePassword",
+    value: function handlePassword(e) {
+      this.setState({
+        password: e.target.value
+      });
+    }
+
+    //   postNewCustomer(){
+    //     let newCustomer = {
+    //         name: this.state.firstName + " " + this.state.lastName,
+    //         email: this.state.email,
+    //         password: this.state.password,
+    //         phoneNumber: this.state.phone,
+    //         address: {
+    //             street: this.state.street,
+    //             town: this.state.town,
+    //             state: this.state.state,
+    //             zipcode: this.state.zipcode
+    //         },
+    //     }
+    //     axios.post('http://localhost:3000/api/Customers', newCustomer)
+    //       .then(function (response) {
+    //         console.log('new customer added');
+    //       })
+    //       .catch(function (error) {
+    //         console.log('unable to add new customer');
+
+    //       });
+    //   }
+
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      var existingUser = null;
+      var newCustomer = {
+        name: this.state.firstName + " " + this.state.lastName,
+        email: this.state.email,
+        password: this.state.password,
+        phoneNumber: this.state.phone,
+        address: {
+          street: this.state.street,
+          town: this.state.town,
+          state: this.state.state,
+          zipcode: this.state.zipcode
+        }
+      };
+
+      _axios2.default.get("http://localhost:3000/api/Customers/findOne?filter=%7B%22where%22%3A%20%7B%22email%22%3A%22" + this.state.email + "%22%7D%7D").then(function (response) {
+        console.log('email already taken');
+        existingUser = true;
+        console.log('existing user? ' + existingUser);
+      }).catch(function (error) {
+        console.log('new user detected');
+        existingUser = false;
+        console.log('existing user? ' + existingUser);
+
+        _axios2.default.post('http://localhost:3000/api/Customers', newCustomer).then(function (response) {
+          console.log('new customer added');
+          console.log(newCustomer);
+          window.location = 'http://google.com';
+        }).catch(function (error) {
+          console.log('unable to add new customer');
+          console.log(error);
+        });
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "form",
+        null,
+        _react2.default.createElement(
+          "div",
+          { className: "form-group row" },
+          _react2.default.createElement(
+            "label",
+            { htmlFor: "customer-first-name-input", className: "col-2 col-form-label" },
+            "First Name"
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "col-4" },
+            _react2.default.createElement("input", {
+              className: "form-control",
+              type: "text",
+              id: "customer-first-name-input",
+              onChange: this.handleFirstName
+            })
+          ),
+          _react2.default.createElement(
+            "label",
+            { htmlFor: "customer-last-name-input", className: "col-2 col-form-label" },
+            "Last Name"
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "col-4" },
+            _react2.default.createElement("input", { className: "form-control", type: "text", id: "customer-last-name-input", onChange: this.handleLastName })
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "form-group" },
+          _react2.default.createElement(
+            "label",
+            { htmlFor: "customer-email" },
+            "Email address"
+          ),
+          _react2.default.createElement("input", { type: "email", className: "form-control", id: "customer-email", onChange: this.handleEmail })
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "form-group" },
+          _react2.default.createElement(
+            "label",
+            { htmlFor: "customer-password" },
+            "Password"
+          ),
+          _react2.default.createElement("input", { type: "password", className: "form-control", id: "customer-password", onChange: this.handlePassword })
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "form-group" },
+          _react2.default.createElement(
+            "label",
+            { htmlFor: "customer-phone" },
+            "Phone Number"
+          ),
+          _react2.default.createElement("input", { type: "tel", className: "form-control", id: "customer-phone", onChange: this.handlePhone })
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "form-group row" },
+          _react2.default.createElement(
+            "label",
+            { htmlFor: "customer-address-input", className: "col-2 col-form-label" },
+            "Street Address"
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "col-4" },
+            _react2.default.createElement("input", {
+              className: "form-control",
+              type: "text",
+              id: "customer-address-input",
+              onChange: this.handleAddressStreet
+            })
+          ),
+          _react2.default.createElement(
+            "label",
+            { htmlFor: "customer-city-input", className: "col-2 col-form-label" },
+            "Town/City"
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "col-4" },
+            _react2.default.createElement("input", { className: "form-control", type: "text", id: "customer-city-input", onChange: this.handleAddressTown })
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "form-group row" },
+          _react2.default.createElement(
+            "label",
+            { htmlFor: "customer-state-input", className: "col-2 col-form-label" },
+            "State"
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "col-4" },
+            _react2.default.createElement(
+              "select",
+              { onChange: this.handleAddressState },
+              _react2.default.createElement(
+                "option",
+                { value: "AL" },
+                "Alabama"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "AK" },
+                "Alaska"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "AZ" },
+                "Arizona"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "AR" },
+                "Arkansas"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "CA" },
+                "California"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "CO" },
+                "Colorado"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "CT" },
+                "Connecticut"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "DE" },
+                "Delaware"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "DC" },
+                "District Of Columbia"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "FL" },
+                "Florida"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "GA" },
+                "Georgia"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "HI" },
+                "Hawaii"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "ID" },
+                "Idaho"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "IL" },
+                "Illinois"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "IN" },
+                "Indiana"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "IA" },
+                "Iowa"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "KS" },
+                "Kansas"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "KY" },
+                "Kentucky"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "LA" },
+                "Louisiana"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "ME" },
+                "Maine"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "MD" },
+                "Maryland"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "MA" },
+                "Massachusetts"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "MI" },
+                "Michigan"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "MN" },
+                "Minnesota"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "MS" },
+                "Mississippi"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "MO" },
+                "Missouri"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "MT" },
+                "Montana"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "NE" },
+                "Nebraska"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "NV" },
+                "Nevada"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "NH" },
+                "New Hampshire"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "NJ" },
+                "New Jersey"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "NM" },
+                "New Mexico"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "NY" },
+                "New York"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "NC" },
+                "North Carolina"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "ND" },
+                "North Dakota"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "OH" },
+                "Ohio"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "OK" },
+                "Oklahoma"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "OR" },
+                "Oregon"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "PA" },
+                "Pennsylvania"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "RI" },
+                "Rhode Island"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "SC" },
+                "South Carolina"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "SD" },
+                "South Dakota"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "TN" },
+                "Tennessee"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "TX" },
+                "Texas"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "UT" },
+                "Utah"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "VT" },
+                "Vermont"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "VA" },
+                "Virginia"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "WA" },
+                "Washington"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "WV" },
+                "West Virginia"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "WI" },
+                "Wisconsin"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "WY" },
+                "Wyoming"
+              )
+            )
+          ),
+          _react2.default.createElement(
+            "label",
+            { htmlFor: "customer-zipcode-input", className: "col-2 col-form-label" },
+            "Zipcode"
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "col-4" },
+            _react2.default.createElement("input", {
+              className: "form-control",
+              type: "number",
+              id: "customer-zipcode-input",
+              onChange: this.handleAddressZip
+            })
+          )
+        ),
+        _react2.default.createElement(
+          "button",
+          { type: "submit", className: "btn btn-primary", id: "sign-up-form-submit", onClick: this.handleSubmit },
+          "Submit Info"
+        )
+      );
+    }
+  }]);
+
+  return CustomerSignUpForm;
+}(_react2.default.Component);
+
+exports.default = CustomerSignUpForm;
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _axios = __webpack_require__(35);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var RestaurantSignUpForm = function (_React$Component) {
+  _inherits(RestaurantSignUpForm, _React$Component);
+
+  function RestaurantSignUpForm(props) {
+    _classCallCheck(this, RestaurantSignUpForm);
+
+    var _this = _possibleConstructorReturn(this, (RestaurantSignUpForm.__proto__ || Object.getPrototypeOf(RestaurantSignUpForm)).call(this, props));
+
+    _this.state = {
+      type: "restaurant",
+      ownerFirstName: "",
+      ownerLastName: "",
+
+      restaurantName: '',
+
+      street: "",
+      town: "",
+      state: "AL",
+      zipcode: "",
+
+      phone: "",
+      email: "",
+      password: "",
+      prepTime: 0
+    };
+
+    _this.handleFirstName = _this.handleFirstName.bind(_this);
+
+    _this.handleLastName = _this.handleLastName.bind(_this);
+
+    _this.handleRestaurantName = _this.handleRestaurantName.bind(_this);
+
+    _this.handleAddressStreet = _this.handleAddressStreet.bind(_this);
+
+    _this.handleAddressTown = _this.handleAddressTown.bind(_this);
+    _this.handleAddressState = _this.handleAddressState.bind(_this);
+    _this.handleAddressZip = _this.handleAddressZip.bind(_this);
+
+    _this.handlePhone = _this.handlePhone.bind(_this);
+    _this.handleEmail = _this.handleEmail.bind(_this);
+
+    _this.handlePassword = _this.handlePassword.bind(_this);
+
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+
+    _this.handlePrepTime = _this.handlePrepTime.bind(_this);
+
+    // this.postNewCustomer =  this.postNewCustomer.bind(this);
+    return _this;
+  }
+
+  _createClass(RestaurantSignUpForm, [{
+    key: 'handleFirstName',
+    value: function handleFirstName(e) {
+      this.setState({
+        ownerFirstName: e.target.value
+      });
+    }
+  }, {
+    key: 'handleLastName',
+    value: function handleLastName(e) {
+      this.setState({
+        ownerLastName: e.target.value
+      });
+    }
+  }, {
+    key: 'handleAddressStreet',
+    value: function handleAddressStreet(e) {
+      this.setState({
+        street: e.target.value
+      });
+    }
+  }, {
+    key: 'handleAddressTown',
+    value: function handleAddressTown(e) {
+      this.setState({
+        town: e.target.value
+      });
+    }
+  }, {
+    key: 'handleAddressState',
+    value: function handleAddressState(e) {
+      this.setState({
+        state: e.target.value
+      });
+    }
+  }, {
+    key: 'handleAddressZip',
+    value: function handleAddressZip(e) {
+      this.setState({
+        zipcode: e.target.value
+      });
+    }
+  }, {
+    key: 'handlePhone',
+    value: function handlePhone(e) {
+      this.setState({
+        phone: e.target.value
+      });
+    }
+  }, {
+    key: 'handleEmail',
+    value: function handleEmail(e) {
+      this.setState({
+        email: e.target.value
+      });
+    }
+  }, {
+    key: 'handlePrepTime',
+    value: function handlePrepTime(e) {
+      this.setState({
+        prepTime: e.target.value
+      });
+    }
+  }, {
+    key: 'handlePassword',
+    value: function handlePassword(e) {
+      this.setState({
+        password: e.target.value
+      });
+    }
+  }, {
+    key: 'handleRestaurantName',
+    value: function handleRestaurantName(e) {
+      this.setState({
+        restaurantName: e.target.value
+      });
+    }
+  }, {
+    key: 'handleSubmit',
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      var existingRestaurant = null;
+      var newRestaurant = {
+        ownerName: this.state.ownerFirstName + " " + this.state.ownerLastName,
+        restaurantName: this.state.restaurantName,
+        restaurantEmail: this.state.email,
+        password: this.state.password,
+        restaurantPhone: this.state.phone,
+        location: {
+          street: this.state.street,
+          town: this.state.town,
+          state: this.state.state,
+          zipcode: this.state.zipcode
+        },
+        prepTime: this.state.prepTime,
+        hoursOfOperation: { willAddLater: true }
+      };
+
+      _axios2.default.get("http://localhost:3000/api/Restaurants/findOne?filter=%7B%22where%22%3A%20%7B%22email%22%3A%22" + this.state.email + "%22%7D%7D").then(function (response) {
+        console.log('email already taken');
+        existingRestaurant = true;
+        console.log('existing restaurant? ' + existingRestaurant);
+      }).catch(function (error) {
+        console.log('new restaurant detected');
+        existingRestaurant = false;
+        console.log('existing restaurant? ' + existingRestaurant);
+
+        _axios2.default.post('http://localhost:3000/api/Restaurants', newRestaurant).then(function (response) {
+          console.log('new restaurant added');
+          console.log(newRestaurant);
+          window.location = 'http://google.com';
+        }).catch(function (error) {
+          console.log('unable to add new restaurant');
+          console.log(error);
+        });
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'form',
+        null,
+        _react2.default.createElement(
+          'div',
+          { className: 'form-group row' },
+          _react2.default.createElement(
+            'label',
+            { htmlFor: 'owner-first-name-input', className: 'col-2 col-form-label' },
+            'Owner First Name'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-4' },
+            _react2.default.createElement('input', {
+              className: 'form-control',
+              type: 'text',
+              id: 'owner-first-name-input',
+              onChange: this.handleFirstName
+            })
+          ),
+          _react2.default.createElement(
+            'label',
+            { htmlFor: 'owner-last-name-input', className: 'col-2 col-form-label' },
+            'Owner Last Name'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-4' },
+            _react2.default.createElement('input', { className: 'form-control', type: 'text', id: 'owner-last-name-input', onChange: this.handleLastName })
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'form-group' },
+          _react2.default.createElement(
+            'label',
+            { htmlFor: 'restaurantName' },
+            'Restaurant Name'
+          ),
+          _react2.default.createElement('input', { type: 'email', className: 'form-control', id: 'restaurantName', onChange: this.handleEmail })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'form-group' },
+          _react2.default.createElement(
+            'label',
+            { htmlFor: 'restaurantPrepTime' },
+            'Avg Prep Time (mins)'
+          ),
+          _react2.default.createElement('input', { type: 'number', className: 'form-control', id: 'restaurantPrepTime', onChange: this.handlePrepTime })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'form-group' },
+          _react2.default.createElement(
+            'label',
+            { htmlFor: 'restaurant-email' },
+            'Email address'
+          ),
+          _react2.default.createElement('input', { type: 'email', className: 'form-control', id: 'restaurant-email', onChange: this.handleRestaurantName })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'form-group' },
+          _react2.default.createElement(
+            'label',
+            { htmlFor: 'restaurant-password' },
+            'Password'
+          ),
+          _react2.default.createElement('input', { type: 'password', className: 'form-control', id: 'restaurant-password', onChange: this.handlePassword })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'form-group' },
+          _react2.default.createElement(
+            'label',
+            { htmlFor: 'restaurant-phone' },
+            'Phone Number'
+          ),
+          _react2.default.createElement('input', { type: 'tel', className: 'form-control', id: 'restaurant-phone', onChange: this.handlePhone })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'form-group row' },
+          _react2.default.createElement(
+            'label',
+            { htmlFor: 'restaurant-address-input', className: 'col-2 col-form-label' },
+            'Street Address'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-4' },
+            _react2.default.createElement('input', {
+              className: 'form-control',
+              type: 'text',
+              id: 'restaurant-address-input',
+              onChange: this.handleAddressStreet
+            })
+          ),
+          _react2.default.createElement(
+            'label',
+            { htmlFor: 'restaurant-city-input', className: 'col-2 col-form-label' },
+            'Town/City'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-4' },
+            _react2.default.createElement('input', { className: 'form-control', type: 'text', id: 'restaurant-city-input', onChange: this.handleAddressTown })
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'form-group row' },
+          _react2.default.createElement(
+            'label',
+            { htmlFor: 'restaurant-state-input', className: 'col-2 col-form-label' },
+            'State'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-4' },
+            _react2.default.createElement(
+              'select',
+              { onChange: this.handleAddressState },
+              _react2.default.createElement(
+                'option',
+                { value: 'AL' },
+                'Alabama'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'AK' },
+                'Alaska'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'AZ' },
+                'Arizona'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'AR' },
+                'Arkansas'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'CA' },
+                'California'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'CO' },
+                'Colorado'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'CT' },
+                'Connecticut'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'DE' },
+                'Delaware'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'DC' },
+                'District Of Columbia'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'FL' },
+                'Florida'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'GA' },
+                'Georgia'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'HI' },
+                'Hawaii'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'ID' },
+                'Idaho'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'IL' },
+                'Illinois'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'IN' },
+                'Indiana'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'IA' },
+                'Iowa'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'KS' },
+                'Kansas'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'KY' },
+                'Kentucky'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'LA' },
+                'Louisiana'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'ME' },
+                'Maine'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'MD' },
+                'Maryland'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'MA' },
+                'Massachusetts'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'MI' },
+                'Michigan'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'MN' },
+                'Minnesota'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'MS' },
+                'Mississippi'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'MO' },
+                'Missouri'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'MT' },
+                'Montana'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'NE' },
+                'Nebraska'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'NV' },
+                'Nevada'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'NH' },
+                'New Hampshire'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'NJ' },
+                'New Jersey'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'NM' },
+                'New Mexico'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'NY' },
+                'New York'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'NC' },
+                'North Carolina'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'ND' },
+                'North Dakota'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'OH' },
+                'Ohio'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'OK' },
+                'Oklahoma'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'OR' },
+                'Oregon'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'PA' },
+                'Pennsylvania'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'RI' },
+                'Rhode Island'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'SC' },
+                'South Carolina'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'SD' },
+                'South Dakota'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'TN' },
+                'Tennessee'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'TX' },
+                'Texas'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'UT' },
+                'Utah'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'VT' },
+                'Vermont'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'VA' },
+                'Virginia'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'WA' },
+                'Washington'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'WV' },
+                'West Virginia'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'WI' },
+                'Wisconsin'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'WY' },
+                'Wyoming'
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'label',
+            { htmlFor: 'restaurant-zipcode-input', className: 'col-2 col-form-label' },
+            'Zipcode'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-4' },
+            _react2.default.createElement('input', {
+              className: 'form-control',
+              type: 'number',
+              id: 'restaurant-zipcode-input',
+              onChange: this.handleAddressZip
+            })
+          )
+        ),
+        _react2.default.createElement(
+          'button',
+          { type: 'submit', className: 'btn btn-primary', id: 'sign-up-form-submit', onClick: this.handleSubmit },
+          'Submit Info'
+        )
+      );
+    }
+  }]);
+
+  return RestaurantSignUpForm;
+}(_react2.default.Component);
+
+exports.default = RestaurantSignUpForm;
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Navbar = function (_React$Component) {
+  _inherits(Navbar, _React$Component);
+
+  function Navbar() {
+    _classCallCheck(this, Navbar);
+
+    return _possibleConstructorReturn(this, (Navbar.__proto__ || Object.getPrototypeOf(Navbar)).apply(this, arguments));
+  }
+
+  _createClass(Navbar, [{
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "nav",
+        { className: "navbar navbar-toggleable-md navbar-light bg-faded fixed-top" },
+        _react2.default.createElement(
+          "button",
+          {
+            className: "navbar-toggler navbar-toggler-right",
+            type: "button",
+            "data-toggle": "collapse",
+            "data-target": "#navbarNavAltMarkup"
+          },
+          _react2.default.createElement("span", { className: "navbar-toggler-icon" })
+        ),
+        _react2.default.createElement(
+          "a",
+          { className: "navbar-brand", href: "#" },
+          "MealHouse"
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "collapse navbar-collapse justify-content-end", id: "navbarNavAltMarkup" },
+          _react2.default.createElement(
+            "div",
+            { className: "navbar-nav" },
+            _react2.default.createElement(
+              "a",
+              { className: "nav-item nav-link active", href: "#" },
+              "Sign Up ",
+              _react2.default.createElement(
+                "span",
+                { className: "sr-only" },
+                "(current)"
+              )
+            ),
+            _react2.default.createElement(
+              "a",
+              {
+                href: "#",
+                className: "nav-item nav-link active",
+                "data-toggle": "modal",
+                "data-target": "#myModal"
+              },
+              "Login"
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Navbar;
+}(_react2.default.Component);
+
+exports.default = Navbar;
+
+/***/ }),
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20028,7 +21354,7 @@ var LoginModal = function (_React$Component) {
                 { className: "form-group" },
                 _react2.default.createElement(
                   "label",
-                  { "for": "exampleInputEmail1" },
+                  { htmlFor: "exampleInputEmail1" },
                   "Email address"
                 ),
                 _react2.default.createElement("input", {
@@ -20043,7 +21369,7 @@ var LoginModal = function (_React$Component) {
                 { className: "form-group" },
                 _react2.default.createElement(
                   "label",
-                  { "for": "exampleInputPassword1" },
+                  { htmlFor: "exampleInputPassword1" },
                   "Password"
                 ),
                 _react2.default.createElement("input", {
@@ -20091,65 +21417,6 @@ var LoginModal = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = LoginModal;
-
-/***/ }),
-/* 56 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(2);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Navbar = __webpack_require__(54);
-
-var _Navbar2 = _interopRequireDefault(_Navbar);
-
-var _LoginModal = __webpack_require__(55);
-
-var _LoginModal2 = _interopRequireDefault(_LoginModal);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var RestaurantProfile = function (_React$Component) {
-  _inherits(RestaurantProfile, _React$Component);
-
-  function RestaurantProfile(props) {
-    _classCallCheck(this, RestaurantProfile);
-
-    var _this = _possibleConstructorReturn(this, (RestaurantProfile.__proto__ || Object.getPrototypeOf(RestaurantProfile)).call(this, props));
-
-    _this.state = {
-      companyName: ""
-    };
-    return _this;
-  }
-
-  _createClass(RestaurantProfile, [{
-    key: "render",
-    value: function render() {
-      return _react2.default.createElement("div", null);
-    }
-  }]);
-
-  return RestaurantProfile;
-}(_react2.default.Component);
-
-exports.default = RestaurantProfile;
 
 /***/ })
 /******/ ]);
