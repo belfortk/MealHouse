@@ -26,12 +26,7 @@ class App extends Component {
           <LoginModal/>
         </header>
 
-<<<<<<< HEAD
         <SearchBar />
-=======
-      <SearchBar />
-      <MenuProfile/>
->>>>>>> menu profile state creation
         <div className="container">
 
 
