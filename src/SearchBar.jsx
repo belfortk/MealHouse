@@ -1,8 +1,6 @@
 import React from "react";
 
 
-var border = { border: "30px" };
-
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
@@ -22,7 +20,7 @@ class SearchBar extends React.Component {
     autocomplete.addListener('place_changed', () => {
       let place = autocomplete.getPlace();
       let location = place.geometry.location;
-    
+
       this.setState({
         place_formatted: place.formatted_address,
         place_id: place.place_id,
@@ -42,8 +40,8 @@ class SearchBar extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="jumbotron" style={border}>
+
+        <div className="container-1 " >
           <div className="input-group">
             <input
               ref="searchField"
@@ -63,7 +61,7 @@ class SearchBar extends React.Component {
 
           </div>
         </div>
-      </div>
+
     );
   }
 }

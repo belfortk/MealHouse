@@ -11,7 +11,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-   
+
   }
 
   }
@@ -25,8 +25,10 @@ class App extends Component {
           <LoginModal/>
         </header>
 
-      <SearchBar />
+        <SearchBar />
         <div className="container">
+
+
         {/* <SignupPage /> */}
 
         </div>
