@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import LoginModal from './LoginModal.jsx';
 import SearchBar from "./SearchBar";
 import React, { Component } from 'react';
+import MenuProfile from './MenuProfile';
 
 
 import SignupPage from './SignupPage/SignupPage'
@@ -25,7 +26,12 @@ class App extends Component {
           <LoginModal/>
         </header>
 
+<<<<<<< HEAD
         <SearchBar />
+=======
+      <SearchBar />
+      <MenuProfile/>
+>>>>>>> menu profile state creation
         <div className="container">
 
 
