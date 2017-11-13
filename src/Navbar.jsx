@@ -2,7 +2,7 @@ import React from "react";
 class Navbar extends React.Component {
   render() {
     return (
-      <nav className="navbar navbar-toggleable-md navbar-light bg-faded fixed-top">
+      <nav className="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
         <button
           className="navbar-toggler navbar-toggler-right"
           type="button"
