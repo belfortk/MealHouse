@@ -6,8 +6,26 @@ class MenuProfile extends Component {
         super(props);
 
         this.state = {
-            name: ""
+            FirstName: "",
+            LastName: "",
+            BusinessName: ""
         };
+
+        this.handleFirstName = this.handleFirstName.bind(this);
+        this.handleLastName = this.handleLastName.bind(this);
+        this.handleBusinessName = this.handleBusinessName.bind(this);
+    }
+
+    handleFirstName(event) {
+      this.setState({FirstName: event.target.value});
+    }
+
+    handleLastName(event) {
+      this.setState({LastName: event.target.value});
+    }
+
+    handleBusinessName(event) {
+      this.setState({BusinessName: event.target.value});
     }
 
     render() {
@@ -33,19 +51,19 @@ class MenuProfile extends Component {
               <div className="form-group row">
                 <label for="firstName" className="col-md-3 col-form-label">First Name</label>
                   <div className="col-md-8">
-                    <input className="form-control" type="text" placeholder="Pre-set Value" id="firstName"/>
+                    <input onChange={this.handleFirstName} value={this.state.FirstName} className="form-control" type="text" placeholder="Pre-set Value" id="firstName"/>
                   </div>
               </div>
               <div className="form-group row">
                 <label for="lastName" className="col-md-3 col-form-label">Last Name</label>
                   <div className="col-md-8">
-                    <input className="form-control" type="text" placeholder="Pre-set Value" id="lastName"/>
+                    <input onChange={this.handleLastName} value={this.state.LastName} className="form-control" type="text" placeholder="Pre-set Value" id="lastName"/>
                   </div>
               </div>
               <div className="form-group row">
                 <label for="businessName" className="col-md-3 col-form-label">Business Name</label>
                   <div className="col-md-8">
-                    <input className="form-control" type="text" placeholder="Pre-set Value" id="businessName"/>
+                    <input onChange={this.handleBusinessName} value={this.state.BusinessName} className="form-control" type="text" placeholder="Pre-set Value" id="businessName"/>
                   </div>
               </div>
               <div className="form-group row">
@@ -90,16 +108,16 @@ class MenuProfile extends Component {
                       </div>
                     </div>
                     <div className="col-md-2">
-                      <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"/> $11 - $30
+                      <div className="form-check form-check-inline">
+                        <label className="form-check-label">
+                          <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"/> $11 - $30
                         </label>
                       </div>
                     </div>
                     <div className="col-md-3">
-                      <div class="form-check form-check-inline disabled">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"/> $31 - $60
+                      <div className="form-check form-check-inline disabled">
+                        <label className="form-check-label">
+                          <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"/> $31 - $60
                         </label>
                       </div>
                     </div>
