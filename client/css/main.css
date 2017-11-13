@@ -1,16 +1,14 @@
-header {
-  margin-bottom: 4em;
+body {
+  margin-top: 38px;
 }
 
-html {
+
+.container-1 {
+  padding: 25vh 5vw 75vh 5vw;
   background: url("https://static.pexels.com/photos/616401/pexels-photo-616401.jpeg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-}
-
-.container-1 {
-  margin-top: 25%;
-  width: 85%;
+  height: 100vh;
 }
