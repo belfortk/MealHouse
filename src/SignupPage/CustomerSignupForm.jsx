@@ -91,44 +91,44 @@ class CustomerSignUpForm extends React.Component {
     });
   }
 
-//   postNewCustomer(){
-//     let newCustomer = {
-//         name: this.state.firstName + " " + this.state.lastName,
-//         email: this.state.email,
-//         password: this.state.password,
-//         phoneNumber: this.state.phone,
-//         address: {
-//             street: this.state.street,
-//             town: this.state.town,
-//             state: this.state.state,
-//             zipcode: this.state.zipcode
-//         },
-//     }
-//     axios.post('http://localhost:3000/api/Customers', newCustomer)
-//       .then(function (response) {
-//         console.log('new customer added');
-//       })
-//       .catch(function (error) {
-//         console.log('unable to add new customer');
+  //   postNewCustomer(){
+  //     let newCustomer = {
+  //         name: this.state.firstName + " " + this.state.lastName,
+  //         email: this.state.email,
+  //         password: this.state.password,
+  //         phoneNumber: this.state.phone,
+  //         address: {
+  //             street: this.state.street,
+  //             town: this.state.town,
+  //             state: this.state.state,
+  //             zipcode: this.state.zipcode
+  //         },
+  //     }
+  //     axios.post('http://localhost:3000/api/Customers', newCustomer)
+  //       .then(function (response) {
+  //         console.log('new customer added');
+  //       })
+  //       .catch(function (error) {
+  //         console.log('unable to add new customer');
 
-//       });
-//   }
+  //       });
+  //   }
 
   handleSubmit(e) {
     e.preventDefault();
-    let existingUser = null
+    let existingUser = null;
     let newCustomer = {
-        name: this.state.firstName + " " + this.state.lastName,
-        email: this.state.email,
-        password: this.state.password,
-        phoneNumber: this.state.phone,
-        address: {
-            street: this.state.street,
-            town: this.state.town,
-            state: this.state.state,
-            zipcode: this.state.zipcode
-        },
-    }
+      name: this.state.firstName + " " + this.state.lastName,
+      email: this.state.email,
+      password: this.state.password,
+      phoneNumber: this.state.phone,
+      address: {
+        street: this.state.street,
+        town: this.state.town,
+        state: this.state.state,
+        zipcode: this.state.zipcode
+      }
+    };
 
     axios
       .get(
@@ -137,95 +137,107 @@ class CustomerSignUpForm extends React.Component {
           "%22%7D%7D"
       )
       .then(function(response) {
-        console.log('email already taken');
+        console.log("email already taken");
         existingUser = true;
-        console.log('existing user? ' + existingUser);
-
+        console.log("existing user? " + existingUser);
       })
       .catch(function(error) {
-        console.log('new user detected');
+        console.log("new user detected");
         existingUser = false;
-        console.log('existing user? ' + existingUser);
+        console.log("existing user? " + existingUser);
 
-        axios.post('http://localhost:3000/api/Customers', newCustomer)
-        .then(function (response) {
-          console.log('new customer added');
-          console.log( newCustomer);
-          window.location = 'http://google.com';
-        })
-        .catch(function (error) {
-          console.log('unable to add new customer');
-          console.log( error);
-
-        });
-
-
+        axios
+          .post("http://localhost:3000/api/Customers", newCustomer)
+          .then(function(response) {
+            console.log("new customer added");
+            console.log(newCustomer);
+            window.location = "http://google.com";
+          })
+          .catch(function(error) {
+            console.log("unable to add new customer");
+            console.log(error);
+          });
       });
-
-
   }
 
   render() {
     return (
       <form>
         <div className="form-group row">
-          <label htmlFor="customer-first-name-input" className="col-2 col-form-label">
-            First Name
-          </label>
           <div className="col-4">
             <input
               className="form-control"
               type="text"
               id="customer-first-name-input"
               onChange={this.handleFirstName}
+              placeholder="First Name"
             />
           </div>
-          <label htmlFor="customer-last-name-input" className="col-2 col-form-label">
-            Last Name
-          </label>
           <div className="col-4">
-            <input className="form-control" type="text" id="customer-last-name-input" onChange={this.handleLastName} />
+            <input
+              className="form-control"
+              type="text"
+              id="customer-last-name-input"
+              onChange={this.handleLastName}
+              placeholder="Last Name"
+            />
           </div>
         </div>
 
         <div className="form-group">
-          <label htmlFor="customer-email">Email address</label>
-          <input type="email" className="form-control" id="customer-email" onChange={this.handleEmail} />
+          <input
+            type="email"
+            className="form-control"
+            id="customer-email"
+            onChange={this.handleEmail}
+            placeholder="Email Address"
+          />
         </div>
         <div className="form-group">
-          <label htmlFor="customer-password">Password</label>
-          <input type="password" className="form-control" id="customer-password" onChange={this.handlePassword} />
+          <input
+            type="password"
+            className="form-control"
+            id="customer-password"
+            onChange={this.handlePassword}
+            placeholder="Password"
+          />
         </div>
         <div className="form-group">
-          <label htmlFor="customer-phone">Phone Number</label>
-          <input type="tel" className="form-control" id="customer-phone" onChange={this.handlePhone} />
+          <input
+            type="tel"
+            className="form-control"
+            id="customer-phone"
+            onChange={this.handlePhone}
+            placeholder="Phone Number"
+          />
         </div>
 
         <div className="form-group row">
-          <label htmlFor="customer-address-input" className="col-2 col-form-label">
-            Street Address
-          </label>
           <div className="col-4">
             <input
               className="form-control"
               type="text"
               id="customer-address-input"
               onChange={this.handleAddressStreet}
+              placeholder="Street Address"
             />
           </div>
-          <label htmlFor="customer-city-input" className="col-2 col-form-label">
-            Town/City
-          </label>
           <div className="col-4">
-            <input className="form-control" type="text" id="customer-city-input" onChange={this.handleAddressTown} />
+            <input
+              className="form-control"
+              type="text"
+              id="customer-city-input"
+              onChange={this.handleAddressTown}
+              placeholder="City/Town"
+
+            />
           </div>
         </div>
         <div className="form-group row">
-          <label htmlFor="customer-state-input" className="col-2 col-form-label">
-            State
-          </label>
+
           <div className="col-4">
             <select onChange={this.handleAddressState}>
+              <option value="">Select State</option>
               <option value="AL">Alabama</option>
               <option value="AK">Alaska</option>
               <option value="AZ">Arizona</option>
@@ -279,19 +291,23 @@ class CustomerSignUpForm extends React.Component {
               <option value="WY">Wyoming</option>
             </select>
           </div>
-          <label htmlFor="customer-zipcode-input" className="col-2 col-form-label">
-            Zipcode
-          </label>
           <div className="col-4">
             <input
               className="form-control"
               type="number"
               id="customer-zipcode-input"
               onChange={this.handleAddressZip}
+              placeholder="Zipcode"
+
             />
           </div>
         </div>
-        <button type="submit" className="btn btn-primary" id="sign-up-form-submit" onClick={this.handleSubmit}>
+        <button
+          type="submit"
+          className="btn btn-primary"
+          id="sign-up-form-submit"
+          onClick={this.handleSubmit}
+        >
           Submit Info
         </button>
       </form>
