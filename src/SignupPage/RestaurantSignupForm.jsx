@@ -183,19 +183,18 @@ class RestaurantSignUpForm extends React.Component {
               onChange={this.handleLastName}
             />
           </div>
-          </div>
-          <div className='form-group row'>
-          <div className="col-md-6">
-            <input
-              type="email"
-              className="form-control"
-              placeholder="Restaurant Name"
-              id="restaurantName"
-              onChange={this.handleEmail}
-            />
-          </div>
-        
-        <div className="col-md-6">
+        </div>
+
+        <div className="form-group">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Restaurant Name"
+            id="restaurantName"
+            onChange={this.handleRestaurantName}
+          />
+        </div>
+        <div className="form-group">
           <input
             type="number"
             className="form-control"
@@ -204,14 +203,13 @@ class RestaurantSignUpForm extends React.Component {
             onChange={this.handlePrepTime}
           />
         </div>
-        </div>
         <div className="form-group">
           <input
             type="email"
             className="form-control"
             placeholder="Email address"
             id="restaurant-email"
-            onChange={this.handleRestaurantName}
+            onChange={this.handleEmail}
           />
         </div>
         <div className="form-group">
