@@ -38,7 +38,42 @@ class MenuProfile extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handlePriceRange = this.handlePriceRange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.listener = this.listener.bind(this);
   }
+
+  listener(){
+    axios.get('/api/restaurants/1')
+    .then(function(response){
+
+      let resBusinessName = response.data.restaurantName;
+      let resBusinessPhone = response.data.restaurantPhone;
+      let resBusinessEmail= response.rdata.estaurantEmail;
+      let fullName = response.data.ownerName;
+      let arrayName= fullName.split(" ");
+      let resFirstName = arrayName[0];
+      let resLastName = arrayName[1];
+      this.setState(
+        {
+          FirstName: resFirstName,
+          LastName: resLastName,
+          BusinessName: resBusinessName,
+          BusinessEmail: resBusinessEmail,
+          BusinessPhone: resBusinessPhone,
+        }
+      );
+
+    })
+    .catch(function (error){
+      console.log(error);
+    });
+
+  }
+
+  componentWillMount(){
+    this.listener()
+
+  }
+
   componentDidMount() {
     var input = document.getElementById("searchTextField");
     var options = { componentRestrictions: { country: "us" } };
@@ -69,7 +104,7 @@ class MenuProfile extends Component {
       place_location: this.state.place_location
     } }, () => {
       axios
-        .put('/restaurants/1', {
+        .put('/api/restaurants/1', {
           ownerName: `${this.state.FirstName} ${this.state.LastName}`,
           restaurantName: this.state.BusinessName,
           restaurantPhone: this.state.BusinessPhone,

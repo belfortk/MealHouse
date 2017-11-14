@@ -188,11 +188,11 @@ class RestaurantSignUpForm extends React.Component {
 
         <div className="form-group">
           <input
-            type="email"
+            type="text"
             className="form-control"
             placeholder="Restaurant Name"
             id="restaurantName"
-            onChange={this.handleEmail}
+            onChange={this.handleRestaurantName}
           />
         </div>
         <div className="form-group">
@@ -210,7 +210,7 @@ class RestaurantSignUpForm extends React.Component {
             className="form-control"
             placeholder="Email address"
             id="restaurant-email"
-            onChange={this.handleRestaurantName}
+            onChange={this.handleEmail}
           />
         </div>
         <div className="form-group">
