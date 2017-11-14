@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import SearchBar from "./SearchBar";
 import axios from "axios";
-
+import Navbar from './Navbar';
 class MenuProfile extends Component {
   constructor(props) {
     super(props);
@@ -38,16 +38,15 @@ class MenuProfile extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handlePriceRange = this.handlePriceRange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.listener = this.listener.bind(this);
   }
 
-  listener(){
+  componentWillMount(){
     axios.get('/api/restaurants/1')
-    .then(function(response){
+    .then((response) => {
 
       let resBusinessName = response.data.restaurantName;
       let resBusinessPhone = response.data.restaurantPhone;
-      let resBusinessEmail= response.rdata.estaurantEmail;
+      let resBusinessEmail= response.data.restaurantEmail;
       let fullName = response.data.ownerName;
       let arrayName= fullName.split(" ");
       let resFirstName = arrayName[0];
@@ -63,14 +62,10 @@ class MenuProfile extends Component {
       );
 
     })
-    .catch(function (error){
+    .catch((error) => {
       console.log(error);
     });
-
-  }
-
-  componentWillMount(){
-    this.listener()
+  
 
   }
 
@@ -159,6 +154,7 @@ class MenuProfile extends Component {
   render() {
     return (
       <div className="container">
+        <Navbar/>
         <div className="row">
           <div className="col-sm-9 offset-sm-3">
             <h1>Restaurant Profile</h1>
