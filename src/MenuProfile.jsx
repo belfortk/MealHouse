@@ -35,28 +35,9 @@ class MenuProfile extends Component {
       place_location: ""
     };
 
-    this.handleFirstName = this.handleFirstName.bind(this);
-    this.handleLastName = this.handleLastName.bind(this);
-    this.handleBusinessName = this.handleBusinessName.bind(this);
-    this.handleBusinessPhone = this.handleBusinessPhone.bind(this);
-    this.handleAddress = this.handleAddress.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handlePriceRange = this.handlePriceRange.bind(this);
-    this.handleDelivery = this.handleDelivery.bind(this);
-    this.handlePrepTime = this.handlePrepTime.bind(this);
-    this.handleMonStart = this.handleMonStart.bind(this);
-    this.handleMonEnd = this.handleMonEnd.bind(this);
-    this.handleTuesStart = this.handleTuesStart.bind(this);
-    this.handleTuesEnd = this.handleTuesEnd.bind(this);
-    this.handleWedStart = this.handleWedStart.bind(this);
-    this.handleWedEnd = this.handleWedEnd.bind(this);
-    this.handleThuStart = this.handleThuStart.bind(this);
-    this.handleThuEnd = this.handleThuEnd.bind(this);
-    this.handleFriStart = this.handleFriStart.bind(this);
-    this.handleFriEnd = this.handleFriEnd.bind(this);
-    this.handleSatStart = this.handleSatStart.bind(this);
-    this.handleSatEnd = this.handleSatEnd.bind(this);
-    this.handleSunStart = this.handleSunStart.bind(this);
-    this.handleSunEnd = this.handleSunEnd.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidMount() {
     var input = document.getElementById("searchTextField");
@@ -74,93 +55,71 @@ class MenuProfile extends Component {
     });
   }
 
-  handleFirstName(event) {
-    this.setState({ FirstName: event.target.value });
+  handleChange(event) {
+    let prop = event.target.id;
+
+    this.setState({ [prop]: event.target.value});
+    console.log(this.state);
   }
 
-  handleLastName(event) {
-    this.setState({ LastName: event.target.value });
-  }
-
-  handleBusinessName(event) {
-    this.setState({ BusinessName: event.target.value });
-  }
-
-  handleBusinessPhone(event) {
-    this.setState({ BusinessPhone: event.target.value });
-  }
-
-  handleAddress(event) {
-    this.setState({ Address: event.target.value });
+  handleSubmit() {
+    this.setState({ Address: {
+      place_formatted: this.state.place_formatted,
+      place_id: this.state.place_id,
+      place_location: this.state.place_location
+    } }, () => {
+      axios
+        .put('/restaurants/1', {
+          ownerName: `${this.state.FirstName} ${this.state.LastName}`,
+          restaurantName: this.state.BusinessName,
+          restaurantPhone: this.state.BusinessPhone,
+          location : this.state.Address,
+          prepTime: this.state.PrepTime,
+          hoursOfOperation: [
+            {Mon: {
+              start: this.state.MonStart,
+              end: this.state.MonEnd
+            }},
+            {Tues: {
+              start: this.state.ThuStart,
+              end: this.state.ThuEnd
+            }},
+            {Wed: {
+              start: this.state.WedStart,
+              end: this.state.WedEnd
+            }},
+            {Thu: {
+              start: this.state.ThuStart,
+              end: this.state.ThuEnd
+            }},
+            {Fri: {
+              start: this.state.FriStart,
+              end: this.state.FriEnd
+            }},
+            {Sat: {
+              start: this.state.SatStart,
+              end: this.state.SatEnd
+            }},
+            {Sun: {
+              start: this.state.SunStart,
+              end: this.state.SunEnd
+            }}
+          ],
+          priceRange: this.state.PriceRange,
+          minDeliveryCharge: this.state.Delivery
+        })
+        .then(() => {
+          console.log("Update Success");
+        }).catch(err => {
+          console.log(err);
+        })
+    });
   }
 
   handlePriceRange(event) {
     this.setState({ PriceRange: event.target.value });
   }
-  handleDelivery(event) {
-    this.setState({ Delivery: event.target.value });
-  }
 
-  handlePrepTime(event) {
-    this.setState({ PrepTime: event.target.value });
-  }
-
-  handleMonStart(event) {
-    this.setState({ MonStart: event.target.value });
-  }
-
-  handleMonEnd(event) {
-    this.setState({ MonEnd: event.target.value });
-  }
-
-  handleTuesStart(event) {
-    this.setState({ TuesStart: event.target.value });
-  }
-
-  handleTuesEnd(event) {
-    this.setState({ TuesEnd: event.target.value });
-  }
-
-  handleWedStart(event) {
-    this.setState({ WedStart: event.target.value });
-  }
-
-  handleWedEnd(event) {
-    this.setState({ WedEnd: event.target.value });
-  }
-
-  handleThuStart(event) {
-    this.setState({ ThuStart: event.target.value });
-  }
-
-  handleThuEnd(event) {
-    this.setState({ ThuEnd: event.target.value });
-  }
-
-  handleFriStart(event) {
-    this.setState({ FriStart: event.target.value });
-  }
-
-  handleFriEnd(event) {
-    this.setState({ FriEnd: event.target.value });
-  }
-
-  handleSatStart(event) {
-    this.setState({ SatStart: event.target.value });
-  }
-
-  handleSatEnd(event) {
-    this.setState({ SatEnd: event.target.value });
-  }
-
-  handleSunStart(event) {
-    this.setState({ SunStart: event.target.value });
-  }
-
-  handleSunEnd(event) {
-    this.setState({ SunEnd: event.target.value });
-    console.log(this.state);
-  }
 
   render() {
     return (
@@ -199,12 +158,12 @@ class MenuProfile extends Component {
               </label>
               <div className="col-md-8">
                 <input
-                  onChange={this.handleFirstName}
+                  onChange={this.handleChange}
                   value={this.state.FirstName}
                   className="form-control"
                   type="text"
                   placeholder="Pre-set Value"
-                  id="firstName"
+                  id="FirstName"
                 />
               </div>
             </div>
@@ -214,12 +173,12 @@ class MenuProfile extends Component {
               </label>
               <div className="col-md-8">
                 <input
-                  onChange={this.handleLastName}
+                  onChange={this.handleChange}
                   value={this.state.LastName}
                   className="form-control"
                   type="text"
                   placeholder="Pre-set Value"
-                  id="lastName"
+                  id="LastName"
                 />
               </div>
             </div>
@@ -229,12 +188,12 @@ class MenuProfile extends Component {
               </label>
               <div className="col-md-8">
                 <input
-                  onChange={this.handleBusinessName}
+                  onChange={this.handleChange}
                   value={this.state.BusinessName}
                   className="form-control"
                   type="text"
                   placeholder="Pre-set Value"
-                  id="businessName"
+                  id="BusinessName"
                 />
               </div>
             </div>
@@ -254,12 +213,12 @@ class MenuProfile extends Component {
               </label>
               <div className="col-md-8">
                 <input
-                  onChange={this.handleBusinessPhone}
+                  onChange={this.handleChange}
                   value={this.state.BusinessPhone}
                   className="form-control"
                   type="tel"
                   placeholder="Pre-set Value"
-                  id="businesspnumber"
+                  id="BusinessPhone"
                 />
               </div>
             </div>
@@ -269,7 +228,6 @@ class MenuProfile extends Component {
               </label>
               <div className="col-md-8">
                 <input
-                  onChange={this.handleAddress}
                   ref="searchField"
                   id="searchTextField"
                   type="text"
@@ -343,11 +301,12 @@ class MenuProfile extends Component {
                 <div className="input-group">
                   <span className="input-group-addon">$</span>
                   <input
-                    onChange={this.handleDelivery}
+                    onChange={this.handleChange}
                     value={this.state.Delivery}
                     type="number"
                     className="form-control"
                     aria-label="Amount (to the nearest dollar)"
+                    id="Delivery"
                   />
                   <span className="input-group-addon">.00</span>
                 </div>
@@ -360,10 +319,11 @@ class MenuProfile extends Component {
               <div className="col-md-3">
                 <div className="input-group">
                   <input
-                    onChange={this.handlePrepTime}
+                    onChange={this.handleChange}
                     value={this.state.PrepTime}
                     type="number"
                     className="form-control"
+                    id="PrepTime"
                   />
                   <span className="input-group-addon">mins</span>
                 </div>
@@ -378,19 +338,21 @@ class MenuProfile extends Component {
               </label>
               <div className="col-md-3">
                 <input
-                  onChange={this.handleMonStart}
+                  onChange={this.handleChange}
                   value={this.state.MonStart}
                   type="time"
                   className="form-control"
+                  id="MonStart"
                 />
               </div>
               <p className="form-control-static">to</p>
               <div className="col-md-3">
                 <input
-                  onChange={this.handleMonEnd}
+                  onChange={this.handleChange}
                   value={this.state.MonEnd}
                   type="time"
                   className="form-control"
+                  id="MonEnd"
                 />
               </div>
             </div>
@@ -403,19 +365,21 @@ class MenuProfile extends Component {
               </label>
               <div className="col-md-3">
                 <input
-                  onChange={this.handleTuesStart}
+                  onChange={this.handleChange}
                   value={this.state.TuesStart}
                   type="time"
                   className="form-control"
+                  id="TuesStart"
                 />
               </div>
               <p className="form-control-static">to</p>
               <div className="col-md-3">
                 <input
-                  onChange={this.handleTuesEnd}
+                  onChange={this.handleChange}
                   value={this.state.TuesEnd}
                   type="time"
                   className="form-control"
+                  id="TuesEnd"
                 />
               </div>
             </div>
@@ -428,19 +392,21 @@ class MenuProfile extends Component {
               </label>
               <div className="col-md-3">
                 <input
-                  onChange={this.handleWedStart}
+                  onChange={this.handleChange}
                   value={this.state.WedStart}
                   type="time"
                   className="form-control"
+                  id="WedStart"
                 />
               </div>
               <p className="form-control-static">to</p>
               <div className="col-md-3">
                 <input
-                  onChange={this.handleWedEnd}
+                  onChange={this.handleChange}
                   value={this.state.WedEnd}
                   type="time"
                   className="form-control"
+                  id="WedEnd"
                 />
               </div>
             </div>
@@ -453,19 +419,21 @@ class MenuProfile extends Component {
               </label>
               <div className="col-md-3">
                 <input
-                  onChange={this.handleThuStart}
+                  onChange={this.handleChange}
                   value={this.state.ThuStart}
                   type="time"
                   className="form-control"
+                  id="ThuStart"
                 />
               </div>
               <p className="form-control-static">to</p>
               <div className="col-md-3">
                 <input
-                  onChange={this.handleThuEnd}
+                  onChange={this.handleChange}
                   value={this.state.ThuEnd}
                   type="time"
                   className="form-control"
+                  id="ThuEnd"
                 />
               </div>
             </div>
@@ -478,19 +446,21 @@ class MenuProfile extends Component {
               </label>
               <div className="col-md-3">
                 <input
-                  onChange={this.handleFriStart}
+                  onChange={this.handleChange}
                   value={this.state.FriStart}
                   type="time"
                   className="form-control"
+                  id="FriStart"
                 />
               </div>
               <p className="form-control-static">to</p>
               <div className="col-md-3">
                 <input
-                  onChange={this.handleFriEnd}
+                  onChange={this.handleChange}
                   value={this.state.FriEnd}
                   type="time"
                   className="form-control"
+                  id="FriEnd"
                 />
               </div>
             </div>
@@ -503,19 +473,21 @@ class MenuProfile extends Component {
               </label>
               <div className="col-md-3">
                 <input
-                  onChange={this.handleSatStart}
+                  onChange={this.handleChange}
                   value={this.state.SatStart}
                   type="time"
                   className="form-control"
+                  id="SatStart"
                 />
               </div>
               <p className="form-control-static">to</p>
               <div className="col-md-3">
                 <input
-                  onChange={this.handleSatEnd}
+                  onChange={this.handleChange}
                   value={this.state.SatEnd}
                   type="time"
                   className="form-control"
+                  id="SatEnd"
                 />
               </div>
             </div>
@@ -528,23 +500,25 @@ class MenuProfile extends Component {
               </label>
               <div className="col-md-3">
                 <input
-                  onChange={this.handleSunStart}
+                  onChange={this.handleChange}
                   value={this.state.SunStart}
                   type="time"
                   className="form-control"
+                  id="SunStart"
                 />
               </div>
               <p className="form-control-static">to</p>
               <div className="col-md-3">
                 <input
-                  onChange={this.handleSunEnd}
+                  onChange={this.handleChange}
                   value={this.state.SunEnd}
                   type="time"
                   className="form-control"
+                  id="SunEnd"
                 />
               </div>
             </div>
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" onClick={this.handleSubmit} className="btn btn-primary">
               Update Profile
             </button>
             <input
