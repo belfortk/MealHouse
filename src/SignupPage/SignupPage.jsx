@@ -24,7 +24,7 @@ class SignupPage extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="SignupPage">
         <header className="App-header">
           <Navbar />
           <LoginModal/>
