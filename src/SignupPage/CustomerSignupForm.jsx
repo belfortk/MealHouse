@@ -164,7 +164,7 @@ class CustomerSignUpForm extends React.Component {
     return (
       <form>
         <div className="form-group row">
-          <div className="col-4">
+          <div className="col-6">
             <input
               className="form-control"
               type="text"
@@ -173,7 +173,7 @@ class CustomerSignUpForm extends React.Component {
               placeholder="First Name"
             />
           </div>
-          <div className="col-4">
+          <div className="col-6">
             <input
               className="form-control"
               type="text"
@@ -184,34 +184,35 @@ class CustomerSignUpForm extends React.Component {
           </div>
         </div>
 
-        <div className="form-group">
-          <input
-            type="email"
-            className="form-control"
-            id="customer-email"
-            onChange={this.handleEmail}
-            placeholder="Email Address"
-          />
+        <div className="form-group row">
+          <div className="col-4">
+            <input
+              type="email"
+              className="form-control"
+              id="customer-email"
+              onChange={this.handleEmail}
+              placeholder="Email Address"
+            />
+          </div>
+          <div className="col-4">
+            <input
+              type="password"
+              className="form-control"
+              id="customer-password"
+              onChange={this.handlePassword}
+              placeholder="Password"
+            />
+          </div>
+          <div className="col-4">
+            <input
+              type="tel"
+              className="form-control"
+              id="customer-phone"
+              onChange={this.handlePhone}
+              placeholder="Phone Number"
+            />
+          </div>
         </div>
-        <div className="form-group">
-          <input
-            type="password"
-            className="form-control"
-            id="customer-password"
-            onChange={this.handlePassword}
-            placeholder="Password"
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="tel"
-            className="form-control"
-            id="customer-phone"
-            onChange={this.handlePhone}
-            placeholder="Phone Number"
-          />
-        </div>
-
         <div className="form-group row">
           <div className="col-4">
             <input
@@ -229,13 +230,19 @@ class CustomerSignUpForm extends React.Component {
               id="customer-city-input"
               onChange={this.handleAddressTown}
               placeholder="City/Town"
-
+            />
+          </div>
+          <div className="col-4">
+            <input
+              className="form-control"
+              type="number"
+              id="customer-zipcode-input"
+              onChange={this.handleAddressZip}
+              placeholder="Zipcode"
             />
           </div>
         </div>
-        <div className="form-group row">
-
-          <div className="col-4">
+        <div className="row justify-content-center">
             <select onChange={this.handleAddressState}>
               <option value="">Select State</option>
               <option value="AL">Alabama</option>
@@ -290,26 +297,19 @@ class CustomerSignUpForm extends React.Component {
               <option value="WI">Wisconsin</option>
               <option value="WY">Wyoming</option>
             </select>
-          </div>
-          <div className="col-4">
-            <input
-              className="form-control"
-              type="number"
-              id="customer-zipcode-input"
-              onChange={this.handleAddressZip}
-              placeholder="Zipcode"
-
-            />
-          </div>
         </div>
+        <div className='row'> </div>
+        <div className='row justify-content-center'>
         <button
-          type="submit"
-          className="btn btn-primary"
+          id='CustSub'
+          type="submit mx-auto"
+          className="btn btn-success"
           id="sign-up-form-submit"
           onClick={this.handleSubmit}
         >
           Submit Info
         </button>
+        </div>
       </form>
     );
   }

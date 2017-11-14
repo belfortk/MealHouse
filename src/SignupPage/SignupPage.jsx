@@ -31,7 +31,7 @@ class SignupPage extends Component {
         </header>
 
         <div className="container">
-          <div className="btn-group" data-toggle="buttons">
+          <div className="btn-group justify-content-center col-4" data-toggle="buttons">
             <label className="btn btn-primary active">
               <button type="radio" name="options" id="customer-button" autoComplete="off" value={'true'} onClick={this.handleSelectType} />
               Customer
