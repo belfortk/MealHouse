@@ -7,11 +7,11 @@
     "Role": 1,
     "MenuItem": 1,
     "Tag": 1,
-    "Restaurant": 1,
+    "Restaurant": 2,
     "Picture": 2,
     "Order": 1,
     "Review": 2,
-    "Customer": 1
+    "Customer": 2
   },
   "models": {
     "User": {},
@@ -22,7 +22,8 @@
     "MenuItem": {},
     "Tag": {},
     "Restaurant": {
-      "0": "{\"ownerName\":\"Jeff\",\"restaurantName\":\"Panaynay\",\"restaurantPhone\":\"string\",\"restaurantEmail\":\"restaurant@gmail.com\",\"password\":\"string\",\"location\":{\"street\":\"225 Broadway\",\"city\":\"San Diego\",\"state\":\"CA\",\"zip\":\"92101\",\"place_id\":\"ChIJK2LZD6hU2YARm4yHxj0GSIU\"},\"prepTime\":0,\"hoursOfOperation\":[{\"Mon\":{\"start\":\"9:00AM\",\"end\":\"10:00PM\"}}],\"priceRange\":0,\"minDeliveryCharge\":0,\"id\":0}"
+      "0": "{\"ownerName\":\"Jeff\",\"restaurantName\":\"Panaynay\",\"restaurantPhone\":\"string\",\"restaurantEmail\":\"restaurant@gmail.com\",\"password\":\"string\",\"location\":{\"street\":\"225 Broadway\",\"city\":\"San Diego\",\"state\":\"CA\",\"zip\":\"92101\",\"place_id\":\"ChIJK2LZD6hU2YARm4yHxj0GSIU\"},\"prepTime\":0,\"hoursOfOperation\":[{\"Mon\":{\"start\":\"9:00AM\",\"end\":\"10:00PM\"}}],\"priceRange\":0,\"minDeliveryCharge\":0,\"id\":0}",
+      "1": "{\"ownerName\":\"Danny Ginger\",\"restaurantName\":\"DANNY@JIMBOS.COM\",\"restaurantPhone\":\"709874923\",\"restaurantEmail\":\"Jimbos\",\"password\":\"bdjs;lkn\",\"location\":{\"street\":\"124 main\",\"town\":\"hello\",\"state\":\"AR\",\"zipcode\":\"32142\"},\"prepTime\":0,\"hoursOfOperation\":[{\"willAddLater\":true}],\"priceRange\":0,\"minDeliveryCharge\":0,\"id\":1}"
     },
     "Picture": {
       "1": "{\"description\":\"dummy picture\",\"date\":\"2017-11-13T06:45:28.595Z\",\"src\":\"https://static.pexels.com/photos/461198/pexels-photo-461198.jpeg\",\"restaurantId\":1,\"id\":1}"
@@ -32,7 +33,8 @@
       "1": "{\"date\":\"2017-11-13T06:45:29.063Z\",\"stars\":3,\"restaurantId\":1,\"customerId\":2,\"id\":1}"
     },
     "Customer": {
-      "0": "{\"name\":\"Mickael Roberts\",\"email\":\"mike@gmail.com\",\"password\":\"string\",\"phoneNumber\":\"string\",\"address\":{\"street\":\"101 Broadway\",\"city\":\"San Diego\",\"state\":\"CA\",\"zip\":\"92101\",\"place_id\":\"ChIJQWk5R6hU2YARYd3JEN8iEsg\"},\"id\":0}"
+      "0": "{\"name\":\"Mickael Roberts\",\"email\":\"mike@gmail.com\",\"password\":\"string\",\"phoneNumber\":\"string\",\"address\":{\"street\":\"101 Broadway\",\"city\":\"San Diego\",\"state\":\"CA\",\"zip\":\"92101\",\"place_id\":\"ChIJQWk5R6hU2YARYd3JEN8iEsg\"},\"id\":0}",
+      "1": "{\"name\":\"hello goodbye\",\"email\":\"test@gmail.com\",\"password\":\"fsdafl;kj\",\"phoneNumber\":\"542425421\",\"address\":{\"street\":\"32 TEST\",\"town\":\"testing\",\"state\":\"AL\",\"zipcode\":\"23134\"},\"id\":1}"
     }
   }
 }

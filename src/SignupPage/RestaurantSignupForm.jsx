@@ -18,8 +18,7 @@ class RestaurantSignUpForm extends React.Component {
 
       phone: "",
       email: "",
-      password: "",
-      prepTime: 0
+      password: ""
     };
 
     this.handleFirstName = this.handleFirstName.bind(this);
@@ -113,6 +112,8 @@ class RestaurantSignUpForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     let existingRestaurant = null;
+
+
     let newRestaurant = {
       ownerName: this.state.ownerFirstName + " " + this.state.ownerLastName,
       restaurantName: this.state.restaurantName,
@@ -125,8 +126,10 @@ class RestaurantSignUpForm extends React.Component {
         state: this.state.state,
         zipcode: this.state.zipcode
       },
-      prepTime: this.state.prepTime,
-      hoursOfOperation: { willAddLater: true }
+      prepTime: 0,
+      priceRange: 0,
+      hoursOfOperation: [{ willAddLater: true }],
+      minDeliveryCharge: 0,
     };
 
     axios
