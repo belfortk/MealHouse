@@ -33,7 +33,9 @@ class Items extends Component {
     return (
       <li className="list-group-item list-group-item-primary">
         <div className="row">
-          <strong>{this.props.entry} - ${this.props.price}</strong>
+          <strong>{this.props.entry} - ${this.props.price} - ({this.props.type})</strong>
+          <br/>
+          <p>{this.props.description}</p>
           <a
             href="#"
             onClick={() => this.props.onClick()}
