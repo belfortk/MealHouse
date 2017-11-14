@@ -2,25 +2,13 @@ body {
   margin-top: 38px;
 }
 
-<<<<<<< HEAD
 
 .container-1 {
   padding: 25vh 5vw 75vh 5vw;
-=======
-.container-1 {
->>>>>>> Added proper seed data
   background: url("https://static.pexels.com/photos/616401/pexels-photo-616401.jpeg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-<<<<<<< HEAD
   height: 100vh;
-=======
-}
-
-.input-group {
-  vh: 100%;
-  width: 85%;
->>>>>>> Added proper seed data
 }
