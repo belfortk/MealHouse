@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 class Navbar extends React.Component {
   render() {
     return (
@@ -16,9 +18,9 @@ class Navbar extends React.Component {
         </a>
         <div className="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
           <div className="navbar-nav">
-            <a className="nav-item nav-link active" href="#">
+            <Link className="nav-item nav-link active" to="/signup">
               Sign Up <span className="sr-only">(current)</span>
-            </a>
+            </Link>
             <a
           href="#"
           className="nav-item nav-link active"
