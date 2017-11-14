@@ -7,6 +7,7 @@ import MenuProfile from "./MenuProfile";
 import { HashRouter as Router, Route } from "react-router-dom";
 import HomePage from "./HomePage";
 import SignupPage from "./SignupPage/SignupPage";
+import ResultsList from './ResultsPage/ResultsList';
 
 class App extends Component {
   constructor(props) {
@@ -20,6 +21,8 @@ class App extends Component {
         <div>
           <Route path="/signup" component={SignupPage} />
           <Route exact path="/" component={HomePage} />
+          <Route path="/results" component={ResultsList} />
+
         </div>
       </Router>
     );
