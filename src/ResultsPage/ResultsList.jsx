@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import NavBarComponent from "../NavBar";
+import NavBarComponent from "../Navbar";
 import SearchResult from "./SearchResult";
 
 class ResultsList extends Component {

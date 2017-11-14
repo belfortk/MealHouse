@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 
 class MenuProfile extends Component {
@@ -8,13 +9,52 @@ class MenuProfile extends Component {
         this.state = {
             FirstName: "",
             LastName: "",
-            BusinessName: ""
+            BusinessName: "",
+            BusinessEmail: "",
+            BusinessPhone: "",
+            Address: "",
+            PriceRange: "",
+            Delivery: "",
+            PrepTime: "",
+            MonStart: "",
+            MonEnd: "",
+            TuesStart: "",
+            TuesEnd: "",
+            WedStart: "",
+            WedEnd: "",
+            ThuStart: "",
+            ThuEnd: "",
+            FriStart: "",
+            FriEnd: "",
+            SatStart: "",
+            SatEnd: "",
+            SunStart: "",
+            SunEnd: ""
         };
 
         this.handleFirstName = this.handleFirstName.bind(this);
         this.handleLastName = this.handleLastName.bind(this);
         this.handleBusinessName = this.handleBusinessName.bind(this);
-    }
+        this.handleBusinessPhone =this.handleBusinessPhone.bind(this);
+        this.handleAddress = this.handleAddress.bind(this);
+        this.handlePriceRange = this.handlePriceRange.bind(this);
+        this.handleDelivery = this.handleDelivery.bind(this);
+        this.handlePrepTime = this.handlePrepTime.bind(this);
+        this.handleMonStart = this.handleMonStart.bind(this);
+        this.handleMonEnd = this.handleMonEnd.bind(this);
+        this.handleTuesStart = this.handleTuesStart.bind(this);
+        this.handleTuesEnd = this.handleTuesEnd.bind(this);
+        this.handleWedStart = this.handleWedStart.bind(this);
+        this.handleWedEnd = this.handleWedEnd.bind(this);
+        this.handleThuStart = this.handleThuStart.bind(this);
+        this.handleThuEnd = this.handleThuEnd.bind(this);
+        this.handleFriStart = this.handleFriStart.bind(this);
+        this.handleFriEnd = this.handleFriEnd.bind(this);
+        this.handleSatStart = this.handleSatStart.bind(this);
+        this.handleSatEnd = this.handleSatEnd.bind(this);
+        this.handleSunStart = this.handleSunStart.bind(this);
+        this.handleSunEnd = this.handleSunEnd.bind(this);
+      }
 
     handleFirstName(event) {
       this.setState({FirstName: event.target.value});
@@ -26,6 +66,82 @@ class MenuProfile extends Component {
 
     handleBusinessName(event) {
       this.setState({BusinessName: event.target.value});
+    }
+
+    handleBusinessPhone(event) {
+      this.setState({BusinessPhone: event.target.value});
+    }
+
+    handleAddress(event) {
+      this.setState({Address: event.target.value});
+    }
+
+    handlePriceRange(event) {
+      this.setState({PriceRange: event.target.value});
+    }
+    handleDelivery(event) {
+      this.setState({Delivery: event.target.value});
+    }
+
+    handlePrepTime(event) {
+      this.setState({PrepTime: event.target.value});
+    }
+
+    handleMonStart(event) {
+      this.setState({MonStart: event.target.value});
+    }
+
+    handleMonEnd(event) {
+      this.setState({MonEnd: event.target.value});
+    }
+
+    handleTuesStart(event) {
+      this.setState({TuesStart: event.target.value});
+    }
+
+    handleTuesEnd(event) {
+      this.setState({TuesEnd: event.target.value});
+    }
+
+    handleWedStart(event) {
+      this.setState({WedStart: event.target.value});
+    }
+
+    handleWedEnd(event) {
+      this.setState({WedEnd: event.target.value});
+    }
+
+    handleThuStart(event) {
+      this.setState({ThuStart: event.target.value});
+    }
+
+    handleThuEnd(event) {
+      this.setState({ThuEnd: event.target.value});
+    }
+
+    handleFriStart(event) {
+      this.setState({FriStart: event.target.value});
+    }
+
+    handleFriEnd(event) {
+      this.setState({FriEnd: event.target.value});
+    }
+
+    handleSatStart(event) {
+      this.setState({SatStart: event.target.value});
+    }
+
+    handleSatEnd(event) {
+      this.setState({SatEnd: event.target.value});
+    }
+
+    handleSunStart(event) {
+      this.setState({SunStart: event.target.value});
+    }
+
+    handleSunEnd(event) {
+      this.setState({SunEnd: event.target.value});
+      console.log(this.state);
     }
 
     render() {
@@ -69,33 +185,19 @@ class MenuProfile extends Component {
               <div className="form-group row">
                 <label for="businessEmail" className="col-md-3 col-form-label">Business Email</label>
                   <div className="col-md-8">
-                    <p className="form-control-static">email@example.com</p>
+                    <p className="form-control-static">{this.state.BusinessEmail}</p>
                   </div>
               </div>
               <div className="form-group row">
                 <label for="businesspnumber" className="col-md-3 col-form-label">Business Phone#</label>
                   <div className="col-md-8">
-                    <input className="form-control" type="tel" placeholder="Pre-set Value" id="businesspnumber"/>
+                    <input onChange={this.handleBusinessPhone} value={this.state.BusinessPhone} className="form-control" type="tel" placeholder="Pre-set Value" id="businesspnumber"/>
                   </div>
               </div>
               <div className="form-group row">
-                <label for="businessAddress" className="col-md-3 col-form-label">Business Street</label>
+                <label for="businessAddress" className="col-md-3 col-form-label">Business Address</label>
                   <div className="col-md-8">
-                    <input className="form-control" type="text" placeholder="Pre-set Value" id="businessAddress"/>
-                  </div>
-              </div>
-              <div className="form-group row">
-                <label for="businessAddress" className="col-md-3 col-form-label">Business City</label>
-                  <div className="col-md-3">
-                    <input className="form-control" type="text" placeholder="Pre-set Value" id="businessAddress"/>
-                  </div>
-                  <label for="businessAddress" className="col-md-1 col-form-label">State</label>
-                  <div className="col-md-2">
-                    <input className="form-control" type="text" placeholder="Pre-set Value" id="businessAddress"/>
-                  </div>
-                  <label for="businessAddress" className="col-md-1 col-form-label">Zip</label>
-                  <div className="col-md-2">
-                    <input className="form-control" type="text" placeholder="Pre-set Value" id="businessAddress"/>
+                    <input onChange={this.handleAddress} value={this.state.Address} className="form-control" type="text" placeholder="Pre-set Value" id="businessAddress"/>
                   </div>
               </div>
               <div className="form-group row">
@@ -103,21 +205,21 @@ class MenuProfile extends Component {
                     <div className="col-md-2">
                       <div className="form-check form-check-inline">
                         <label className="form-check-label">
-                          <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"/> $0 - $10
+                          <input onChange={this.handlePriceRange} className="form-check-input" checked={this.state.PriceRange === "1"} type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1"/> $0 - $10
                         </label>
                       </div>
                     </div>
                     <div className="col-md-2">
                       <div className="form-check form-check-inline">
                         <label className="form-check-label">
-                          <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"/> $11 - $30
+                          <input onChange={this.handlePriceRange} className="form-check-input" type="radio" name="inlineRadioOptions" checked={this.state.PriceRange === "2"} id="inlineRadio2" value="2"/> $11 - $30
                         </label>
                       </div>
                     </div>
                     <div className="col-md-3">
                       <div className="form-check form-check-inline disabled">
                         <label className="form-check-label">
-                          <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"/> $31 - $60
+                          <input onChange={this.handlePriceRange} className="form-check-input" type="radio" name="inlineRadioOptions" checked={this.state.PriceRange === "3"} id="inlineRadio3" value="3"/> $31 - $60
                         </label>
                       </div>
                     </div>
@@ -127,7 +229,7 @@ class MenuProfile extends Component {
                   <div className="col-md-8">
                     <div className="input-group">
                       <span className="input-group-addon">$</span>
-                      <input type="number" className="form-control" aria-label="Amount (to the nearest dollar)"/>
+                      <input onChange={this.handleDelivery} value={this.state.Delivery} type="number" className="form-control" aria-label="Amount (to the nearest dollar)"/>
                       <span className="input-group-addon">.00</span>
                     </div>
                   </div>
@@ -136,7 +238,7 @@ class MenuProfile extends Component {
                 <label for="prepTime" className="col-md-3 col-form-label">Prep Time</label>
                   <div className="col-md-3">
                     <div className="input-group">
-                      <input type="number" className="form-control"/>
+                      <input onChange={this.handlePrepTime} value={this.state.PrepTime} type="number" className="form-control"/>
                       <span className="input-group-addon">mins</span>
                     </div>
                   </div>
@@ -144,71 +246,71 @@ class MenuProfile extends Component {
               <div className="form-group row">
                 <label for="minDeliveryCharge" className="col-md-3 col-form-label">Hours (Mon)</label>
                   <div className="col-md-3">
-                      <input type="time" className="form-control"/>   
+                      <input onChange={this.handleMonStart} value={this.state.MonStart} type="time" className="form-control"/>   
                   </div>
                   <p className="form-control-static">to</p>
                   <div className="col-md-3">
-                      <input type="time" className="form-control"/>   
+                      <input onChange={this.handleMonEnd} value={this.state.MonEnd} type="time" className="form-control"/>   
                   </div>
               </div>
               <div className="form-group row">
                 <label for="minDeliveryCharge" className="col-md-3 col-form-label">------ (Tues)</label>
                   <div className="col-md-3">
-                      <input type="time" className="form-control"/>   
+                      <input onChange={this.handleTuesStart} value={this.state.TuesStart} type="time" className="form-control"/>   
                   </div>
                   <p className="form-control-static">to</p>
                   <div className="col-md-3">
-                      <input type="time" className="form-control"/>   
+                      <input onChange={this.handleTuesEnd} value={this.state.TuesEnd} type="time" className="form-control"/>   
                   </div>
               </div>
               <div className="form-group row">
                 <label for="minDeliveryCharge" className="col-md-3 col-form-label">------ (Wed)</label>
                   <div className="col-md-3">
-                      <input type="time" className="form-control"/>   
+                      <input onChange={this.handleWedStart} value={this.state.WedStart} type="time" className="form-control"/>   
                   </div>
                   <p className="form-control-static">to</p>
                   <div className="col-md-3">
-                      <input type="time" className="form-control"/>   
+                      <input onChange={this.handleWedEnd} value={this.state.WedEnd} type="time" className="form-control"/>   
                   </div>
               </div>
               <div className="form-group row">
                 <label for="minDeliveryCharge" className="col-md-3 col-form-label">------ (Thurs)</label>
                   <div className="col-md-3">
-                      <input type="time" className="form-control"/>   
+                      <input onChange={this.handleThuStart} value={this.state.ThuStart} type="time" className="form-control"/>   
                   </div>
                   <p className="form-control-static">to</p>
                   <div className="col-md-3">
-                      <input type="time" className="form-control"/>   
+                      <input onChange={this.handleThuEnd} value={this.state.ThuEnd} type="time" className="form-control"/>   
                   </div>
               </div>
               <div className="form-group row">
                 <label for="minDeliveryCharge" className="col-md-3 col-form-label">------ (Fri)</label>
                   <div className="col-md-3">
-                      <input type="time" className="form-control"/>   
+                      <input onChange={this.handleFriStart} value={this.state.FriStart} type="time" className="form-control"/>   
                   </div>
                   <p className="form-control-static">to</p>
                   <div className="col-md-3">
-                      <input type="time" className="form-control"/>   
+                      <input onChange={this.handleFriEnd} value={this.state.FriEnd} type="time" className="form-control"/>   
                   </div>
               </div>
               <div className="form-group row">
                 <label for="minDeliveryCharge" className="col-md-3 col-form-label">------ (Sat)</label>
                   <div className="col-md-3">
-                      <input type="time" className="form-control"/>   
+                      <input onChange={this.handleSatStart} value={this.state.SatStart} type="time" className="form-control"/>   
                   </div>
                   <p className="form-control-static">to</p>
                   <div className="col-md-3">
-                      <input type="time" className="form-control"/>   
+                      <input onChange={this.handleSatEnd} value={this.state.SatEnd} type="time" className="form-control"/>   
                   </div>
               </div>
               <div className="form-group row">
                 <label for="minDeliveryCharge" className="col-md-3 col-form-label">------ (Sun)</label>
                   <div className="col-md-3">
-                      <input type="time" className="form-control"/>   
+                      <input onChange={this.handleSunStart} value={this.state.SunStart} type="time" className="form-control"/>   
                   </div>
                   <p className="form-control-static">to</p>
                   <div className="col-md-3">
-                      <input type="time" className="form-control"/>   
+                      <input onChange={this.handleSunEnd} value={this.state.SunEnd} type="time" className="form-control"/>   
                   </div>
               </div>
               <button type="submit" className="btn btn-primary">Update Profile</button>
