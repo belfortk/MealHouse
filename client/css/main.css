@@ -3,7 +3,7 @@ body {
 }
 
 #AppBack {
-  padding: 25vh 5vw 75vh 5vw;
+  /* padding: 25vh 5vw 75vh 5vw; */
   background: url("https://static.pexels.com/photos/616401/pexels-photo-616401.jpeg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -12,6 +12,33 @@ body {
   height: 100vh;
 }
 
-#CustSub {
-  margin: 10px;
+.SignupPage{
+  padding: 10vh 7vw 50vh 7vw;
+  background: url("https://static.pexels.com/photos/616401/pexels-photo-616401.jpeg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+}
+
+.ResultsPage{
+   padding: 15vh 7vw 50vh 7vw;
+  background: url("https://static.pexels.com/photos/616401/pexels-photo-616401.jpeg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+}
+
+.HomePage{
+    padding: 25vh 5vw 75vh 5vw;
+    background: url("https://static.pexels.com/photos/616401/pexels-photo-616401.jpeg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100vh;
+
 }

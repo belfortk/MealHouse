@@ -6,7 +6,7 @@ import SearchBar from "./SearchBar";
 class HomePage extends React.Component {
   render() {
     return (
-      <div className="App">
+      <div className="HomePage">
         <header className="App-header">
           <Navbar />
           <LoginModal />

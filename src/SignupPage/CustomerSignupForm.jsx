@@ -151,7 +151,7 @@ class CustomerSignUpForm extends React.Component {
           .then(function(response) {
             console.log("new customer added");
             console.log(newCustomer);
-            window.location = "http://google.com";
+            window.location = "http://localhost:3000/";
           })
           .catch(function(error) {
             console.log("unable to add new customer");
