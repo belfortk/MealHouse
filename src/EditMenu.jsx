@@ -9,11 +9,15 @@ class EditMenu extends Component {
       entry: "",
       dentry: "",
       price: "",
+      type:"",
+      description:"",
       items: [],
     };
     this.additem = this.additem.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handlePrice = this.handlePrice.bind(this);
+    this.handleType = this.handleType.bind(this);
+    this.handleDescription = this.handleDescription.bind(this);
     this.saveItem = this.saveItem.bind(this);
   }
 
@@ -44,6 +48,14 @@ class EditMenu extends Component {
   handlePrice(event) {
     this.setState({ price: event.target.value });
   }
+  
+  handleType(event) {
+    this.setState({ type: event.target.value });
+  }
+
+  handleDescription(event) {
+    this.setState({ description: event.target.value });
+  }
 
   deleteInfo(index) {
     let items = [...this.state.items];
@@ -62,10 +74,14 @@ class EditMenu extends Component {
     var itemArray = this.state.items;
     const entryvalue = this.state.entry;
     var pricevalue = this.state.price;
+    var typevalue = this.state.type;
+    var descriptionvalue = this.state.description;
     
     itemArray.push({
       entry: entryvalue,
       price: pricevalue,
+      description: descriptionvalue,
+      type: typevalue
     });
 
     this.setState({
@@ -80,6 +96,8 @@ class EditMenu extends Component {
         price={item.price}
         index={index}
         entry={item.entry}
+        description={item.description}
+        type={item.type}
         onClick={() => this.deleteInfo(index)}
         saveItem={this.saveItem}
       />
@@ -100,9 +118,17 @@ class EditMenu extends Component {
                 <textarea
                   className="form-control create-todo-text"
                   id="inputbox"
-                  rows="3"
+                  rows="1"
                   value={this.state.entry}
                   onChange={this.handleChange}
+                />
+                <label htmlFor="inputbox">Description</label>
+                <textarea
+                  className="form-control create-todo-text"
+                  id="inputbox"
+                  rows="3"
+                  value={this.state.description}
+                  onChange={this.handleDescription}
                 />
                 <label htmlFor="priority">
                   Price
@@ -114,6 +140,14 @@ class EditMenu extends Component {
                         <input type="number" className="form-control" value={this.state.price} onChange={this.handlePrice}/>
                     </div>
                   </div>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="exampleFormControlSelect2">Item Type</label>
+                  <select className="form-control" id="exampleFormControlSelect2" onChange={this.handleType}>
+                    <option value="Appetizer">Appetizer</option>
+                    <option value="Entree">Entree</option>
+                    <option value="Beverage">Beverage</option>
+                  </select>
                 </div>
               </div>
               <div className="card-footer">
