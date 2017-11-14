@@ -301,7 +301,6 @@ class CustomerSignUpForm extends React.Component {
         <div className='row'> </div>
         <div className='row justify-content-center'>
         <button
-          id='CustSub'
           type="submit mx-auto"
           className="btn btn-success"
           id="sign-up-form-submit"

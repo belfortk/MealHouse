@@ -7,7 +7,7 @@
     "Role": 1,
     "MenuItem": 1,
     "Tag": 1,
-    "Restaurant": 2,
+    "Restaurant": 3,
     "Picture": 2,
     "Order": 1,
     "Review": 2,
@@ -23,7 +23,8 @@
     "Tag": {},
     "Restaurant": {
       "0": "{\"ownerName\":\"Jeff\",\"restaurantName\":\"Panaynay\",\"restaurantPhone\":\"string\",\"restaurantEmail\":\"restaurant@gmail.com\",\"password\":\"string\",\"location\":{\"street\":\"225 Broadway\",\"city\":\"San Diego\",\"state\":\"CA\",\"zip\":\"92101\",\"place_id\":\"ChIJK2LZD6hU2YARm4yHxj0GSIU\"},\"prepTime\":0,\"hoursOfOperation\":[{\"Mon\":{\"start\":\"9:00AM\",\"end\":\"10:00PM\"}}],\"priceRange\":0,\"minDeliveryCharge\":0,\"id\":0}",
-      "1": "{\"ownerName\":\"Danny Ginger\",\"restaurantName\":\"DANNY@JIMBOS.COM\",\"restaurantPhone\":\"709874923\",\"restaurantEmail\":\"Jimbos\",\"password\":\"bdjs;lkn\",\"location\":{\"street\":\"124 main\",\"town\":\"hello\",\"state\":\"AR\",\"zipcode\":\"32142\"},\"prepTime\":0,\"hoursOfOperation\":[{\"willAddLater\":true}],\"priceRange\":0,\"minDeliveryCharge\":0,\"id\":1}"
+      "1": "{\"ownerName\":\"Danny Ginger\",\"restaurantName\":\"DANNY@JIMBOS.COM\",\"restaurantPhone\":\"709874923\",\"restaurantEmail\":\"Jimbos\",\"password\":\"bdjs;lkn\",\"location\":{\"street\":\"124 main\",\"town\":\"hello\",\"state\":\"AR\",\"zipcode\":\"32142\"},\"prepTime\":0,\"hoursOfOperation\":[{\"willAddLater\":true}],\"priceRange\":0,\"minDeliveryCharge\":0,\"id\":1}",
+      "2": "{\"ownerName\":\"Dan Kurtz\",\"restaurantName\":\"Panera\",\"restaurantPhone\":\"9192223333\",\"restaurantEmail\":\"ghghg@lol.com\",\"password\":\"fdsal;kj\",\"location\":{\"street\":\"\",\"town\":\"\",\"state\":\"null\",\"zipcode\":\"\",\"place_id\":\"ChIJ58LDKX9T2YARcypwkERhH2M\",\"place_formatted\":\"1117 30th St, San Diego, CA 92102, USA\",\"place_location\":\"(32.7174317, -117.12939110000002)\"},\"prepTime\":0,\"hoursOfOperation\":[{\"willAddLater\":true}],\"priceRange\":0,\"minDeliveryCharge\":0,\"id\":2}"
     },
     "Picture": {
       "1": "{\"description\":\"dummy picture\",\"date\":\"2017-11-13T06:45:28.595Z\",\"src\":\"https://static.pexels.com/photos/461198/pexels-photo-461198.jpeg\",\"restaurantId\":1,\"id\":1}"

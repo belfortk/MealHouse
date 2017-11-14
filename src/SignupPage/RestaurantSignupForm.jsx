@@ -18,7 +18,11 @@ class RestaurantSignUpForm extends React.Component {
 
       phone: "",
       email: "",
-      password: ""
+      password: "",
+
+      place_id: "",
+      place_formatted: "",
+      place_location: ""
     };
 
     this.handleFirstName = this.handleFirstName.bind(this);
@@ -26,12 +30,6 @@ class RestaurantSignUpForm extends React.Component {
     this.handleLastName = this.handleLastName.bind(this);
 
     this.handleRestaurantName = this.handleRestaurantName.bind(this);
-
-    this.handleAddressStreet = this.handleAddressStreet.bind(this);
-
-    this.handleAddressTown = this.handleAddressTown.bind(this);
-    this.handleAddressState = this.handleAddressState.bind(this);
-    this.handleAddressZip = this.handleAddressZip.bind(this);
 
     this.handlePhone = this.handlePhone.bind(this);
     this.handleEmail = this.handleEmail.bind(this);
@@ -45,6 +43,22 @@ class RestaurantSignUpForm extends React.Component {
     // this.postNewCustomer =  this.postNewCustomer.bind(this);
   }
 
+  componentDidMount() {
+    var input = document.getElementById("restaurant-address-input");
+    var options = { componentRestrictions: { country: "us" } };
+    var autocomplete = new google.maps.places.Autocomplete(input, options);
+    autocomplete.addListener("place_changed", () => {
+      let place = autocomplete.getPlace();
+      let location = place.geometry.location;
+
+      this.setState({
+        place_formatted: place.formatted_address,
+        place_id: place.place_id,
+        place_location: location.toString()
+      });
+    });
+  }
+
   handleFirstName(e) {
     this.setState({
       ownerFirstName: e.target.value
@@ -54,28 +68,6 @@ class RestaurantSignUpForm extends React.Component {
   handleLastName(e) {
     this.setState({
       ownerLastName: e.target.value
-    });
-  }
-
-  handleAddressStreet(e) {
-    this.setState({
-      street: e.target.value
-    });
-  }
-
-  handleAddressTown(e) {
-    this.setState({
-      town: e.target.value
-    });
-  }
-  handleAddressState(e) {
-    this.setState({
-      state: e.target.value
-    });
-  }
-  handleAddressZip(e) {
-    this.setState({
-      zipcode: e.target.value
     });
   }
 
@@ -123,7 +115,10 @@ class RestaurantSignUpForm extends React.Component {
         street: this.state.street,
         town: this.state.town,
         state: this.state.state,
-        zipcode: this.state.zipcode
+        zipcode: this.state.zipcode,
+        place_id: this.state.place_id,
+        place_formatted: this.state.place_formatted,
+        place_location: this.state.place_location
       },
       prepTime: 0,
       priceRange: 0,
@@ -185,71 +180,79 @@ class RestaurantSignUpForm extends React.Component {
           </div>
         </div>
 
-        <div className="form-group">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Restaurant Name"
-            id="restaurantName"
-            onChange={this.handleRestaurantName}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="number"
-            className="form-control"
-            placeholder="Avg Prep Time (mins)"
-            id="restaurantPrepTime"
-            onChange={this.handlePrepTime}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="email"
-            className="form-control"
-            placeholder="Email address"
-            id="restaurant-email"
-            onChange={this.handleEmail}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="password"
-            className="form-control"
-            placeholder="Password"
-            id="restaurant-password"
-            onChange={this.handlePassword}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="tel"
-            className="form-control"
-            placeholder="Phone Number"
-            id="restaurant-phone"
-            onChange={this.handlePhone}
-          />
-        </div>
-
         <div className="form-group row">
           <div className="col-md-6">
             <input
-              className="form-control"
               type="text"
-              id="restaurant-address-input"
-              onChange={this.handleAddressStreet}
-              placeholder="Street Address"
+              className="form-control"
+              placeholder="Restaurant Name"
+              id="restaurantName"
+              onChange={this.handleRestaurantName}
+            />
+          </div>
+
+          <div className="col-md-6">
+            <input
+              type="number"
+              className="form-control"
+              placeholder="Avg Prep Time (mins)"
+              id="restaurantPrepTime"
+              onChange={this.handlePrepTime}
             />
           </div>
         </div>
+        <div className="form-group row">
+          <div className="col-md-6">
+            <input
+              type="email"
+              className="form-control"
+              placeholder="Email address"
+              id="restaurant-email"
+              onChange={this.handleEmail}
+            />
+          </div>
+          <div className="col-md-6">
+            <input
+              type="password"
+              className="form-control"
+              placeholder="Password"
+              id="restaurant-password"
+              onChange={this.handlePassword}
+            />
+          </div>
+        </div>
+        <div className="form-group row">
+          <div className="col-md-6">
+            <input
+              type="text"
+              id="restaurant-address-input"
+              placeholder="Street Address"
+              ref="searchField"
+              className="form-control Autocomplete"
+              placeholder="Address"
+              aria-describedby="basic-addon2"
+            />
+          </div>
+          <div className="col-md-6">
+            <input
+              type="tel"
+              className="form-control"
+              placeholder="Phone Number"
+              id="restaurant-phone"
+              onChange={this.handlePhone}
+            />
+          </div>
+        </div>
+        <div className='row justify-content-center'>
         <button
           type="submit"
-          className="btn btn-primary"
+          className="btn btn-success mx-auto"
           id="sign-up-form-submit"
           onClick={this.handleSubmit}
         >
           Submit Info
         </button>
+        </div>
       </form>
     );
   }
