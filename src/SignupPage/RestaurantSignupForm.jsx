@@ -147,7 +147,7 @@ class RestaurantSignUpForm extends React.Component {
           .then(function(response) {
             console.log("new restaurant added");
             console.log(newRestaurant);
-            window.location = "http://localhost:3000/#/menuProfile";
+            window.location = "http://localhost:3000/#/profile/restaurant";
           })
           .catch(function(error) {
             console.log("unable to add new restaurant");
