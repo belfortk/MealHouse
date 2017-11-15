@@ -157,6 +157,7 @@ class RestaurantProfile extends Component {
           })
           .then(data => {
             console.log("Update Success");
+            window.location = 'http://localhost:3000/#/editMenu';
           })
           .catch(err => {
             console.log(err);
