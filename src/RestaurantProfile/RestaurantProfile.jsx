@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import SearchBar from "../SearchBar";
 import axios from "axios";
-import Navbar from '../Navbar';
+import Navbar from "../Navbar";
+import { Link } from "react-router-dom";
 class RestaurantProfile extends Component {
   constructor(props) {
     super(props);
@@ -32,7 +33,8 @@ class RestaurantProfile extends Component {
       SunEnd: "",
       place_id: "",
       place_formatted: "",
-      place_location: ""
+      place_location: "",
+      password: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -40,33 +42,29 @@ class RestaurantProfile extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentWillMount(){
-    axios.get('/api/restaurants/1')
-    .then((response) => {
-
-      let resBusinessName = response.data.restaurantName;
-      let resBusinessPhone = response.data.restaurantPhone;
-      let resBusinessEmail= response.data.restaurantEmail;
-      let fullName = response.data.ownerName;
-      let arrayName= fullName.split(" ");
-      let resFirstName = arrayName[0];
-      let resLastName = arrayName[1];
-      this.setState(
-        {
+  componentWillMount() {
+    axios
+      .get("/api/restaurants/1")
+      .then(response => {
+        let resBusinessName = response.data.restaurantName;
+        let resBusinessPhone = response.data.restaurantPhone;
+        let resBusinessEmail = response.data.restaurantEmail;
+        let fullName = response.data.ownerName;
+        let arrayName = fullName.split(" ");
+        let resFirstName = arrayName[0];
+        let resLastName = arrayName[1];
+        this.setState({
           FirstName: resFirstName,
           LastName: resLastName,
           BusinessName: resBusinessName,
           BusinessEmail: resBusinessEmail,
           BusinessPhone: resBusinessPhone,
-        }
-      );
-
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  
-
+          password: response.data.password
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   componentDidMount() {
@@ -88,73 +86,93 @@ class RestaurantProfile extends Component {
   handleChange(event) {
     let prop = event.target.id;
 
-    this.setState({ [prop]: event.target.value});
-    console.log(this.state);
+    this.setState({ [prop]: event.target.value });
   }
 
   handleSubmit() {
-    this.setState({ Address: {
-      place_formatted: this.state.place_formatted,
-      place_id: this.state.place_id,
-      place_location: this.state.place_location
-    } }, () => {
-      axios
-        .put('/api/restaurants/1', {
-          ownerName: `${this.state.FirstName} ${this.state.LastName}`,
-          restaurantName: this.state.BusinessName,
-          restaurantPhone: this.state.BusinessPhone,
-          location : this.state.Address,
-          prepTime: this.state.PrepTime,
-          hoursOfOperation: [
-            {Mon: {
-              start: this.state.MonStart,
-              end: this.state.MonEnd
-            }},
-            {Tues: {
-              start: this.state.ThuStart,
-              end: this.state.ThuEnd
-            }},
-            {Wed: {
-              start: this.state.WedStart,
-              end: this.state.WedEnd
-            }},
-            {Thu: {
-              start: this.state.ThuStart,
-              end: this.state.ThuEnd
-            }},
-            {Fri: {
-              start: this.state.FriStart,
-              end: this.state.FriEnd
-            }},
-            {Sat: {
-              start: this.state.SatStart,
-              end: this.state.SatEnd
-            }},
-            {Sun: {
-              start: this.state.SunStart,
-              end: this.state.SunEnd
-            }}
-          ],
-          priceRange: this.state.PriceRange,
-          minDeliveryCharge: this.state.Delivery
-        })
-        .then(() => {
-          console.log("Update Success");
-        }).catch(err => {
-          console.log(err);
-        })
-    });
+    this.setState(
+      {
+        Address: {
+          place_formatted: this.state.place_formatted,
+          place_id: this.state.place_id,
+          place_location: this.state.place_location
+        }
+      },
+      () => {
+        axios
+          .put("/api/restaurants/1", {
+            ownerName: `${this.state.FirstName} ${this.state.LastName}`,
+            restaurantName: this.state.BusinessName,
+            restaurantPhone: this.state.BusinessPhone,
+            location: this.state.Address,
+            prepTime: this.state.PrepTime,
+            hoursOfOperation: [
+              {
+                Mon: {
+                  start: this.state.MonStart,
+                  end: this.state.MonEnd
+                }
+              },
+              {
+                Tues: {
+                  start: this.state.ThuStart,
+                  end: this.state.ThuEnd
+                }
+              },
+              {
+                Wed: {
+                  start: this.state.WedStart,
+                  end: this.state.WedEnd
+                }
+              },
+              {
+                Thu: {
+                  start: this.state.ThuStart,
+                  end: this.state.ThuEnd
+                }
+              },
+              {
+                Fri: {
+                  start: this.state.FriStart,
+                  end: this.state.FriEnd
+                }
+              },
+              {
+                Sat: {
+                  start: this.state.SatStart,
+                  end: this.state.SatEnd
+                }
+              },
+              {
+                Sun: {
+                  start: this.state.SunStart,
+                  end: this.state.SunEnd
+                }
+              }
+            ],
+            priceRange: this.state.PriceRange,
+            minDeliveryCharge: this.state.Delivery,
+            restaurantEmail: this.state.BusinessEmail,
+            password: this.state.password
+          })
+          .then(data => {
+            console.log("Update Success");
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
+    );
   }
 
   handlePriceRange(event) {
     this.setState({ PriceRange: event.target.value });
   }
 
-
   render() {
     return (
       <div className="container">
-        <Navbar/>
+        <Navbar />
         <div className="row">
           <div className="col-sm-9 offset-sm-3">
             <h1>Restaurant Profile</h1>
@@ -229,7 +247,10 @@ class RestaurantProfile extends Component {
               </div>
             </div>
             <div className="form-group row">
-              <label htmlFor="businessEmail" className="col-md-3 col-form-label">
+              <label
+                htmlFor="businessEmail"
+                className="col-md-3 col-form-label"
+              >
                 Business Email
               </label>
               <div className="col-md-8">
@@ -239,7 +260,10 @@ class RestaurantProfile extends Component {
               </div>
             </div>
             <div className="form-group row">
-              <label htmlFor="businesspnumber" className="col-md-3 col-form-label">
+              <label
+                htmlFor="businesspnumber"
+                className="col-md-3 col-form-label"
+              >
                 Business Phone#
               </label>
               <div className="col-md-8">
@@ -254,7 +278,10 @@ class RestaurantProfile extends Component {
               </div>
             </div>
             <div className="form-group row">
-              <label htmlFor="businessAddress" className="col-md-3 col-form-label">
+              <label
+                htmlFor="businessAddress"
+                className="col-md-3 col-form-label"
+              >
                 Business Address
               </label>
               <div className="col-md-8">
@@ -305,7 +332,7 @@ class RestaurantProfile extends Component {
                 </div>
               </div>
               <div className="col-md-3">
-                <div className="form-check form-check-inline disabled">
+                <div className="form-check form-check-inline">
                   <label className="form-check-label">
                     <input
                       onChange={this.handlePriceRange}
@@ -549,9 +576,14 @@ class RestaurantProfile extends Component {
                 />
               </div>
             </div>
-            <button type="submit" onClick={this.handleSubmit} className="btn btn-primary">
+            <button
+              type="submit"
+              onClick={this.handleSubmit}
+              className="btn btn-primary"
+            >
               Update Profile
             </button>
+
             <input
               id="editMenu"
               className="btn btn-primary"
