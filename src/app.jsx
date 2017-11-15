@@ -9,10 +9,11 @@ import HomePage from "./HomePage/HomePage";
 import SignupPage from "./SignupPage/SignupPage";
 import ResultsList from './ResultsPage/ResultsList';
 import EditMenu from './EditMenu/EditMenu';
-import ThankYouPage from './ThankYouPage/ThankYouPage';
-import AboutUsPage from './AboutUsPage/AboutUsPage';
-import CustomerProfile from './CustomerProfile/CustomerProfile';
-import CheckoutPage from './CheckoutPage/CheckoutPage';
+import ThankYouPage from './ThankYouPage/ThankYouPage'
+import AboutUsPage from './AboutUsPage/AboutUsPage'
+import ContactUs from './ContactUs/ContactUs'
+import CustomerProfile from './CustomerProfile/CustomerProfile'
+import Footer from "./Footer";
 
 class App extends Component {
   constructor(props) {
@@ -31,8 +32,9 @@ class App extends Component {
           <Route path="/editMenu" component={EditMenu}/>
           <Route path="/thankyou" component={ThankYouPage}/>
           <Route path="/aboutus" component={AboutUsPage}/>
+          <Route path="/contactus" component={ContactUs}/>
           <Route path="/profile/customer" component={CustomerProfile}/>
-          <Route path="/checkout" component={CheckoutPage}/>
+          <Footer />
         </div>
       </Router>
     );

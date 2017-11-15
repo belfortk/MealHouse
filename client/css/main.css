@@ -52,6 +52,18 @@ body {
   height: 100vh;
 }
 
+.ContactUs{
+  padding: 25vh 5vw 75vh 5vw;
+  background: url("https://static.pexels.com/photos/616401/pexels-photo-616401.jpeg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+}
+
+
+
 #thankyou-container{
   text-align: center;
 }
@@ -68,6 +80,23 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+footer {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 10px;
+  right:0px;
+  height:120px;
+  width:100%;
+  color: black;
+}
+
+.text-black{
+  color: black;
+}
+
 
 
 .CustomerProfilePage{
