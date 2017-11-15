@@ -10,6 +10,7 @@ import SignupPage from "./SignupPage/SignupPage";
 import ResultsList from './ResultsPage/ResultsList';
 import EditMenu from './EditMenu/EditMenu';
 import ThankYouPage from './ThankYouPage/ThankYouPage'
+import AboutUsPage from './AboutUsPage/AboutUsPage'
 import CustomerProfile from './CustomerProfile/CustomerProfile'
 
 class App extends Component {
@@ -28,6 +29,7 @@ class App extends Component {
           <Route path="/profile/restaurant" component={RestaurantProfile} />
           <Route path="/editMenu" component={EditMenu}/>
           <Route path="/thankyou" component={ThankYouPage}/>
+          <Route path="/aboutus" component={AboutUsPage}/>
           <Route path="/profile/customer" component={CustomerProfile}/>
         </div>
       </Router>
