@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux';
 import { searchPlaceId, searchPlaceFormatted, searchPlaceLocation } from './SearchAction';
+import { Link } from "react-router-dom";
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -38,13 +39,12 @@ class SearchBar extends React.Component {
 }
 
   handleFormSubmit(event) {
-    event.preventDefault();
-    var inputText = document.getElementById("searchTextField").value;
+    // event.preventDefault();
+    // var inputText = document.getElementById("searchTextField").value;
   }
 
   render() {
     return (
-
         <div className="container" id='searchCont' >
           <div className="input-group">
             <input
@@ -55,13 +55,13 @@ class SearchBar extends React.Component {
               placeholder="Address"
               aria-describedby="basic-addon2"
             />
-            <button
+            <Link to="/results"><button
               className="input-group-addon button-success"
               id="basic-addon2"
               onClick={this.handleFormSubmit}
             >
               Submit
-            </button>
+            </button></Link>
 
           </div>
         </div>
