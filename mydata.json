@@ -5,13 +5,13 @@
     "ACL": 1,
     "RoleMapping": 1,
     "Role": 1,
-    "MenuItem": 1,
+    "MenuItem": 7,
     "Tag": 1,
     "Restaurant": 3,
     "Picture": 2,
     "Order": 1,
-    "Review": 2,
-    "Customer": 2
+    "Review": 6,
+    "Customer": 4
   },
   "models": {
     "User": {},
@@ -19,7 +19,14 @@
     "ACL": {},
     "RoleMapping": {},
     "Role": {},
-    "MenuItem": {},
+    "MenuItem": {
+      "1": "{\"name\":\"Tacos\",\"description\":\"delicious carnitas tacos\",\"price\":4,\"type\":\"Appetizer\",\"tag\":\"vegan\",\"restaurantId\":1,\"id\":1}",
+      "2": "{\"name\":\"horchata\",\"description\":\"cinnamon delight\",\"price\":2,\"type\":\"Beverage\",\"tag\":\"\",\"restaurantId\":1,\"id\":2}",
+      "3": "{\"name\":\"burrito\",\"description\":\"meaty juicy california\",\"price\":8,\"type\":\"Entree\",\"tag\":\"\",\"restaurantId\":1,\"id\":3}",
+      "4": "{\"name\":\"Hamburger\",\"description\":\"Thick Cut No Cheese Pickles\",\"price\":6,\"type\":\"Entree\",\"tag\":\"\",\"restaurantId\":2,\"id\":4}",
+      "5": "{\"name\":\"Fries\",\"description\":\"Waffle Style\",\"price\":4,\"type\":\"Appetizer\",\"tag\":\"\",\"restaurantId\":2,\"id\":5}",
+      "6": "{\"name\":\"Coke\",\"description\":\"Not Diet\",\"price\":2,\"type\":\"Beverage\",\"tag\":\"\",\"restaurantId\":2,\"id\":6}"
+    },
     "Tag": {},
     "Restaurant": {
       "0": "{\"ownerName\":\"Jeff\",\"restaurantName\":\"Panaynay\",\"restaurantPhone\":\"string\",\"restaurantEmail\":\"restaurant@gmail.com\",\"password\":\"string\",\"location\":{\"street\":\"225 Broadway\",\"city\":\"San Diego\",\"state\":\"CA\",\"zip\":\"92101\",\"place_id\":\"ChIJK2LZD6hU2YARm4yHxj0GSIU\"},\"prepTime\":0,\"hoursOfOperation\":[{\"Mon\":{\"start\":\"9:00AM\",\"end\":\"10:00PM\"}}],\"priceRange\":0,\"minDeliveryCharge\":0,\"id\":0}",
@@ -31,11 +38,17 @@
     },
     "Order": {},
     "Review": {
-      "1": "{\"date\":\"2017-11-13T06:45:29.063Z\",\"stars\":3,\"restaurantId\":1,\"customerId\":2,\"id\":1}"
+      "1": "{\"date\":\"2017-11-13T06:45:29.063Z\",\"stars\":3,\"restaurantId\":1,\"customerId\":2,\"id\":1}",
+      "2": "{\"date\":\"2017-11-14T23:27:26.118Z\",\"stars\":3,\"restaurantId\":1,\"customerId\":1,\"id\":2}",
+      "3": "{\"date\":\"2017-11-14T23:27:26.118Z\",\"stars\":4,\"restaurantId\":1,\"customerId\":2,\"id\":3}",
+      "4": "{\"date\":\"2017-11-14T23:27:26.118Z\",\"stars\":5,\"restaurantId\":2,\"customerId\":1,\"id\":4}",
+      "5": "{\"date\":\"2017-11-14T23:27:26.118Z\",\"stars\":2,\"restaurantId\":2,\"customerId\":2,\"id\":5}"
     },
     "Customer": {
       "0": "{\"name\":\"Mickael Roberts\",\"email\":\"mike@gmail.com\",\"password\":\"string\",\"phoneNumber\":\"string\",\"address\":{\"street\":\"101 Broadway\",\"city\":\"San Diego\",\"state\":\"CA\",\"zip\":\"92101\",\"place_id\":\"ChIJQWk5R6hU2YARYd3JEN8iEsg\"},\"id\":0}",
-      "1": "{\"name\":\"hello goodbye\",\"email\":\"test@gmail.com\",\"password\":\"fsdafl;kj\",\"phoneNumber\":\"542425421\",\"address\":{\"street\":\"32 TEST\",\"town\":\"testing\",\"state\":\"AL\",\"zipcode\":\"23134\"},\"id\":1}"
+      "1": "{\"name\":\"hello goodbye\",\"email\":\"test@gmail.com\",\"password\":\"fsdafl;kj\",\"phoneNumber\":\"542425421\",\"address\":{\"street\":\"32 TEST\",\"town\":\"testing\",\"state\":\"AL\",\"zipcode\":\"23134\"},\"id\":1}",
+      "2": "{\"name\":\"testing testing\",\"email\":\"hello@gmail.com\",\"password\":\"fdsfion\",\"phoneNumber\":\"467890876\",\"address\":{\"street\":\"123 Main\",\"town\":\"Boston\",\"state\":\"AL\",\"zipcode\":\"87654\"},\"id\":2}",
+      "3": "{\"name\":\"harry mister\",\"email\":\"harry@gmail.com\",\"password\":\"lmoinoio\",\"phoneNumber\":\"098654474\",\"address\":{\"street\":\"123 Main\",\"town\":\"Chicago\",\"state\":\"MN\",\"zipcode\":\"56216\"},\"id\":3}"
     }
   }
 }
