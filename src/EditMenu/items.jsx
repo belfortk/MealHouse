@@ -7,43 +7,27 @@ class Items extends Component {
       dentry: "",
       dprice: "",
     };
-    this.updateDescription = this.updateDescription.bind(this);
-    this.updatePrice = this.updatePrice.bind(this);
+
   }
 
-  updateDescription(event) {
-    this.setState({ dentry: event.target.value });
-  }
-
-  updatePrice(event) {
-    this.setState({ dprice: event.target.value });
-  }
-
-
-  save() {
-
-    const payload = {
-      dentry: this.state.dentry,
-      dprice: this.state.dprice
-    };
-    this.props.saveItem(payload, this.props.index);
-  }
 
   render() {
     return (
+    <div style={{ display: this.props.active ? "block" : "none" }}>
       <li className="list-group-item list-group-item-primary">
         <div className="row">
-          <strong>{this.props.entry} - ${this.props.price} - ({this.props.type})</strong>
+          <strong>{this.props.name} - ${this.props.price} - ({this.props.type})</strong>
           <br/>
-          <p>{this.props.description}</p>
+          <p>--{this.props.description}</p>
           <a
-            href="#"
+            href="#/editmenu"
             onClick={() => this.props.onClick()}
           >
           <i className="fa fa-trash" aria-hidden="true"></i>
           </a>
         </div>
       </li>
+    </div>
     );
   }
 }

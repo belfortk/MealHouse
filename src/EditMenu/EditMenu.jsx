@@ -1,49 +1,31 @@
 import React, { Component } from "react";
 import Items from "./items";
+import axios from "axios";
+import Navbar from "../Navbar";
 
 class EditMenu extends Component {
   constructor(props) {
     super(props);
     this.state = {
       key: 0,
-      entry: "",
-      dentry: "",
+      name: "",
       price: "",
-      type:"",
+      type:"Appetizer",
       description:"",
       items: [],
+      active: true
     };
     this.additem = this.additem.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handlePrice = this.handlePrice.bind(this);
     this.handleType = this.handleType.bind(this);
     this.handleDescription = this.handleDescription.bind(this);
-    this.saveItem = this.saveItem.bind(this);
+    this.deleteInfo = this.deleteInfo.bind(this);
   }
 
   
-  saveItem(payload, index) {
-    let items = [...this.state.items];
-    
 
-    if (payload.dentry===""){
-      items[index].entry = this.state.entry
-    }
-    else{
-      items[index].entry = payload.dentry;
-    }
-    if (payload.dprice===""){
-      items[index].price = this.state.price
-    }
-    else{
-      items[index].price = payload.dprice;
-    }
-    
-    
-    this.setState({
-      items: items
-    });
-  }
+  
 
   handlePrice(event) {
     this.setState({ price: event.target.value });
@@ -57,37 +39,62 @@ class EditMenu extends Component {
     this.setState({ description: event.target.value });
   }
 
-  deleteInfo(index) {
+  deleteInfo(index, id) {
     let items = [...this.state.items];
+
+    axios.put(`/api/MenuItems/${id}`,{
+      name: items[index].name,
+      price: items[index].price,
+      type: items[index].type,
+      active: false
+    })
 
     items.splice(index, 1);
 
     this.setState({
       items: items
     });
+
   }
 
   handleChange(event) {
-    this.setState({ entry: event.target.value });
+    this.setState({ name: event.target.value });
   }
   additem() {
     var itemArray = this.state.items;
-    const entryvalue = this.state.entry;
+    const namevalue = this.state.name;
     var pricevalue = this.state.price;
     var typevalue = this.state.type;
     var descriptionvalue = this.state.description;
+    var restaurantIdvalue = 1;
+    var activevalue = this.state.active;
     
     itemArray.push({
-      entry: entryvalue,
+      name: namevalue,
       price: pricevalue,
       description: descriptionvalue,
-      type: typevalue
+      type: typevalue,
+      restaurantId: restaurantIdvalue,
+      active: activevalue
     });
 
     this.setState({
       items: itemArray
     });
     
+    axios.post('/api/MenuItems', {
+      name: namevalue,
+      price: pricevalue,
+      description: descriptionvalue,
+      type: typevalue,
+      restaurantId: restaurantIdvalue,
+      active: activevalue
+    })
+    .then(data => console.log(data))
+    .catch(err => {
+            console.log(err);
+          })
+
   }
   renderTodos() {
     return this.state.items.map((item, index) => (
@@ -95,17 +102,28 @@ class EditMenu extends Component {
         key={item.entry + index}
         price={item.price}
         index={index}
-        entry={item.entry}
+        name={item.name}
         description={item.description}
         type={item.type}
-        onClick={() => this.deleteInfo(index)}
-        saveItem={this.saveItem}
+        active={item.active}
+        onClick={() => this.deleteInfo(index, item.id)}
       />
     ));
   }
+
+  componentWillMount(){
+    axios.get('/api/MenuItems')
+  .then(response => this.setState({
+    items: response.data
+  }))
+  .catch(err => {console.log(err)})
+  }
+
   render() {
     return (
+        
       <div className="container">
+        <Navbar />
         <div className="titleheader">
           <h1>Editing Menu</h1>
         </div>
@@ -119,7 +137,7 @@ class EditMenu extends Component {
                   className="form-control create-todo-text"
                   id="inputbox"
                   rows="1"
-                  value={this.state.entry}
+                  value={this.state.name}
                   onChange={this.handleChange}
                 />
                 <label htmlFor="inputbox">Description</label>
