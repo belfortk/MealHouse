@@ -69,6 +69,23 @@ body {
   align-items: center;
 }
 
+footer {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 10px;
+  right:0px;
+  height:120px;
+  width:100%;
+  color: black;
+}
+
+.text-black{
+  color: black;
+}
+
+
 
 .CustomerProfilePage{
   padding: 10vh 7vw 50vh 7vw;
