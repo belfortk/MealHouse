@@ -7,7 +7,7 @@ class EditMenu extends Component {
     super(props);
     this.state = {
       key: 0,
-      entry: "",
+      name: "",
       dentry: "",
       price: "",
       type:"Appetizer",
@@ -20,7 +20,9 @@ class EditMenu extends Component {
     this.handleType = this.handleType.bind(this);
     this.handleDescription = this.handleDescription.bind(this);
   }
+
   
+
   
 
   handlePrice(event) {
@@ -46,26 +48,37 @@ class EditMenu extends Component {
   }
 
   handleChange(event) {
-    this.setState({ entry: event.target.value });
+    this.setState({ name: event.target.value });
   }
   additem() {
     var itemArray = this.state.items;
-    const entryvalue = this.state.entry;
+    const namevalue = this.state.name;
     var pricevalue = this.state.price;
     var typevalue = this.state.type;
     var descriptionvalue = this.state.description;
+    var restaurantIdvalue = 1;
     
     itemArray.push({
-      entry: entryvalue,
+      name: namevalue,
       price: pricevalue,
       description: descriptionvalue,
-      type: typevalue
+      type: typevalue,
+      restaurantId: restaurantIdvalue
     });
 
     this.setState({
       items: itemArray
     });
     
+    axios.post('/api/MenuItems', {
+      name: namevalue,
+      price: pricevalue,
+      description: descriptionvalue,
+      type: typevalue,
+      restaurantId: restaurantIdvalue
+    })
+    .then(reponse => console.log(response.data))
+
   }
   renderTodos() {
     return this.state.items.map((item, index) => (
@@ -73,7 +86,7 @@ class EditMenu extends Component {
         key={item.entry + index}
         price={item.price}
         index={index}
-        entry={item.entry}
+        name={item.name}
         description={item.description}
         type={item.type}
         onClick={() => this.deleteInfo(index)}
@@ -82,8 +95,16 @@ class EditMenu extends Component {
     ));
   }
 
+  componentWillMount(){
+    axios.get('/api/MenuItems')
+  .then(response => this.setState({
+    items: response.data
+  }))
+  }
+
   render() {
     return (
+        
       <div className="container">
         <div className="titleheader">
           <h1>Editing Menu</h1>
@@ -98,7 +119,7 @@ class EditMenu extends Component {
                   className="form-control create-todo-text"
                   id="inputbox"
                   rows="1"
-                  value={this.state.entry}
+                  value={this.state.name}
                   onChange={this.handleChange}
                 />
                 <label htmlFor="inputbox">Description</label>

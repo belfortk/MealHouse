@@ -5,7 +5,7 @@
     "ACL": 1,
     "RoleMapping": 1,
     "Role": 1,
-    "MenuItem": 7,
+    "MenuItem": 8,
     "Tag": 1,
     "Restaurant": 7,
     "Picture": 2,
@@ -25,7 +25,8 @@
       "3": "{\"name\":\"burrito\",\"description\":\"meaty juicy california\",\"price\":8,\"type\":\"Entree\",\"tag\":\"\",\"restaurantId\":1,\"id\":3}",
       "4": "{\"name\":\"Hamburger\",\"description\":\"Thick Cut No Cheese Pickles\",\"price\":6,\"type\":\"Entree\",\"tag\":\"\",\"restaurantId\":2,\"id\":4}",
       "5": "{\"name\":\"Fries\",\"description\":\"Waffle Style\",\"price\":4,\"type\":\"Appetizer\",\"tag\":\"\",\"restaurantId\":2,\"id\":5}",
-      "6": "{\"name\":\"Coke\",\"description\":\"Not Diet\",\"price\":2,\"type\":\"Beverage\",\"tag\":\"\",\"restaurantId\":2,\"id\":6}"
+      "6": "{\"name\":\"Coke\",\"description\":\"Not Diet\",\"price\":2,\"type\":\"Beverage\",\"tag\":\"\",\"restaurantId\":2,\"id\":6}",
+      "7": "{\"name\":\"Fried Rice\",\"description\":\"shrimp, beef, chicken\",\"price\":9.99,\"type\":\"Entree\",\"restaurantId\":1,\"id\":7}"
     },
     "Tag": {},
     "Restaurant": {
