@@ -14,6 +14,7 @@ import AboutUsPage from './AboutUsPage/AboutUsPage'
 import ContactUs from './ContactUs/ContactUs'
 import CustomerProfile from './CustomerProfile/CustomerProfile'
 import Footer from "./Footer";
+import DistanceCalc from "./DistanceCalc/DistanceCalc";
 
 class App extends Component {
   constructor(props) {
@@ -33,6 +34,7 @@ class App extends Component {
           <Route path="/thankyou" component={ThankYouPage}/>
           <Route path="/aboutus" component={AboutUsPage}/>
           <Route path="/contactus" component={ContactUs}/>
+          <Route path="/distancecalc" component={DistanceCalc}/>
           <Route path="/profile/customer" component={CustomerProfile}/>
           <Footer />
         </div>
