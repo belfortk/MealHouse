@@ -1,30 +1,30 @@
-import React from 'react';
-import NavBar from '../Navbar';
+import React from "react";
+import NavBar from "../Navbar";
 import { connect } from "react-redux";
 
-class CheckoutPage extends React.Component{
-  constructor(props){
+class CheckoutPage extends React.Component {
+  constructor(props) {
     super(props);
 
-    this.handleClick =  this.handleClick.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(){
-    window.location = 'http://localhost:3000/'
+  handleClick() {
+    window.location = "http://localhost:3000/";
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <div className="CheckoutPage">
-      <header className="App-header">
-        <NavBar />
-      </header>
-      <div className="container" id='checkout-container'>
-
-
+        <header className="App-header">
+          <NavBar />
+        </header>
+        <div className="container" id="checkout-container">
+          <p> MAP OVER MENU ITEMS</p>
+          <p>DISPLAY TOTAL </p>
+          <p> STRIPE CHECKOUT ICON</p>
+        </div>
       </div>
-    </div>
-
     );
   }
 }
@@ -36,5 +36,3 @@ function mapStateToProps(store) {
 }
 
 export default connect(mapStateToProps)(CheckoutPage);
-
-
