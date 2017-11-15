@@ -41,7 +41,7 @@ class SearchBar extends React.Component {
   render() {
     return (
 
-        <div className="container-1 " >
+        <div className="container" id='searchCont' >
           <div className="input-group">
             <input
               ref="searchField"
@@ -52,7 +52,7 @@ class SearchBar extends React.Component {
               aria-describedby="basic-addon2"
             />
             <button
-              className="input-group-addon"
+              className="input-group-addon button-success"
               id="basic-addon2"
               onClick={this.handleFormSubmit}
             >

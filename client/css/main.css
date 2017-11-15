@@ -52,9 +52,51 @@ body {
   height: 100vh;
 }
 
+.ContactUs{
+  padding: 25vh 5vw 75vh 5vw;
+  background: url("https://static.pexels.com/photos/616401/pexels-photo-616401.jpeg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+}
+
+
+
 #thankyou-container{
   text-align: center;
 }
+
+#aboutus-container{
+  text-align: center;
+  background: #32AA46;
+  width: 60%;
+}
+
+#searchCont{
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 10px;
+  right:0px;
+  height:120px;
+  width:100%;
+  color: black;
+}
+
+.text-black{
+  color: black;
+}
+
 
 
 .CustomerProfilePage{
@@ -65,4 +107,19 @@ body {
   -o-background-size: cover;
   background-size: cover;
   height: 100vh;
+}
+
+
+.CheckoutPage{
+  padding: 10vh 7vw 50vh 7vw;
+  background: url("https://static.pexels.com/photos/616401/pexels-photo-616401.jpeg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+}
+
+#checkout-container{
+  text-align: center;
 }
