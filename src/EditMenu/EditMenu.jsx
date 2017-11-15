@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Items from "./items";
+import axios from "axios";
 
 class EditMenu extends Component {
   constructor(props) {
@@ -9,7 +10,7 @@ class EditMenu extends Component {
       entry: "",
       dentry: "",
       price: "",
-      type:"",
+      type:"Appetizer",
       description:"",
       items: [],
     };
@@ -18,32 +19,9 @@ class EditMenu extends Component {
     this.handlePrice = this.handlePrice.bind(this);
     this.handleType = this.handleType.bind(this);
     this.handleDescription = this.handleDescription.bind(this);
-    this.saveItem = this.saveItem.bind(this);
   }
-
   
-  saveItem(payload, index) {
-    let items = [...this.state.items];
-    
-
-    if (payload.dentry===""){
-      items[index].entry = this.state.entry
-    }
-    else{
-      items[index].entry = payload.dentry;
-    }
-    if (payload.dprice===""){
-      items[index].price = this.state.price
-    }
-    else{
-      items[index].price = payload.dprice;
-    }
-    
-    
-    this.setState({
-      items: items
-    });
-  }
+  
 
   handlePrice(event) {
     this.setState({ price: event.target.value });
@@ -103,6 +81,7 @@ class EditMenu extends Component {
       />
     ));
   }
+
   render() {
     return (
       <div className="container">

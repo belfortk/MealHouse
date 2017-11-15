@@ -7,27 +7,9 @@ class Items extends Component {
       dentry: "",
       dprice: "",
     };
-    this.updateDescription = this.updateDescription.bind(this);
-    this.updatePrice = this.updatePrice.bind(this);
+
   }
 
-  updateDescription(event) {
-    this.setState({ dentry: event.target.value });
-  }
-
-  updatePrice(event) {
-    this.setState({ dprice: event.target.value });
-  }
-
-
-  save() {
-
-    const payload = {
-      dentry: this.state.dentry,
-      dprice: this.state.dprice
-    };
-    this.props.saveItem(payload, this.props.index);
-  }
 
   render() {
     return (
@@ -37,7 +19,7 @@ class Items extends Component {
           <br/>
           <p>{this.props.description}</p>
           <a
-            href="#"
+            href="#/editmenu"
             onClick={() => this.props.onClick()}
           >
           <i className="fa fa-trash" aria-hidden="true"></i>
