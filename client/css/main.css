@@ -40,5 +40,18 @@ body {
     -o-background-size: cover;
     background-size: cover;
     height: 100vh;
+}
 
+.ThankYouPage{
+  padding: 25vh 5vw 75vh 5vw;
+  background: url("https://static.pexels.com/photos/616401/pexels-photo-616401.jpeg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+}
+
+#thankyou-container{
+  text-align: center;
 }

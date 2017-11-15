@@ -9,6 +9,7 @@ import HomePage from "./HomePage/HomePage";
 import SignupPage from "./SignupPage/SignupPage";
 import ResultsList from './ResultsPage/ResultsList';
 import EditMenu from './EditMenu/EditMenu';
+import ThankYouPage from './ThankYouPage/ThankYouPage'
 
 class App extends Component {
   constructor(props) {
@@ -25,6 +26,7 @@ class App extends Component {
           <Route path="/results" component={ResultsList} />
           <Route path="/profile/restaurant" component={RestaurantProfile} />
           <Route path="/editMenu" component={EditMenu}/>
+          <Route path="/thankyou" component={ThankYouPage}/>
         </div>
       </Router>
     );
