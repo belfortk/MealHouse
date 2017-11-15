@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux'
 
 import NavBarComponent from "../Navbar";
 import SearchResult from "./SearchResult";
@@ -58,11 +59,9 @@ class ResultsList extends Component {
 
               <div className="row">
                 <div className="col-md-4">Price</div>
-
                 <button type="button" class="btn btn-primary col-md-4">
                   Lo
                 </button>
-
                 <button type="button" class="btn btn-primary col-md-4">
                   Hi
                 </button>
@@ -70,11 +69,9 @@ class ResultsList extends Component {
 
               <div className="row">
                 <div className="col-md-4">Distance</div>
-
                 <button type="button" class="btn btn-primary col-md-4">
                   Lo
                 </button>
-
                 <button type="button" class="btn btn-primary col-md-4">
                   Hi
                 </button>
@@ -82,11 +79,9 @@ class ResultsList extends Component {
 
               <div className="row">
                 <div className="col-md-4">Distance</div>
-
                 <button type="button" class="btn btn-primary col-md-4">
                   Lo
                 </button>
-
                 <button type="button" class="btn btn-primary col-md-4">
                   Hi
                 </button>
@@ -99,6 +94,8 @@ class ResultsList extends Component {
             </div>
 
             <div className="col-md-9">
+
+            {console.log(this.props)}
               {this.state.restaurants.map(restaurant => {
                 return <SearchResult />;
               })}
@@ -110,4 +107,11 @@ class ResultsList extends Component {
   }
 }
 
-export default ResultsList;
+function mapStateToProps(store){
+  return
+    {
+      store: store.restaurants
+    };
+}
+
+export default connect(mapStateToProps)(ResultsList);
