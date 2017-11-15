@@ -13,6 +13,7 @@ class Items extends Component {
 
   render() {
     return (
+    <div style={{ display: this.props.active ? "block" : "none" }}>
       <li className="list-group-item list-group-item-primary">
         <div className="row">
           <strong>{this.props.name} - ${this.props.price} - ({this.props.type})</strong>
@@ -26,6 +27,7 @@ class Items extends Component {
           </a>
         </div>
       </li>
+    </div>
     );
   }
 }

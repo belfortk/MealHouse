@@ -8,17 +8,18 @@ class EditMenu extends Component {
     this.state = {
       key: 0,
       name: "",
-      dentry: "",
       price: "",
       type:"Appetizer",
       description:"",
       items: [],
+      active: true
     };
     this.additem = this.additem.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handlePrice = this.handlePrice.bind(this);
     this.handleType = this.handleType.bind(this);
     this.handleDescription = this.handleDescription.bind(this);
+    this.deleteInfo = this.deleteInfo.bind(this);
   }
 
   
@@ -37,14 +38,22 @@ class EditMenu extends Component {
     this.setState({ description: event.target.value });
   }
 
-  deleteInfo(index) {
+  deleteInfo(index, id) {
     let items = [...this.state.items];
+
+    axios.put(`/api/MenuItems/${id}`,{
+      name: items[index].name,
+      price: items[index].price,
+      type: items[index].type,
+      active: false
+    })
 
     items.splice(index, 1);
 
     this.setState({
       items: items
     });
+
   }
 
   handleChange(event) {
@@ -57,13 +66,15 @@ class EditMenu extends Component {
     var typevalue = this.state.type;
     var descriptionvalue = this.state.description;
     var restaurantIdvalue = 1;
+    var activevalue = this.state.active;
     
     itemArray.push({
       name: namevalue,
       price: pricevalue,
       description: descriptionvalue,
       type: typevalue,
-      restaurantId: restaurantIdvalue
+      restaurantId: restaurantIdvalue,
+      active: activevalue
     });
 
     this.setState({
@@ -75,9 +86,13 @@ class EditMenu extends Component {
       price: pricevalue,
       description: descriptionvalue,
       type: typevalue,
-      restaurantId: restaurantIdvalue
+      restaurantId: restaurantIdvalue,
+      active: activevalue
     })
-    .then(reponse => console.log(response.data))
+    .then(data => console.log(data))
+    .catch(err => {
+            console.log(err);
+          })
 
   }
   renderTodos() {
@@ -89,8 +104,8 @@ class EditMenu extends Component {
         name={item.name}
         description={item.description}
         type={item.type}
-        onClick={() => this.deleteInfo(index)}
-        saveItem={this.saveItem}
+        active={item.active}
+        onClick={() => this.deleteInfo(index, item.id)}
       />
     ));
   }
@@ -100,6 +115,7 @@ class EditMenu extends Component {
   .then(response => this.setState({
     items: response.data
   }))
+  .catch(err => {console.log(err)})
   }
 
   render() {

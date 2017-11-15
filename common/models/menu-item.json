@@ -23,6 +23,9 @@
     },
     "tag": {
       "type": "string"
+    },
+    "active":{
+      "type": "boolean"
     }
   },
   "validations": [],
