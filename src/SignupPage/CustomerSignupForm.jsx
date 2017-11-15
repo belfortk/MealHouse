@@ -91,29 +91,6 @@ class CustomerSignUpForm extends React.Component {
     });
   }
 
-  //   postNewCustomer(){
-  //     let newCustomer = {
-  //         name: this.state.firstName + " " + this.state.lastName,
-  //         email: this.state.email,
-  //         password: this.state.password,
-  //         phoneNumber: this.state.phone,
-  //         address: {
-  //             street: this.state.street,
-  //             town: this.state.town,
-  //             state: this.state.state,
-  //             zipcode: this.state.zipcode
-  //         },
-  //     }
-  //     axios.post('http://localhost:3000/api/Customers', newCustomer)
-  //       .then(function (response) {
-  //         console.log('new customer added');
-  //       })
-  //       .catch(function (error) {
-  //         console.log('unable to add new customer');
-
-  //       });
-  //   }
-
   handleSubmit(e) {
     e.preventDefault();
     let existingUser = null;
