@@ -3,12 +3,12 @@ import Navbar from "./Navbar";
 import LoginModal from "./LoginModal.jsx";
 import SearchBar from "./SearchBar";
 import React, { Component } from "react";
-import MenuProfile from "./MenuProfile";
+import RestaurantProfile from "./RestaurantProfile/RestaurantProfile";
 import { HashRouter as Router, Route } from "react-router-dom";
-import HomePage from "./HomePage";
+import HomePage from "./HomePage/HomePage";
 import SignupPage from "./SignupPage/SignupPage";
 import ResultsList from './ResultsPage/ResultsList';
-import EditMenu from './EditMenu';
+import EditMenu from './EditMenu/EditMenu';
 
 class App extends Component {
   constructor(props) {
@@ -23,7 +23,7 @@ class App extends Component {
           <Route path="/signup" component={SignupPage} />
           <Route exact path="/" component={HomePage} />
           <Route path="/results" component={ResultsList} />
-          <Route path="/menuProfile" component={MenuProfile} />
+          <Route path="/profile/restaurant" component={RestaurantProfile} />
           <Route path="/editMenu" component={EditMenu}/>
         </div>
       </Router>

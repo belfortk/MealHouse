@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "./Navbar";
-import LoginModal from "./LoginModal.jsx";
-import SearchBar from "./SearchBar";
+import Navbar from "../Navbar";
+import LoginModal from "../LoginModal.jsx";
+import SearchBar from "../SearchBar";
 
 class HomePage extends React.Component {
   render() {

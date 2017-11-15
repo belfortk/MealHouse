@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import SearchBar from "./SearchBar";
+import SearchBar from "../SearchBar";
 import axios from "axios";
-import Navbar from './Navbar';
-class MenuProfile extends Component {
+import Navbar from '../Navbar';
+class RestaurantProfile extends Component {
   constructor(props) {
     super(props);
 
@@ -566,4 +566,4 @@ class MenuProfile extends Component {
   }
 }
 
-export default MenuProfile;
+export default RestaurantProfile;
