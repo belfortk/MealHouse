@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
 import customerSign from './SignupPage/CustomerReducer';
+import SearchResultsReducer from './ResultsPage/ResultsReducer';
 
 
 const rootReducer = combineReducers({
-    customerSign
+  restaurants: SearchResultsReducer
 });
 
 export default rootReducer;
