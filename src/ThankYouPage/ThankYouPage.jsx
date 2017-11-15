@@ -6,7 +6,13 @@ class ThankYouPage extends React.Component{
   constructor(props){
     super(props);
 
+    this.handleClick =  this.handleClick.bind(this);
   }
+
+  handleClick(){
+    window.location = 'http://localhost:3000/'
+  }
+
   render(){
     return(
       <div className="ThankYouPage">
@@ -22,6 +28,8 @@ class ThankYouPage extends React.Component{
 
       <p>If you have any questions about your order, please call 'BUSINESS PHONE'</p>
 
+      <button className="btn btn-primary" onClick={ this.handleClick } > Back to Search </button>
+
       </div>
     </div>
 
@@ -31,7 +39,7 @@ class ThankYouPage extends React.Component{
 
 function mapStateToProps(store) {
   return {
-    store: orderInfo
+    store: store.orderInfo
   };
 }
 
