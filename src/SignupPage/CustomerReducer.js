@@ -12,7 +12,6 @@ const defaultState = {
 
 export default function customerSignUp(state = defaultState, action) {
     const { type, payload, keyName } = action;
-    console.log(keyName);
     switch(type) {
         case 'customer_input': {
             return {
