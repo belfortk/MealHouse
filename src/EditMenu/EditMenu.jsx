@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Items from "./items";
 import axios from "axios";
+import Navbar from "../Navbar";
 
 class EditMenu extends Component {
   constructor(props) {
@@ -122,6 +123,7 @@ class EditMenu extends Component {
     return (
         
       <div className="container">
+        <Navbar />
         <div className="titleheader">
           <h1>Editing Menu</h1>
         </div>
