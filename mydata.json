@@ -7,7 +7,7 @@
     "Role": 1,
     "MenuItem": 7,
     "Tag": 1,
-    "Restaurant": 3,
+    "Restaurant": 7,
     "Picture": 2,
     "Order": 1,
     "Review": 6,
@@ -29,9 +29,8 @@
     },
     "Tag": {},
     "Restaurant": {
-      "0": "{\"ownerName\":\"Jeff\",\"restaurantName\":\"Panaynay\",\"restaurantPhone\":\"string\",\"restaurantEmail\":\"restaurant@gmail.com\",\"password\":\"string\",\"location\":{\"street\":\"225 Broadway\",\"city\":\"San Diego\",\"state\":\"CA\",\"zip\":\"92101\",\"place_id\":\"ChIJK2LZD6hU2YARm4yHxj0GSIU\"},\"prepTime\":0,\"hoursOfOperation\":[{\"Mon\":{\"start\":\"9:00AM\",\"end\":\"10:00PM\"}}],\"priceRange\":0,\"minDeliveryCharge\":0,\"id\":0}",
-      "1": "{\"id\":1,\"ownerName\":\"Danny Ginger\",\"restaurantName\":\"DANNY@JIMBOS.COM\",\"restaurantPhone\":\"709874923\",\"restaurantEmail\":\"Jimbos\",\"password\":\"bdjs;lkn\",\"location\":{\"place_formatted\":\"101 Broadway, San Diego, CA 92101, USA\",\"place_id\":\"ChIJQWk5R6hU2YARYd3JEN8iEsg\",\"place_location\":\"(32.7154049, -117.16356200000001)\"},\"prepTime\":5,\"hoursOfOperation\":[{\"Mon\":{\"start\":\"01:01\",\"end\":\"01:01\"}},{\"Tues\":{\"start\":\"10:10\",\"end\":\"01:01\"}},{\"Wed\":{\"start\":\"10:10\",\"end\":\"01:10\"}},{\"Thu\":{\"start\":\"10:10\",\"end\":\"01:01\"}},{\"Fri\":{\"start\":\"01:01\",\"end\":\"10:10\"}},{\"Sat\":{\"start\":\"01:01\",\"end\":\"01:01\"}},{\"Sun\":{\"start\":\"01:01\",\"end\":\"01:10\"}}],\"priceRange\":2,\"minDeliveryCharge\":5}",
-      "2": "{\"ownerName\":\"Dan Kurtz\",\"restaurantName\":\"Panera\",\"restaurantPhone\":\"9192223333\",\"restaurantEmail\":\"ghghg@lol.com\",\"password\":\"fdsal;kj\",\"location\":{\"street\":\"\",\"town\":\"\",\"state\":\"null\",\"zipcode\":\"\",\"place_id\":\"ChIJ58LDKX9T2YARcypwkERhH2M\",\"place_formatted\":\"1117 30th St, San Diego, CA 92102, USA\",\"place_location\":\"(32.7174317, -117.12939110000002)\"},\"prepTime\":0,\"hoursOfOperation\":[{\"willAddLater\":true}],\"priceRange\":0,\"minDeliveryCharge\":0,\"id\":2}"
+      "1": "{\"ownerName\":\"Jason Mason\",\"restaurantName\":\"Tacos Emporium\",\"restaurantPhone\":\"123456533\",\"restaurantEmail\":\"google@gmail.com\",\"password\":\"jbngfskjlb\",\"location\":{\"street\":\"\",\"town\":\"\",\"state\":\"null\",\"zipcode\":\"\",\"place_id\":\"ChIJA7dcL91U2YAR35w03lpXaZk\",\"place_formatted\":\"1238 University Ave, San Diego, CA 92103, USA\",\"place_location\":\"(32.7487147, -117.15250430000003)\"},\"prepTime\":0,\"hoursOfOperation\":[{\"willAddLater\":true}],\"priceRange\":0,\"minDeliveryCharge\":0,\"id\":1}",
+      "2": "{\"ownerName\":\"Chris BBQ\",\"restaurantName\":\"BBQ Town\",\"restaurantPhone\":\"8975732452\",\"restaurantEmail\":\"chrisbbq@gmail.com\",\"password\":\"noknug\",\"location\":{\"street\":\"\",\"town\":\"\",\"state\":\"null\",\"zipcode\":\"\",\"place_id\":\"ChIJd13Xl6dU2YARIRz5a3gl8dk\",\"place_formatted\":\"1055 Fifth Ave, San Diego, CA 92101, USA\",\"place_location\":\"(32.71636350000001, -117.15969769999998)\"},\"prepTime\":0,\"hoursOfOperation\":[{\"willAddLater\":true}],\"priceRange\":0,\"minDeliveryCharge\":0,\"id\":2}"
     },
     "Picture": {
       "1": "{\"description\":\"dummy picture\",\"date\":\"2017-11-13T06:45:28.595Z\",\"src\":\"https://static.pexels.com/photos/461198/pexels-photo-461198.jpeg\",\"restaurantId\":1,\"id\":1}"
