@@ -3,16 +3,16 @@ const defaultState = {
     lastName: "",
     street: "",
     city: "",
-    state: "",
-    zipcode: "",
+    state: "null",
+    zip: "",
     phone: "",
     email: "",
     password: ""
 }
 
-export default function customerSignUp(state = defaultState, action, keyName) {
-    const { type, payload } = action;
-
+export default function customerSignUp(state = defaultState, action) {
+    const { type, payload, keyName } = action;
+    console.log(keyName);
     switch(type) {
         case 'customer_input': {
             return {
