@@ -124,6 +124,22 @@ footer {
   text-align: center;
 }
 
+.orderPageItemList{
+  overflow: scroll;
+}
+
+.ShopCart{
+  background-color: white;
+  overflow: scroll;
+  height:700px
+}
+
+.cart-footer{
+  position:absolute;
+  bottom:0;
+  width:100%;
+}
+
 .flexbox1{
   display:flex;
 }
