@@ -3,39 +3,51 @@ import SearchBar from "../SearchBar";
 import axios from "axios";
 import Navbar from "../Navbar";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import {
+  restaurantProfileInput,
+  restaurantProfileRange,
+  restaurantProfilePlaceId,
+  restaurantProfilePlaceFormatted,
+  restaurantProfilePlaceLocation,
+  restaurantAddress
+} from "./RestaurantAction";
+import restaurantProfile from "./RestaurantReducer";
+
+function mapStateToProps(state) {
+  return {
+    FirstName: state.restaurantProfile.FirstName,
+    LastName: state.restaurantProfile.LastName,
+    BusinessName: state.restaurantProfile.BusinessName,
+    BusinessEmail: state.restaurantProfile.BusinessEmail,
+    BusinessPhone: state.restaurantProfile.BusinessPhone,
+    Address: state.restaurantProfile.Address,
+    PriceRange: state.restaurantProfile.PriceRange,
+    Delivery: state.restaurantProfile.Delivery,
+    PrepTime: state.restaurantProfile.PrepTime,
+    MonStart: state.restaurantProfile.MonStart,
+    MonEnd: state.restaurantProfile.MonEnd,
+    TuesStart: state.restaurantProfile.TuesStart,
+    TuesEnd: state.restaurantProfile.TuesEnd,
+    WedStart: state.restaurantProfile.WedStart,
+    WedEnd: state.restaurantProfile.WedEnd,
+    ThuStart: state.restaurantProfile.ThuStart,
+    ThuEnd: state.restaurantProfile.ThuEnd,
+    FriStart: state.restaurantProfile.FriStart,
+    FriEnd: state.restaurantProfile.FriEnd,
+    SatStart: state.restaurantProfile.SatStart,
+    SatEnd: state.restaurantProfile.SatEnd,
+    SunStart: state.restaurantProfile.SunStart,
+    SunEnd: state.restaurantProfile.SunEnd,
+    place_id: state.restaurantProfile.place_id,
+    place_formatted: state.restaurantProfile.place_formatted,
+    place_location: state.restaurantProfile.place_location,
+    password: state.restaurantProfile.password
+  };
+}
 class RestaurantProfile extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      FirstName: "",
-      LastName: "",
-      BusinessName: "",
-      BusinessEmail: "",
-      BusinessPhone: "",
-      Address: "",
-      PriceRange: "",
-      Delivery: "",
-      PrepTime: "",
-      MonStart: "",
-      MonEnd: "",
-      TuesStart: "",
-      TuesEnd: "",
-      WedStart: "",
-      WedEnd: "",
-      ThuStart: "",
-      ThuEnd: "",
-      FriStart: "",
-      FriEnd: "",
-      SatStart: "",
-      SatEnd: "",
-      SunStart: "",
-      SunEnd: "",
-      place_id: "",
-      place_formatted: "",
-      place_location: "",
-      password: ""
-    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handlePriceRange = this.handlePriceRange.bind(this);
@@ -53,13 +65,19 @@ class RestaurantProfile extends Component {
         let arrayName = fullName.split(" ");
         let resFirstName = arrayName[0];
         let resLastName = arrayName[1];
-        this.setState({
-          FirstName: resFirstName,
-          LastName: resLastName,
-          BusinessName: resBusinessName,
-          BusinessEmail: resBusinessEmail,
-          BusinessPhone: resBusinessPhone,
-          password: response.data.password
+        let resPassword = response.data.password;
+
+        const { dispatch } = this.props;
+        const reducerKeys = [
+          ['FirstName', resFirstName],
+          ['LastName', resLastName],
+          ['BusinessEmail', resBusinessEmail],
+          ['BusinessName', resBusinessName],
+          ['BusinessPhone', resBusinessPhone],
+          ['password', resPassword]
+        ];
+        reducerKeys.map(input => {
+          dispatch(restaurantProfileInput(input[1], input[0]));
         });
       })
       .catch(error => {
@@ -75,11 +93,11 @@ class RestaurantProfile extends Component {
       let place = autocomplete.getPlace();
       let location = place.geometry.location;
 
-      this.setState({
-        place_formatted: place.formatted_address,
-        place_id: place.place_id,
-        place_location: location.toString()
-      });
+      const { dispatch } = this.props;
+      dispatch(restaurantProfilePlaceId(place.place_id));
+      dispatch(restaurantProfilePlaceFormatted(place.formatted_address));
+      dispatch(restaurantProfilePlaceLocation(location.toString()));
+      dispatch(restaurantAddress(1))
     });
   }
 
@@ -87,87 +105,81 @@ class RestaurantProfile extends Component {
     let prop = event.target.id;
 
     this.setState({ [prop]: event.target.value });
+    const { dispatch } = this.props;
+    dispatch(restaurantProfileInput(event.target.value, event.target.id));
   }
 
   handleSubmit() {
-    this.setState(
-      {
-        Address: {
-          place_formatted: this.state.place_formatted,
-          place_id: this.state.place_id,
-          place_location: this.state.place_location
-        }
-      },
-      () => {
         axios
           .put("/api/restaurants/1", {
-            ownerName: `${this.state.FirstName} ${this.state.LastName}`,
-            restaurantName: this.state.BusinessName,
-            restaurantPhone: this.state.BusinessPhone,
-            location: this.state.Address,
-            prepTime: this.state.PrepTime,
+            ownerName: `${this.props.FirstName} ${this.props.LastName}`,
+            restaurantName: this.props.BusinessName,
+            restaurantPhone: this.props.BusinessPhone,
+            location: this.props.Address,
+            prepTime: this.props.PrepTime,
             hoursOfOperation: [
               {
                 Mon: {
-                  start: this.state.MonStart,
-                  end: this.state.MonEnd
+                  start: this.props.MonStart,
+                  end: this.props.MonEnd
                 }
               },
               {
                 Tues: {
-                  start: this.state.ThuStart,
-                  end: this.state.ThuEnd
+                  start: this.props.ThuStart,
+                  end: this.props.ThuEnd
                 }
               },
               {
                 Wed: {
-                  start: this.state.WedStart,
-                  end: this.state.WedEnd
+                  start: this.props.WedStart,
+                  end: this.props.WedEnd
                 }
               },
               {
                 Thu: {
-                  start: this.state.ThuStart,
-                  end: this.state.ThuEnd
+                  start: this.props.ThuStart,
+                  end: this.props.ThuEnd
                 }
               },
               {
                 Fri: {
-                  start: this.state.FriStart,
-                  end: this.state.FriEnd
+                  start: this.props.FriStart,
+                  end: this.props.FriEnd
                 }
               },
               {
                 Sat: {
-                  start: this.state.SatStart,
-                  end: this.state.SatEnd
+                  start: this.props.SatStart,
+                  end: this.props.SatEnd
                 }
               },
               {
                 Sun: {
-                  start: this.state.SunStart,
-                  end: this.state.SunEnd
+                  start: this.props.SunStart,
+                  end: this.props.SunEnd
                 }
               }
             ],
-            priceRange: this.state.PriceRange,
-            minDeliveryCharge: this.state.Delivery,
-            restaurantEmail: this.state.BusinessEmail,
-            password: this.state.password
+            priceRange: this.props.PriceRange,
+            minDeliveryCharge: this.props.Delivery,
+            restaurantEmail: this.props.BusinessEmail,
+            password: this.props.password
           })
           .then(data => {
             console.log("Update Success");
-            window.location = 'http://localhost:3000/#/editMenu';
+            window.location = "http://localhost:3000/#/editMenu";
           })
           .catch(err => {
             console.log(err);
           });
-      }
-    );
   }
 
   handlePriceRange(event) {
     this.setState({ PriceRange: event.target.value });
+
+    const { dispatch } = this.props;
+    dispatch(restaurantProfileRange(event.target.value));
   }
 
   render() {
@@ -209,7 +221,7 @@ class RestaurantProfile extends Component {
               <div className="col-md-8">
                 <input
                   onChange={this.handleChange}
-                  value={this.state.FirstName}
+                  value={this.props.FirstName}
                   className="form-control"
                   type="text"
                   placeholder="Pre-set Value"
@@ -224,7 +236,7 @@ class RestaurantProfile extends Component {
               <div className="col-md-8">
                 <input
                   onChange={this.handleChange}
-                  value={this.state.LastName}
+                  value={this.props.LastName}
                   className="form-control"
                   type="text"
                   placeholder="Pre-set Value"
@@ -239,7 +251,7 @@ class RestaurantProfile extends Component {
               <div className="col-md-8">
                 <input
                   onChange={this.handleChange}
-                  value={this.state.BusinessName}
+                  value={this.props.BusinessName}
                   className="form-control"
                   type="text"
                   placeholder="Pre-set Value"
@@ -256,7 +268,7 @@ class RestaurantProfile extends Component {
               </label>
               <div className="col-md-8">
                 <p className="form-control-static">
-                  {this.state.BusinessEmail}
+                  {this.props.BusinessEmail}
                 </p>
               </div>
             </div>
@@ -270,7 +282,7 @@ class RestaurantProfile extends Component {
               <div className="col-md-8">
                 <input
                   onChange={this.handleChange}
-                  value={this.state.BusinessPhone}
+                  value={this.props.BusinessPhone}
                   className="form-control"
                   type="tel"
                   placeholder="Pre-set Value"
@@ -306,12 +318,12 @@ class RestaurantProfile extends Component {
                     <input
                       onChange={this.handlePriceRange}
                       className="form-check-input"
-                      checked={this.state.PriceRange === "1"}
+                      checked={this.props.PriceRange === "1"}
                       type="radio"
                       name="inlineRadioOptions"
                       id="inlineRadio1"
                       value="1"
-                    />{" "}
+                    />
                     $0 - $10
                   </label>
                 </div>
@@ -324,10 +336,10 @@ class RestaurantProfile extends Component {
                       className="form-check-input"
                       type="radio"
                       name="inlineRadioOptions"
-                      checked={this.state.PriceRange === "2"}
+                      checked={this.props.PriceRange === "2"}
                       id="inlineRadio2"
                       value="2"
-                    />{" "}
+                    />
                     $11 - $30
                   </label>
                 </div>
@@ -340,10 +352,10 @@ class RestaurantProfile extends Component {
                       className="form-check-input"
                       type="radio"
                       name="inlineRadioOptions"
-                      checked={this.state.PriceRange === "3"}
+                      checked={this.props.PriceRange === "3"}
                       id="inlineRadio3"
                       value="3"
-                    />{" "}
+                    />
                     $31 - $60
                   </label>
                 </div>
@@ -361,7 +373,7 @@ class RestaurantProfile extends Component {
                   <span className="input-group-addon">$</span>
                   <input
                     onChange={this.handleChange}
-                    value={this.state.Delivery}
+                    value={this.props.Delivery}
                     type="number"
                     className="form-control"
                     aria-label="Amount (to the nearest dollar)"
@@ -379,7 +391,7 @@ class RestaurantProfile extends Component {
                 <div className="input-group">
                   <input
                     onChange={this.handleChange}
-                    value={this.state.PrepTime}
+                    value={this.props.PrepTime}
                     type="number"
                     className="form-control"
                     id="PrepTime"
@@ -398,7 +410,7 @@ class RestaurantProfile extends Component {
               <div className="col-md-3">
                 <input
                   onChange={this.handleChange}
-                  value={this.state.MonStart}
+                  value={this.props.MonStart}
                   type="time"
                   className="form-control"
                   id="MonStart"
@@ -408,7 +420,7 @@ class RestaurantProfile extends Component {
               <div className="col-md-3">
                 <input
                   onChange={this.handleChange}
-                  value={this.state.MonEnd}
+                  value={this.props.MonEnd}
                   type="time"
                   className="form-control"
                   id="MonEnd"
@@ -425,7 +437,7 @@ class RestaurantProfile extends Component {
               <div className="col-md-3">
                 <input
                   onChange={this.handleChange}
-                  value={this.state.TuesStart}
+                  value={this.props.TuesStart}
                   type="time"
                   className="form-control"
                   id="TuesStart"
@@ -435,7 +447,7 @@ class RestaurantProfile extends Component {
               <div className="col-md-3">
                 <input
                   onChange={this.handleChange}
-                  value={this.state.TuesEnd}
+                  value={this.props.TuesEnd}
                   type="time"
                   className="form-control"
                   id="TuesEnd"
@@ -452,7 +464,7 @@ class RestaurantProfile extends Component {
               <div className="col-md-3">
                 <input
                   onChange={this.handleChange}
-                  value={this.state.WedStart}
+                  value={this.props.WedStart}
                   type="time"
                   className="form-control"
                   id="WedStart"
@@ -462,7 +474,7 @@ class RestaurantProfile extends Component {
               <div className="col-md-3">
                 <input
                   onChange={this.handleChange}
-                  value={this.state.WedEnd}
+                  value={this.props.WedEnd}
                   type="time"
                   className="form-control"
                   id="WedEnd"
@@ -479,7 +491,7 @@ class RestaurantProfile extends Component {
               <div className="col-md-3">
                 <input
                   onChange={this.handleChange}
-                  value={this.state.ThuStart}
+                  value={this.props.ThuStart}
                   type="time"
                   className="form-control"
                   id="ThuStart"
@@ -489,7 +501,7 @@ class RestaurantProfile extends Component {
               <div className="col-md-3">
                 <input
                   onChange={this.handleChange}
-                  value={this.state.ThuEnd}
+                  value={this.props.ThuEnd}
                   type="time"
                   className="form-control"
                   id="ThuEnd"
@@ -506,7 +518,7 @@ class RestaurantProfile extends Component {
               <div className="col-md-3">
                 <input
                   onChange={this.handleChange}
-                  value={this.state.FriStart}
+                  value={this.props.FriStart}
                   type="time"
                   className="form-control"
                   id="FriStart"
@@ -516,7 +528,7 @@ class RestaurantProfile extends Component {
               <div className="col-md-3">
                 <input
                   onChange={this.handleChange}
-                  value={this.state.FriEnd}
+                  value={this.props.FriEnd}
                   type="time"
                   className="form-control"
                   id="FriEnd"
@@ -533,7 +545,7 @@ class RestaurantProfile extends Component {
               <div className="col-md-3">
                 <input
                   onChange={this.handleChange}
-                  value={this.state.SatStart}
+                  value={this.props.SatStart}
                   type="time"
                   className="form-control"
                   id="SatStart"
@@ -543,7 +555,7 @@ class RestaurantProfile extends Component {
               <div className="col-md-3">
                 <input
                   onChange={this.handleChange}
-                  value={this.state.SatEnd}
+                  value={this.props.SatEnd}
                   type="time"
                   className="form-control"
                   id="SatEnd"
@@ -560,7 +572,7 @@ class RestaurantProfile extends Component {
               <div className="col-md-3">
                 <input
                   onChange={this.handleChange}
-                  value={this.state.SunStart}
+                  value={this.props.SunStart}
                   type="time"
                   className="form-control"
                   id="SunStart"
@@ -570,7 +582,7 @@ class RestaurantProfile extends Component {
               <div className="col-md-3">
                 <input
                   onChange={this.handleChange}
-                  value={this.state.SunEnd}
+                  value={this.props.SunEnd}
                   type="time"
                   className="form-control"
                   id="SunEnd"
@@ -599,4 +611,4 @@ class RestaurantProfile extends Component {
   }
 }
 
-export default RestaurantProfile;
+export default connect(mapStateToProps)(RestaurantProfile);

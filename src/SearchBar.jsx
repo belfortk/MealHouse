@@ -1,5 +1,7 @@
 import React from "react";
-
+import { connect } from 'react-redux';
+import { searchPlaceId, searchPlaceFormatted, searchPlaceLocation } from './SearchAction';
+import { Link } from "react-router-dom";
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -20,27 +22,29 @@ class SearchBar extends React.Component {
     autocomplete.addListener('place_changed', () => {
       let place = autocomplete.getPlace();
       let location = place.geometry.location;
+      console.log(this.props);
 
       this.setState({
         place_formatted: place.formatted_address,
         place_id: place.place_id,
         place_location: location.toString(),
       });
+
+      const { dispatch } = this.props;
+
+      dispatch(searchPlaceId(place.place_id));
+      dispatch(searchPlaceFormatted(place.formatted_address));
+      dispatch(searchPlaceLocation(location.toString()));
   });
 }
 
   handleFormSubmit(event) {
-    event.preventDefault();
-    var inputText = document.getElementById("searchTextField").value;
-    this.setState({
-      inputText: inputText
-    });
-    console.log(this.state);
+    // event.preventDefault();
+    // var inputText = document.getElementById("searchTextField").value;
   }
 
   render() {
     return (
-
         <div className="container" id='searchCont' >
           <div className="input-group">
             <input
@@ -51,13 +55,13 @@ class SearchBar extends React.Component {
               placeholder="Address"
               aria-describedby="basic-addon2"
             />
-            <button
+            <Link to="/results"><button
               className="input-group-addon button-success"
               id="basic-addon2"
               onClick={this.handleFormSubmit}
             >
               Submit
-            </button>
+            </button></Link>
 
           </div>
         </div>
@@ -66,4 +70,12 @@ class SearchBar extends React.Component {
   }
 }
 
-export default SearchBar;
+function mapStateToProps(state) {
+  return {
+    search_place_id: state.search.search_place_id,
+    search_place_formatted: state.search.search_place_formatted,
+    search_place_location: state.search.search_place_location
+  }
+}
+
+export default connect(mapStateToProps)(SearchBar);

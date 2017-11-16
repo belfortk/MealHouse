@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-
+import { connect } from 'react-redux'
+import axios from 'axios';
 import NavBarComponent from "../Navbar";
 import SearchResult from "./SearchResult";
 
@@ -44,6 +45,7 @@ class ResultsList extends Component {
       ]
     };
   }
+
   render() {
     return (
       <div className="ResultsPage">
@@ -58,36 +60,30 @@ class ResultsList extends Component {
 
               <div className="row">
                 <div className="col-md-4">Price</div>
-
-                <button type="button" class="btn btn-primary col-md-4">
+                <button type="button" className="btn btn-primary col-md-4">
                   Lo
                 </button>
-
-                <button type="button" class="btn btn-primary col-md-4">
+                <button type="button" className="btn btn-primary col-md-4">
                   Hi
                 </button>
               </div>
 
               <div className="row">
                 <div className="col-md-4">Distance</div>
-
-                <button type="button" class="btn btn-primary col-md-4">
+                <button type="button" className="btn btn-primary col-md-4">
                   Lo
                 </button>
-
-                <button type="button" class="btn btn-primary col-md-4">
+                <button type="button" className="btn btn-primary col-md-4">
                   Hi
                 </button>
               </div>
 
               <div className="row">
                 <div className="col-md-4">Distance</div>
-
-                <button type="button" class="btn btn-primary col-md-4">
+                <button type="button" className="btn btn-primary col-md-4">
                   Lo
                 </button>
-
-                <button type="button" class="btn btn-primary col-md-4">
+                <button type="button" className="btn btn-primary col-md-4">
                   Hi
                 </button>
               </div>
@@ -99,8 +95,10 @@ class ResultsList extends Component {
             </div>
 
             <div className="col-md-9">
-              {this.state.restaurants.map(restaurant => {
-                return <SearchResult />;
+
+            {console.log(this.props)}
+              {this.props.listStore.map(restaurant => {
+                return <SearchResult name={restaurant.restaurantName}/>;
               })}
             </div>
           </div>
@@ -110,4 +108,13 @@ class ResultsList extends Component {
   }
 }
 
-export default ResultsList;
+function mapStateToProps(store){
+  return  {
+      listStore: store.SearchResultsReducer.restaurants,
+      search_place_id: store.search.search_place_id,
+      search_place_formatted: store.search.search_place_formatted,
+      search_place_location: store.search.search_place_location
+    };
+}
+
+export default connect(mapStateToProps)(ResultsList);
