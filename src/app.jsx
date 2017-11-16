@@ -14,11 +14,8 @@ import AboutUsPage from './AboutUsPage/AboutUsPage'
 import ContactUs from './ContactUs/ContactUs'
 import CustomerProfile from './CustomerProfile/CustomerProfile'
 import Footer from "./Footer";
-<<<<<<< HEAD
 import OrderPage from "./OrderPage/OrderPage";
-=======
 import DistanceCalc from "./DistanceCalc/DistanceCalc";
->>>>>>> master
 
 class App extends Component {
   constructor(props) {

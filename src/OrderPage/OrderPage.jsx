@@ -36,10 +36,6 @@ class OrderPage extends Component {
 
   }
 
-  calculateSub(){
-      
-  }
-
   handleQuantity(event){
       this.setState({ quantity: event.target.value });
   }
