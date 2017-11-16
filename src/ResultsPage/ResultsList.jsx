@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux'
-import axios from 'axios';
+import { connect } from "react-redux";
+import axios from "axios";
 import NavBarComponent from "../Navbar";
 import SearchResult from "./SearchResult";
 
@@ -79,7 +79,7 @@ class ResultsList extends Component {
               </div>
 
               <div className="row">
-                <div className="col-md-4">Distance</div>
+                <div className="col-md-4">Ratings</div>
                 <button type="button" className="btn btn-primary col-md-4">
                   Lo
                 </button>
@@ -95,11 +95,24 @@ class ResultsList extends Component {
             </div>
 
             <div className="col-md-9">
+              <div className="card">
+                <ul className="list-group list-group-flush">
 
-            {console.log(this.props)}
-              {this.props.listStore.map(restaurant => {
-                return <SearchResult name={restaurant.restaurantName}/>;
-              })}
+                  {this.props.listStore.map(restaurant => {
+                    return (
+                      <li className="list-group-item">
+                        <SearchResult
+                        id={restaurant.id}
+                        name={restaurant.restaurantName}
+                        location={restaurant.location.place_formatted}
+                        prepTime={restaurant.prepTime}
+                        priceRange= {restaurant.priceRange}
+                        minDeliveryCharge={restaurant.minDeliveryCharge} />
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -108,13 +121,13 @@ class ResultsList extends Component {
   }
 }
 
-function mapStateToProps(store){
-  return  {
-      listStore: store.SearchResultsReducer.restaurants,
-      search_place_id: store.search.search_place_id,
-      search_place_formatted: store.search.search_place_formatted,
-      search_place_location: store.search.search_place_location
-    };
+function mapStateToProps(store) {
+  return {
+    listStore: store.SearchResultsReducer.restaurants,
+    search_place_id: store.search.search_place_id,
+    search_place_formatted: store.search.search_place_formatted,
+    search_place_location: store.search.search_place_location
+  };
 }
 
 export default connect(mapStateToProps)(ResultsList);

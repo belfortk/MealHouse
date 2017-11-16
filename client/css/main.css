@@ -123,3 +123,9 @@ footer {
 #checkout-container{
   text-align: center;
 }
+
+
+.resultRow{
+  display: flex;
+  justify-content: space-between;
+}
