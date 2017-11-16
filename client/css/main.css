@@ -431,3 +431,16 @@ footer {
     right: 0;
     width: 0;
   }
+}
+
+
+.resultRow{
+  display: flex;
+  justify-content: space-between;
+}
+
+.searchResultContainer{
+  background-color: #d3d3d3;
+
+
+
