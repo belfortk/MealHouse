@@ -99,7 +99,7 @@ class EditMenu extends Component {
   renderTodos() {
     return this.state.items.map((item, index) => (
       <Items
-        key={item.entry + index}
+        key={item.name + index}
         price={item.price}
         index={index}
         name={item.name}
