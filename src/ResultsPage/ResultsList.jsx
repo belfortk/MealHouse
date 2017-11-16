@@ -59,30 +59,30 @@ class ResultsList extends Component {
 
               <div className="row">
                 <div className="col-md-4">Price</div>
-                <button type="button" class="btn btn-primary col-md-4">
+                <button type="button" className="btn btn-primary col-md-4">
                   Lo
                 </button>
-                <button type="button" class="btn btn-primary col-md-4">
+                <button type="button" className="btn btn-primary col-md-4">
                   Hi
                 </button>
               </div>
 
               <div className="row">
                 <div className="col-md-4">Distance</div>
-                <button type="button" class="btn btn-primary col-md-4">
+                <button type="button" className="btn btn-primary col-md-4">
                   Lo
                 </button>
-                <button type="button" class="btn btn-primary col-md-4">
+                <button type="button" className="btn btn-primary col-md-4">
                   Hi
                 </button>
               </div>
 
               <div className="row">
                 <div className="col-md-4">Distance</div>
-                <button type="button" class="btn btn-primary col-md-4">
+                <button type="button" className="btn btn-primary col-md-4">
                   Lo
                 </button>
-                <button type="button" class="btn btn-primary col-md-4">
+                <button type="button" className="btn btn-primary col-md-4">
                   Hi
                 </button>
               </div>
