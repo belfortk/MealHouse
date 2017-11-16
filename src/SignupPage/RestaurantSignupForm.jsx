@@ -21,8 +21,8 @@ class RestaurantSignUpForm extends React.Component {
 
       const { dispatch } = this.props;
 
-      dispatch(placeId(place.formatted_address));
-      dispatch(placeFormatted(place.place_id));
+      dispatch(placeId(place.place_id));
+      dispatch(placeFormatted(place.formatted_address));
       dispatch(placeLocation(location.toString()))
     });
   }

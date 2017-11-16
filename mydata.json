@@ -7,7 +7,7 @@
     "Role": 1,
     "MenuItem": 13,
     "Tag": 1,
-    "Restaurant": 8,
+    "Restaurant": 9,
     "Picture": 2,
     "Order": 1,
     "Review": 6,
@@ -29,7 +29,8 @@
     "Restaurant": {
       "1": "{\"id\":1,\"ownerName\":\"Jason Mason\",\"restaurantName\":\"Tacos Emporium\",\"restaurantPhone\":\"123456533\",\"restaurantEmail\":\"google@gmail.com\",\"password\":\"jbngfskjlb\",\"location\":{\"place_formatted\":\"1014 Fifth Ave, San Diego, CA 92101, USA\",\"place_id\":\"ChIJIW1x66dU2YARpnJL8_RwN70\",\"place_location\":\"(32.71597790000001, -117.16041180000002)\"},\"prepTime\":3,\"hoursOfOperation\":[{\"Mon\":{\"start\":\"10:11\",\"end\":\"10:10\"}},{\"Tues\":{\"start\":\"01:01\",\"end\":\"01:01\"}},{\"Wed\":{\"start\":\"01:01\",\"end\":\"10:10\"}},{\"Thu\":{\"start\":\"01:01\",\"end\":\"01:01\"}},{\"Fri\":{\"start\":\"01:01\",\"end\":\"10:10\"}},{\"Sat\":{\"start\":\"10:10\",\"end\":\"10:10\"}},{\"Sun\":{\"start\":\"01:01\",\"end\":\"10:10\"}}],\"priceRange\":2,\"minDeliveryCharge\":5}",
       "2": "{\"ownerName\":\"Chris BBQ\",\"restaurantName\":\"BBQ Town\",\"restaurantPhone\":\"8975732452\",\"restaurantEmail\":\"chrisbbq@gmail.com\",\"password\":\"noknug\",\"location\":{\"street\":\"\",\"town\":\"\",\"state\":\"null\",\"zipcode\":\"\",\"place_id\":\"ChIJd13Xl6dU2YARIRz5a3gl8dk\",\"place_formatted\":\"1055 Fifth Ave, San Diego, CA 92101, USA\",\"place_location\":\"(32.71636350000001, -117.15969769999998)\"},\"prepTime\":0,\"hoursOfOperation\":[{\"willAddLater\":true}],\"priceRange\":0,\"minDeliveryCharge\":0,\"id\":2}",
-      "7": "{\"ownerName\":\"dong donger\",\"restaurantName\":\"Dongies\",\"restaurantPhone\":\"17777778888\",\"restaurantEmail\":\"dong@dongies.com\",\"password\":\"donger\",\"location\":{\"place_id\":\"101 Broadway, San Diego, CA 92101, USA\",\"place_formatted\":\"ChIJQWk5R6hU2YARYd3JEN8iEsg\",\"place_location\":\"(32.7154049, -117.16356200000001)\"},\"prepTime\":5,\"hoursOfOperation\":[{\"willAddLater\":true}],\"priceRange\":0,\"minDeliveryCharge\":0,\"id\":7}"
+      "7": "{\"ownerName\":\"dong donger\",\"restaurantName\":\"Dongies\",\"restaurantPhone\":\"17777778888\",\"restaurantEmail\":\"dong@dongies.com\",\"password\":\"donger\",\"location\":{\"place_id\":\"ChIJQWk5R6hU2YARYd3JEN8iEsg\",\"place_formatted\":\"101 Broadway, San Diego, CA 92101, USA\",\"place_location\":\"(32.7154049, -117.16356200000001)\"},\"prepTime\":5,\"hoursOfOperation\":[{\"willAddLater\":true}],\"priceRange\":0,\"minDeliveryCharge\":0,\"id\":7}",
+      "8": "{\"ownerName\":\"Paris Hilton\",\"restaurantName\":\"So Hot\",\"restaurantPhone\":\"818929211\",\"restaurantEmail\":\"djdjd@imhot.com\",\"password\":\"32948324893429\",\"location\":{\"place_id\":\"ChIJ5RoSfvZU2YARby_JGCaxDkc\",\"place_formatted\":\"3030 University Ave, San Diego, CA 92104, USA\",\"place_location\":\"(32.7487357, -117.12936159999998)\"},\"prepTime\":12,\"hoursOfOperation\":[{\"willAddLater\":true}],\"priceRange\":0,\"minDeliveryCharge\":0,\"id\":8}"
     },
     "Picture": {
       "1": "{\"description\":\"dummy picture\",\"date\":\"2017-11-13T06:45:28.595Z\",\"src\":\"https://static.pexels.com/photos/461198/pexels-photo-461198.jpeg\",\"restaurantId\":1,\"id\":1}"
