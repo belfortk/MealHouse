@@ -100,7 +100,7 @@ class ResultsList extends Component {
 
                   {this.props.listStore.map(restaurant => {
                     return (
-                      <li className="list-group-item">
+                      <li className="list-group-item searchResultContainer">
                         <SearchResult
                         id={restaurant.id}
                         name={restaurant.restaurantName}

@@ -92,7 +92,7 @@ class SearchResult extends React.Component {
     }
 
     return (
-      <div className="searchResultContainer">
+
         <div className="row">
           <div className="col-md-8">
             <p>{this.props.name}</p>
@@ -113,7 +113,7 @@ class SearchResult extends React.Component {
             </div>
           </div>
         </div>
-      </div>
+
     );
   }
 }
