@@ -123,3 +123,15 @@ footer {
 #checkout-container{
   text-align: center;
 }
+
+.flexbox1{
+  display:flex;
+}
+
+.random1{
+  flex: 9;
+}
+
+.random2 {
+  flex:1;
+}

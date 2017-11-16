@@ -14,6 +14,7 @@ import AboutUsPage from './AboutUsPage/AboutUsPage'
 import ContactUs from './ContactUs/ContactUs'
 import CustomerProfile from './CustomerProfile/CustomerProfile'
 import Footer from "./Footer";
+import OrderPage from "./OrderPage/OrderPage";
 
 class App extends Component {
   constructor(props) {
@@ -34,6 +35,7 @@ class App extends Component {
           <Route path="/aboutus" component={AboutUsPage}/>
           <Route path="/contactus" component={ContactUs}/>
           <Route path="/profile/customer" component={CustomerProfile}/>
+          <Route path="/orderpage" component={OrderPage} />
           <Footer />
         </div>
       </Router>
