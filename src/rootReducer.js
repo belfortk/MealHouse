@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
     customerSign,
     restaurantSign,
     search,
-    restaurants: SearchResultsReducer
+    SearchResultsReducer
 });
 
 export default rootReducer;

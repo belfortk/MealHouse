@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux'
-
+import axios from 'axios';
 import NavBarComponent from "../Navbar";
 import SearchResult from "./SearchResult";
 
@@ -45,6 +45,7 @@ class ResultsList extends Component {
       ]
     };
   }
+
   render() {
     return (
       <div className="ResultsPage">
@@ -96,8 +97,8 @@ class ResultsList extends Component {
             <div className="col-md-9">
 
             {console.log(this.props)}
-              {this.state.restaurants.map(restaurant => {
-                return <SearchResult />;
+              {this.props.listStore.map(restaurant => {
+                return <SearchResult name={restaurant.restaurantName}/>;
               })}
             </div>
           </div>
@@ -108,9 +109,11 @@ class ResultsList extends Component {
 }
 
 function mapStateToProps(store){
-  return
-    {
-      store: store.restaurants
+  return  {
+      listStore: store.SearchResultsReducer.restaurants,
+      search_place_id: store.search.search_place_id,
+      search_place_formatted: store.search.search_place_formatted,
+      search_place_location: store.search.search_place_location
     };
 }
 

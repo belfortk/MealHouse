@@ -11,7 +11,7 @@ class SearchResult extends React.Component {
         <div className="col-md-2">img goes here</div>
 
         <div className="col-md-6">
-          <p> Name of Restaurant </p> <p>Tags </p>
+          <p>{this.props.name}</p> <p>Tags </p>
         </div>
 
         <div className="col-md-2">
