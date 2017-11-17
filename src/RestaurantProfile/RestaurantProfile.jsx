@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SearchBar from "../SearchBar";
 import axios from "axios";
 import Navbar from "../Navbar";
+import {readCookie} from "../Cookie/CookieFunction";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import {
@@ -59,9 +60,19 @@ class RestaurantProfile extends Component {
   }
 
   componentWillMount() {
+    let auth = readCookie("auth");
+    let id = readCookie("id")
     axios
-      .get("/api/restaurants/1")
+      .get(`/api/restaurants/${id}`)
       .then(response => {
+
+        axios.get(`/api/Restaurants/${id}/pictures`)
+        .then(response => {
+          console.log(response.data)
+          const {dispatch} = this.props
+          dispatch(updateProfilePic(response.data[0].src))
+        })
+
         let resBusinessName = response.data.restaurantName;
         let resBusinessPhone = response.data.restaurantPhone;
         let resBusinessEmail = response.data.restaurantEmail;
@@ -114,8 +125,10 @@ class RestaurantProfile extends Component {
   }
 
   handleSubmit() {
+    let auth = readCookie("auth");
+    let id = readCookie("id");
         axios
-          .put("/api/restaurants/1", {
+          .put(`/api/restaurants/${id}`, {
             ownerName: `${this.props.FirstName} ${this.props.LastName}`,
             restaurantName: this.props.BusinessName,
             restaurantPhone: this.props.BusinessPhone,
@@ -187,21 +200,26 @@ class RestaurantProfile extends Component {
   }
 
   handleClick(){
-
-    axios.get("/api/Pictures/2/exists")
+    let id = readCookie("id")
+    axios.get(`/api/Restaurants/${id}/pictures`)
     .then(response => {
-       if (response.data.exists){
-      axios.post("/api/Pictures/1/replace", {
+       if (response.data === null || response.data === undefined){
+      axios.post(`/api/Restaurants/${id}/pictures`, {
         src: this.props.urlField
       })
       .then(data => console.log("Update Success"))
       .catch(err=>console.log(err))
     }
     else {
-      axios.post("/api/Pictures", {
-        src: this.props.urlField
+      axios.get(`/api/Restaurants/${id}/pictures`)
+      .then(response=> {
+        console.log(response.data)
+        axios.put(`/api/Restaurants/${id}/pictures/${response.data[0].id}`, {
+        src: this.props.urlField,
       })
       .then(data => console.log("Success"))
+      })
+      
     }
     })
     const {dispatch} = this.props;
