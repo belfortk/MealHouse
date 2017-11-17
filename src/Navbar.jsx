@@ -1,9 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
+import { cookieInput } from "./Cookie/CookieAction";
+import { createCookie } from "./Cookie/CookieFunction";
 
 class Navbar extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e) {
+    console.log(e);
+    const { dispatch } = this.props;
+
+    dispatch(cookieInput(e.target.value, e.target.id));
+    console.log(this.props);
+  }
+
   render() {
     return (
+      <div>
       <nav className="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
         <button
           className="navbar-toggler navbar-toggler-right"
@@ -32,8 +50,65 @@ class Navbar extends React.Component {
           </div>
         </div>
       </nav>
+      <div id="myModal" className="modal fade" role="dialog">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <button type="button" className="close" data-dismiss="modal">
+                &times;
+              </button>
+              <h4 className="modal-title">MealHouse Log-in</h4>
+            </div>
+            <div className="modal-body">
+              <div className="form-group">
+                <label htmlFor="exampleInputEmail1">Email address</label>
+                <input
+                  className="form-control"
+                  id="email"
+                  placeholder="Enter email"
+                  type="email"
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="exampleInputPassword1">Password</label>
+                <input
+                  className="form-control"
+                  id="password"
+                  placeholder="Password"
+                  type="password"
+                  onChange={this.handleChange}
+                />
+              </div>
+              <p className="text-right">
+                <a href="#">Forgot password?</a>
+              </p>
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-default">
+                Submit
+              </button>
+              <button
+                type="button"
+                className="btn btn-default"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
     );
   }
 }
 
-export default Navbar;
+function mapStateToProps(state) {
+  return {
+    email: state.login.email,
+    password: state.login.password
+  }
+}
+
+export default connect(mapStateToProps)(Navbar);

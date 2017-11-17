@@ -1,6 +1,5 @@
 import axios from "axios";
 import Navbar from "../Navbar";
-import LoginModal from '../LoginModal.jsx';
 import React, { Component } from 'react';
 
 import CustomerSignUpForm from './CustomerSignUpForm'
@@ -27,7 +26,6 @@ class SignupPage extends Component {
       <div className="SignupPage">
         <header className="App-header">
           <Navbar />
-          <LoginModal/>
         </header>
 
         <div className="container">
