@@ -4,6 +4,8 @@ import axios from "axios";
 import Navbar from "../Navbar";
 import {userInput, menuList} from "./MenuAction";
 import { connect } from "react-redux";
+import {readCookie} from "../Cookie/CookieFunction";
+
 
 function mapStateToProps(store) {
   return {
@@ -50,13 +52,15 @@ class EditMenu extends Component {
     dispatch(userInput(event.target.value, event.target.id));  
   }
   additem() {
+
+    let id = readCookie("id")
     const {dispatch} = this.props;
     var itemArray = [...this.props.items];
     const namevalue = this.props.name;
     var pricevalue = this.props.price;
     var typevalue = this.props.type;
     var descriptionvalue = this.props.description;
-    var restaurantIdvalue = 1;
+    var restaurantIdvalue = id;
     var activevalue = this.props.active;
     
     itemArray.push({
@@ -101,8 +105,9 @@ class EditMenu extends Component {
   }
 
   componentWillMount(){
+      let id = readCookie("id")
       const {dispatch} = this.props;
-        axios.get('/api/MenuItems')
+        axios.get(`/api/Restaurants/${id}/menuitems`)
       .then(response => {
         console.log("13")
         dispatch(menuList(response.data)) 
