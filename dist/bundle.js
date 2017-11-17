@@ -3676,7 +3676,9 @@ var defaultState = {
     place_id: "",
     place_formatted: "",
     place_location: "",
-    password: ""
+    password: "",
+    updatePic: "http://is1.mzstatic.com/image/thumb/Purple128/v4/76/61/fc/7661fcae-4ea8-b877-3b51-225ec1a0c47c/source/1200x630bb.jpg",
+    urlField: ""
 };
 
 function restaurantProfile() {
@@ -3724,6 +3726,12 @@ function restaurantProfile() {
                         place_id: state.place_id,
                         place_location: state.place_location
                     }
+                });
+            }
+        case "update_profilepic":
+            {
+                return _extends({}, state, {
+                    updatePic: payload
                 });
             }
         default:
@@ -28445,7 +28453,9 @@ function mapStateToProps(state) {
     place_id: state.restaurantProfile.place_id,
     place_formatted: state.restaurantProfile.place_formatted,
     place_location: state.restaurantProfile.place_location,
-    password: state.restaurantProfile.password
+    password: state.restaurantProfile.password,
+    urlField: state.restaurantProfile.urlField,
+    updatePic: state.restaurantProfile.updatePic
   };
 }
 
@@ -28460,6 +28470,7 @@ var RestaurantProfile = function (_Component) {
     _this.handleChange = _this.handleChange.bind(_this);
     _this.handlePriceRange = _this.handlePriceRange.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
+    _this.handleClick = _this.handleClick.bind(_this);
     return _this;
   }
 
@@ -28584,6 +28595,32 @@ var RestaurantProfile = function (_Component) {
       dispatch((0, _RestaurantAction.restaurantProfileRange)(event.target.value));
     }
   }, {
+    key: "handleClick",
+    value: function handleClick() {
+      var _this4 = this;
+
+      _axios2.default.get("/api/Pictures/2/exists").then(function (response) {
+        if (response.data.exists) {
+          _axios2.default.post("/api/Pictures/1/replace", {
+            src: _this4.props.urlField
+          }).then(function (data) {
+            return console.log("Update Success");
+          }).catch(function (err) {
+            return console.log(err);
+          });
+        } else {
+          _axios2.default.post("/api/Pictures", {
+            src: _this4.props.urlField
+          }).then(function (data) {
+            return console.log("Success");
+          });
+        }
+      });
+      var dispatch = this.props.dispatch;
+
+      dispatch((0, _RestaurantAction.updateProfilePic)(this.props.urlField));
+    }
+  }, {
     key: "render",
     value: function render() {
       return _react2.default.createElement(
@@ -28616,7 +28653,7 @@ var RestaurantProfile = function (_Component) {
               _react2.default.createElement("img", {
                 className: "card-img-top",
                 style: { height: 200 },
-                src: "http://is1.mzstatic.com/image/thumb/Purple128/v4/76/61/fc/7661fcae-4ea8-b877-3b51-225ec1a0c47c/source/1200x630bb.jpg",
+                src: this.props.updatePic,
                 alt: "Card image cap"
               }),
               _react2.default.createElement(
@@ -28628,11 +28665,24 @@ var RestaurantProfile = function (_Component) {
                   "Profile Picture"
                 ),
                 _react2.default.createElement(
-                  "a",
+                  "label",
+                  { htmlFor: "updatePic" },
+                  "Pic Url"
+                ),
+                _react2.default.createElement("input", {
+                  onChange: this.handleChange,
+                  value: this.props.urlField,
+                  className: "form-control",
+                  type: "text",
+                  placeholder: "Pre-set Value",
+                  id: "urlField"
+                }),
+                _react2.default.createElement(
+                  "button",
                   {
-                    href: "#",
                     className: "btn btn-primary",
-                    style: { marginLeft: 80 }
+                    style: { marginLeft: 80 },
+                    onClick: this.handleClick
                   },
                   "Update"
                 )
@@ -29232,6 +29282,7 @@ exports.restaurantProfilePlaceId = restaurantProfilePlaceId;
 exports.restaurantProfilePlaceFormatted = restaurantProfilePlaceFormatted;
 exports.restaurantProfilePlaceLocation = restaurantProfilePlaceLocation;
 exports.restaurantAddress = restaurantAddress;
+exports.updateProfilePic = updateProfilePic;
 function restaurantProfileInput(data, key) {
   return {
     type: "restaurant_profile_input",
@@ -29271,6 +29322,13 @@ function restaurantProfilePlaceLocation(data) {
 function restaurantAddress(data) {
   return {
     type: "restaurantProfileAddress",
+    payload: data
+  };
+}
+
+function updateProfilePic(data) {
+  return {
+    type: "update_profilepic",
     payload: data
   };
 }

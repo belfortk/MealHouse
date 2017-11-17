@@ -10,7 +10,8 @@ import {
   restaurantProfilePlaceId,
   restaurantProfilePlaceFormatted,
   restaurantProfilePlaceLocation,
-  restaurantAddress
+  restaurantAddress,
+  updateProfilePic
 } from "./RestaurantAction";
 import restaurantProfile from "./RestaurantReducer";
 
@@ -42,7 +43,9 @@ function mapStateToProps(state) {
     place_id: state.restaurantProfile.place_id,
     place_formatted: state.restaurantProfile.place_formatted,
     place_location: state.restaurantProfile.place_location,
-    password: state.restaurantProfile.password
+    password: state.restaurantProfile.password,
+    urlField: state.restaurantProfile.urlField,
+    updatePic: state.restaurantProfile.updatePic
   };
 }
 class RestaurantProfile extends Component {
@@ -52,6 +55,7 @@ class RestaurantProfile extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handlePriceRange = this.handlePriceRange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentWillMount() {
@@ -182,6 +186,29 @@ class RestaurantProfile extends Component {
     dispatch(restaurantProfileRange(event.target.value));
   }
 
+  handleClick(){
+
+    axios.get("/api/Pictures/2/exists")
+    .then(response => {
+       if (response.data.exists){
+      axios.post("/api/Pictures/1/replace", {
+        src: this.props.urlField
+      })
+      .then(data => console.log("Update Success"))
+      .catch(err=>console.log(err))
+    }
+    else {
+      axios.post("/api/Pictures", {
+        src: this.props.urlField
+      })
+      .then(data => console.log("Success"))
+    }
+    })
+    const {dispatch} = this.props;
+    dispatch(updateProfilePic(this.props.urlField))
+
+  }
+
   render() {
     return (
       <div className="container">
@@ -198,18 +225,29 @@ class RestaurantProfile extends Component {
               <img
                 className="card-img-top"
                 style={{ height: 200 }}
-                src="http://is1.mzstatic.com/image/thumb/Purple128/v4/76/61/fc/7661fcae-4ea8-b877-3b51-225ec1a0c47c/source/1200x630bb.jpg"
+                src={this.props.updatePic}
                 alt="Card image cap"
               />
               <div className="card-body">
                 <h4 className="card-title">Profile Picture</h4>
-                <a
-                  href="#"
+                <label htmlFor="updatePic">
+                  Pic Url
+                </label>
+                <input
+                  onChange={this.handleChange}
+                  value={this.props.urlField}
+                  className="form-control"
+                  type="text"
+                  placeholder="Pre-set Value"
+                  id="urlField"
+                />
+                <button
                   className="btn btn-primary"
-                  style={{ marginLeft: 80 }}
+                  style={{ marginLeft: 80}}
+                  onClick={this.handleClick}
                 >
                   Update
-                </a>
+                </button>
               </div>
             </div>
           </div>
