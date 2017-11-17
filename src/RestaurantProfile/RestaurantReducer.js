@@ -25,7 +25,9 @@ const defaultState = {
     place_id: "",
     place_formatted: "",
     place_location: "",
-    password: ""
+    password: "",
+    updatePic:"http://is1.mzstatic.com/image/thumb/Purple128/v4/76/61/fc/7661fcae-4ea8-b877-3b51-225ec1a0c47c/source/1200x630bb.jpg",
+    urlField:""
 }
 
 export default function restaurantProfile(state = defaultState, action) {
@@ -70,6 +72,12 @@ export default function restaurantProfile(state = defaultState, action) {
                     place_id: state.place_id,
                     place_location: state.place_location
                 }
+            }
+        }
+        case "update_profilepic" :{
+            return {
+                ...state,
+                updatePic: payload
             }
         }
         default: {

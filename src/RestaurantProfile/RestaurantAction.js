@@ -40,3 +40,10 @@ export function restaurantProfilePlaceFormatted(data) {
       payload: data
       }
   }
+
+  export function updateProfilePic(data) {
+    return {
+      type: "update_profilepic",
+      payload: data
+    }
+  }

@@ -15,6 +15,7 @@ import CustomerProfile from './CustomerProfile/CustomerProfile'
 import Footer from "./Footer";
 import OrderPage from "./OrderPage/OrderPage";
 import DistanceCalc from "./DistanceCalc/DistanceCalc";
+import Checkout from './CheckoutPage/CheckoutPage'
 
 class App extends Component {
   constructor(props) {
@@ -37,6 +38,7 @@ class App extends Component {
           <Route path="/distancecalc" component={DistanceCalc}/>
           <Route path="/profile/customer" component={CustomerProfile}/>
           <Route path="/orderpage" component={OrderPage} />
+          <Route path="/checkout" component={Checkout} />
           <Footer />
         </div>
       </Router>

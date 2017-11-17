@@ -446,3 +446,20 @@ footer {
 .invalid {
   color: red;
 }
+  #checkout-table{
+    margin-left:'auto';
+    margin-right: 'auto';
+  }
+
+  #stripe-icon{
+    height:'70px' ;
+     width: '75px';
+  }
+
+  .grow {
+    transition: all .2s ease-in-out;
+  }
+
+  .grow:hover {
+    transform: scale(1.1);
+  }
