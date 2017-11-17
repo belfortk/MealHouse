@@ -3,12 +3,15 @@ import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { cookieInput } from "./Cookie/CookieAction";
 import { createCookie } from "./Cookie/CookieFunction";
+import axios from 'axios';
+import randomstring from 'randomstring';
 
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
@@ -17,6 +20,23 @@ class Navbar extends React.Component {
 
     dispatch(cookieInput(e.target.value, e.target.id));
     console.log(this.props);
+  }
+
+  handleSubmit() {
+    axios
+    .get('/api/customers')
+    .then(data => {
+      console.log(data);
+      let auth;
+      for (let i = 0; i < data.data.length; i++) {
+        if(data.data[i].email === this.props.email && data.data[i].password === this.props.password) {
+          auth = true;
+          createCookie('id', data.data[i].id, 0 );
+          createCookie('auth', randomstring.generate(), 0 );
+        }
+      }
+      console.log(auth);
+    });
   }
 
   render() {
@@ -85,7 +105,7 @@ class Navbar extends React.Component {
               </p>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-default">
+              <button onClick={this.handleSubmit} type="button" className="btn btn-default">
                 Submit
               </button>
               <button
