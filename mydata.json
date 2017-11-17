@@ -5,7 +5,7 @@
     "ACL": 1,
     "RoleMapping": 1,
     "Role": 1,
-    "MenuItem": 26,
+    "MenuItem": 28,
     "Tag": 1,
     "Restaurant": 9,
     "Picture": 6,
@@ -28,7 +28,9 @@
       "14": "{\"name\":\"noodle\",\"description\":\"japanese\",\"price\":10,\"type\":\"Entree\",\"active\":true,\"restaurantId\":1,\"id\":14}",
       "15": "{\"name\":\"tacos\",\"description\":\"carne asada\",\"price\":2,\"type\":\"Appetizer\",\"active\":true,\"restaurantId\":1,\"id\":15}",
       "16": "{\"name\":\"coke\",\"description\":\"pepsi\",\"price\":2,\"type\":\"Beverage\",\"active\":true,\"restaurantId\":1,\"id\":16}",
-      "17": "{\"id\":17,\"name\":\"boba milk tea\",\"price\":300,\"type\":\"Beverage\",\"active\":false}"
+      "17": "{\"id\":17,\"name\":\"boba milk tea\",\"price\":300,\"type\":\"Beverage\",\"active\":false}",
+      "26": "{\"id\":26,\"name\":\"Fried Rice\",\"price\":12,\"type\":\"Entree\",\"active\":false}",
+      "27": "{\"name\":\"milk tea\",\"description\":\"boba\",\"price\":2,\"type\":\"Beverage\",\"active\":true,\"restaurantId\":7,\"id\":27}"
     },
     "Tag": {},
     "Restaurant": {
