@@ -17,21 +17,21 @@ function mapStateToProps(store) {
 class OrderPage extends Component {
   constructor(props) {
     super(props);
-    
+
     this.renderAppetizer = this.renderAppetizer.bind(this);
     this.handleClickAdd = this.handleClickAdd.bind(this);
     this.renderItems = this.renderItems.bind(this);
+    this.handleCheckout = this.handleCheckout.bind(this);
   }
 
   componentWillMount(){
       const {dispatch} = this.props;
       axios.get("http://localhost:3000/api/Restaurants/1?filter=%7B%22include%22%3A%20%22menuItems%22%7D&access_token=Al3bIEhsGQq664HkRHjJd3HDtm3oUK8wkznAj9V7yoWAuUN2H2wLcdseMAY1nRTF")
       .then(response => {
-          console.log(response.data)
         dispatch(DataList(response.data))
     })
     .catch(err => console.log(err))
-    
+
   }
 
   deleteInfo(index, price) {
@@ -76,7 +76,7 @@ class OrderPage extends Component {
 
     dispatch(OrderList(orderArray))
     dispatch(ShowTotal(subtotalvalue, totalvalue))
-    
+
 
   }
 
@@ -152,6 +152,10 @@ class OrderPage extends Component {
         }
       )}};
 
+      handleCheckout(){
+        window.location = '/#/checkout';
+      }
+
   render(){
       let data = this.props.dataList;
       return(
@@ -174,7 +178,7 @@ class OrderPage extends Component {
                 <div className="col-sm-7 orderPageItemList">
                     <hr/>
                     <h2>Appetizer</h2>
-                        {this.renderAppetizer()} 
+                        {this.renderAppetizer()}
                     <h2>Entree</h2>
                         {this.renderEntree()}
                     <h2>Beverage</h2>
@@ -188,7 +192,7 @@ class OrderPage extends Component {
                                   {this.renderItems()}
                                 </ul>
                             </div>
-                            
+
 
                             <div className="card-footer cart-footer">
                                 <div className="flexbox1">
@@ -200,7 +204,7 @@ class OrderPage extends Component {
                                 <div className="flexbox1">
                                     <p className="random1">Total:</p><p className="random2">${this.props.total}</p>
                                 </div>
-                                <button type="button" className="btn btn-primary btn-block">Checkout</button>
+                                <button type="button" className="btn btn-primary btn-block" onClick = {this.handleCheckout}>Checkout</button>
                             </div>
                     </div>
                 </div>
