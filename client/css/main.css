@@ -1,3 +1,446 @@
 body {
-    padding-top: 56px;
+  margin-top: 56px;
 }
+
+#AppBack {
+  /* padding: 25vh 5vw 75vh 5vw; */
+  background: url("https://static.pexels.com/photos/616401/pexels-photo-616401.jpeg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+}
+
+.SignupPage{
+  padding: 10vh 7vw 50vh 7vw;
+  background: url("https://static.pexels.com/photos/616401/pexels-photo-616401.jpeg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+}
+
+.ResultsPage{
+   padding: 15vh 7vw 50vh 7vw;
+  background: url("https://static.pexels.com/photos/616401/pexels-photo-616401.jpeg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+}
+
+.HomePage{
+    padding: 25vh 5vw 75vh 5vw;
+    background: url("https://static.pexels.com/photos/616401/pexels-photo-616401.jpeg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100vh;
+}
+
+.ThankYouPage{
+  padding: 25vh 5vw 75vh 5vw;
+  background: url("https://static.pexels.com/photos/616401/pexels-photo-616401.jpeg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+}
+
+.ContactUs{
+  padding: 25vh 5vw 75vh 5vw;
+  background: url("https://static.pexels.com/photos/616401/pexels-photo-616401.jpeg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+}
+
+
+
+#thankyou-container{
+  text-align: center;
+}
+
+#aboutus-container{
+  text-align: center;
+  background: #32AA46;
+  width: 60%;
+}
+
+#searchCont{
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 10px;
+  right:0px;
+  height:120px;
+  width:100%;
+  color: black;
+}
+
+.text-black{
+  color: black;
+}
+
+
+
+.CustomerProfilePage{
+  padding: 10vh 7vw 50vh 7vw;
+  background: url("https://static.pexels.com/photos/616401/pexels-photo-616401.jpeg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+}
+
+
+.CheckoutPage{
+  padding: 10vh 7vw 50vh 7vw;
+  background: url("https://static.pexels.com/photos/616401/pexels-photo-616401.jpeg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+}
+
+#checkout-container{
+  text-align: center;
+}
+
+
+.orderPageItemList{
+  overflow: scroll;
+}
+
+.ShopCart{
+  background-color: white;
+  overflow: scroll;
+  height:700px
+}
+
+.cart-footer{
+  position:absolute;
+  bottom:0;
+  width:100%;
+}
+
+.flexbox1{
+  display:flex;
+}
+
+.random1{
+  flex: 9;
+}
+
+.random2 {
+  flex:1;
+}
+
+#house {
+  position: absolute;
+  top: 20px;
+  left: calc(50% - 150px);
+  height: 600px;
+  width: 300px;
+}
+
+.leftLine {
+  position: absolute;
+  top: 200px;
+  left: 0;
+  height: 8px;
+  width: 124px;
+  background-color: white;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  animation: leftLine 4s infinite linear;
+}
+
+.leftUpLine {
+  position: absolute;
+  top: 178px;
+  left: 116px;
+  width: 8px;
+  height: 0;
+  background-color: white;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  animation: leftUpLine 4s infinite linear;
+}
+
+.leftAngleLine {
+  position: absolute;
+  top: 180px;
+  left: 116px;
+  width: 8px;
+  height: 0;
+  background-color: white;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  transform: rotate(-132deg);
+  animation: leftAngleLine 4s infinite linear;
+}
+
+.rightAngleLine {
+  position: absolute;
+  top: 150px;
+  left: 149px;
+  width: 8px;
+  height: 0;
+  background-color: white;
+  transform: rotate(132deg);
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  animation: rightAngleLine 4s infinite linear;
+}
+
+.rightUpLine {
+  position: absolute;
+  top: 178px;
+  right: 116px;
+  width: 8px;
+  height: 0;
+  background-color: white;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  animation: rightUpLine 4s infinite linear;
+}
+
+.rightLine {
+  position: absolute;
+  top: 200px;
+  right: 0px;
+  height: 8px;
+  width: 124px;
+  background-color: white;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  animation: rightLine 4s infinite linear;
+}
+
+.dot {
+  position: absolute;
+  top: 192px;
+  left: 143px;
+  height: 14px;
+  width: 14px;
+  background-color: transparent;
+  border-radius: 25px;
+  animation: dot 4s infinite linear;
+}
+
+@keyframes dot {
+  from {
+    background-color: transparent;
+  }
+  33% {
+    background-color: transparent;
+  }
+  37.5% {
+    background-color: white;
+  }
+  83% {
+    background-color: white;
+  }
+  87.5% {
+    background-color: transparent;
+  }
+  to {
+    background-color: transparent;
+  }
+}
+
+@keyframes leftLine {
+  from {
+    left: 0;
+    width: 0;
+  }
+  12.5% {
+    left: 0;
+    width: 124px;
+  }
+  50% {
+    left: 0;
+    width: 124px;
+  }
+  62.5% {
+    left: 124px;
+    width: 0;
+  }
+  to {
+    left: 124px;
+    width: 0;
+  }
+}
+
+@keyframes leftUpLine {
+  from: {
+    top: 208px;
+    height: 0;
+  }
+  12.5% {
+    top: 208px;
+    height: 0;
+  }
+  17% {
+    top: 178px;
+    height: 30px;
+  }
+  62.5% {
+    top: 178px;
+    height: 30px;
+  }
+  67% {
+    top: 178px;
+    height: 0;
+  }
+  to {
+    top: 208px;
+    height: 0;
+  }
+}
+
+@keyframes leftAngleLine {
+  from {
+    top: 182px;
+    left: 116px;
+    height: 0;
+  }
+  17% {
+    top: 182px;
+    left: 116px;
+    height: 0;
+  }
+  25% {
+    top: 144px;
+    left: 131px;
+    height: 48px;
+  }
+  67% {
+    top: 144px;
+    left: 131px;
+    height: 48px;
+  }
+  75% {
+    top: 153px;
+    left: 147px;
+    height: 0;
+  }
+  to {
+    top: 153px;
+    left: 147px;
+    height: 0;
+  }
+}
+
+@keyframes rightAngleLine {
+  from {
+    top: 152px;
+    left: 144px;
+    height: 0;
+  }
+  25% {
+    top: 152px;
+    left: 144px;
+    height: 0;
+  }
+  33% {
+    top: 144px;
+    left: 161px;
+    height: 48px;
+  }
+  75% {
+    top: 144px;
+    left: 161px;
+    height: 48px;
+  }
+  83% {
+    top: 182px;
+    left: 176px;
+    height: 0px;
+  }
+  to {
+    top: 182px;
+    left: 176px;
+    height: 0px;
+  }
+}
+
+@keyframes rightUpLine {
+  from {
+    top: 178px;
+    height: 0;
+  }
+  33% {
+    top: 178px;
+    height: 0;
+  }
+  37.5% {
+    top: 178px;
+    height: 30px;
+  }
+  83% {
+    top: 178px;
+    height: 30px;
+  }
+  87.5% {
+    top: 208px;
+    height: 0px;
+  }
+  to {
+    top: 208px;
+    height: 0px;
+  }
+}
+
+@keyframes rightLine {
+  from {
+    right: 124px;
+    width: 0;
+  }
+  37.5% {
+    right: 124px;
+    width: 0;
+  }
+  50% {
+    right: 0;
+    width: 124px;
+  }
+  87.5% {
+    right: 0;
+    width: 124px;
+  }
+  to {
+    right: 0;
+    width: 0;
+  }
+}
+
+
+.resultRow{
+  display: flex;
+  justify-content: space-between;
+}
+
+.searchResultContainer{
+  background-color: #d3d3d3;
+
+
+

@@ -5,13 +5,13 @@
     "ACL": 1,
     "RoleMapping": 1,
     "Role": 1,
-    "MenuItem": 1,
+    "MenuItem": 26,
     "Tag": 1,
-    "Restaurant": 1,
-    "Picture": 1,
+    "Restaurant": 9,
+    "Picture": 2,
     "Order": 1,
-    "Review": 1,
-    "Customer": 6
+    "Review": 6,
+    "Customer": 8
   },
   "models": {
     "User": {},
@@ -19,18 +19,44 @@
     "ACL": {},
     "RoleMapping": {},
     "Role": {},
-    "MenuItem": {},
+    "MenuItem": {
+      "9": "{\"id\":9,\"name\":\"Taco\",\"price\":2,\"type\":\"Appetizer\",\"active\":false}",
+      "10": "{\"id\":10,\"name\":\"Burger\",\"description\":\"1/4 Pound\",\"price\":3.99,\"type\":\"Entree\",\"active\":false,\"restaurantId\":1}",
+      "11": "{\"name\":\"Fries\",\"description\":\"\",\"price\":2.55,\"type\":\"Appetizer\",\"active\":true,\"restaurantId\":1,\"id\":11}",
+      "12": "{\"name\":\"Fried Rice\",\"description\":\"Shrimp\",\"price\":9.99,\"type\":\"Entree\",\"active\":true,\"restaurantId\":1,\"id\":12}",
+      "13": "{\"name\":\"Hot Dog\",\"description\":\"1/4 Pound\",\"price\":1.99,\"type\":\"Entree\",\"active\":true,\"restaurantId\":2,\"id\":13}",
+      "14": "{\"name\":\"noodle\",\"description\":\"japanese\",\"price\":10,\"type\":\"Entree\",\"active\":true,\"restaurantId\":1,\"id\":14}",
+      "15": "{\"name\":\"tacos\",\"description\":\"carne asada\",\"price\":2,\"type\":\"Appetizer\",\"active\":true,\"restaurantId\":1,\"id\":15}",
+      "16": "{\"name\":\"coke\",\"description\":\"pepsi\",\"price\":2,\"type\":\"Beverage\",\"active\":true,\"restaurantId\":1,\"id\":16}",
+      "17": "{\"id\":17,\"name\":\"boba milk tea\",\"price\":300,\"type\":\"Beverage\",\"active\":false}"
+    },
     "Tag": {},
-    "Restaurant": {},
-    "Picture": {},
+    "Restaurant": {
+      "1": "{\"id\":1,\"ownerName\":\"Jason Mason\",\"restaurantName\":\"Tacos Emporium\",\"restaurantPhone\":\"123456533\",\"restaurantEmail\":\"google@gmail.com\",\"password\":\"jbngfskjlb\",\"location\":{\"place_formatted\":\"1014 Fifth Ave, San Diego, CA 92101, USA\",\"place_id\":\"ChIJIW1x66dU2YARpnJL8_RwN70\",\"place_location\":\"(32.71597790000001, -117.16041180000002)\"},\"prepTime\":3,\"hoursOfOperation\":[{\"Mon\":{\"start\":\"10:11\",\"end\":\"10:10\"}},{\"Tues\":{\"start\":\"01:01\",\"end\":\"01:01\"}},{\"Wed\":{\"start\":\"01:01\",\"end\":\"10:10\"}},{\"Thu\":{\"start\":\"01:01\",\"end\":\"01:01\"}},{\"Fri\":{\"start\":\"01:01\",\"end\":\"10:10\"}},{\"Sat\":{\"start\":\"10:10\",\"end\":\"10:10\"}},{\"Sun\":{\"start\":\"01:01\",\"end\":\"10:10\"}}],\"priceRange\":2,\"minDeliveryCharge\":5}",
+      "2": "{\"ownerName\":\"Chris BBQ\",\"restaurantName\":\"BBQ Town\",\"restaurantPhone\":\"8975732452\",\"restaurantEmail\":\"chrisbbq@gmail.com\",\"password\":\"noknug\",\"location\":{\"street\":\"\",\"town\":\"\",\"state\":\"null\",\"zipcode\":\"\",\"place_id\":\"ChIJd13Xl6dU2YARIRz5a3gl8dk\",\"place_formatted\":\"1055 Fifth Ave, San Diego, CA 92101, USA\",\"place_location\":\"(32.71636350000001, -117.15969769999998)\"},\"prepTime\":0,\"hoursOfOperation\":[{\"willAddLater\":true}],\"priceRange\":3,\"minDeliveryCharge\":0,\"id\":2}",
+      "7": "{\"ownerName\":\"dong donger\",\"restaurantName\":\"Dongies\",\"restaurantPhone\":\"17777778888\",\"restaurantEmail\":\"dong@dongies.com\",\"password\":\"donger\",\"location\":{\"place_id\":\"ChIJQWk5R6hU2YARYd3JEN8iEsg\",\"place_formatted\":\"101 Broadway, San Diego, CA 92101, USA\",\"place_location\":\"(32.7154049, -117.16356200000001)\"},\"prepTime\":5,\"hoursOfOperation\":[{\"willAddLater\":true}],\"priceRange\":0,\"minDeliveryCharge\":0,\"id\":7}",
+      "8": "{\"ownerName\":\"Paris Hilton\",\"restaurantName\":\"So Hot\",\"restaurantPhone\":\"818929211\",\"restaurantEmail\":\"djdjd@imhot.com\",\"password\":\"32948324893429\",\"location\":{\"place_id\":\"ChIJ5RoSfvZU2YARby_JGCaxDkc\",\"place_formatted\":\"3030 University Ave, San Diego, CA 92104, USA\",\"place_location\":\"(32.7487357, -117.12936159999998)\"},\"prepTime\":12,\"hoursOfOperation\":[{\"willAddLater\":true}],\"priceRange\":0,\"minDeliveryCharge\":0,\"id\":8}"
+    },
+    "Picture": {
+      "1": "{\"description\":\"dummy picture\",\"date\":\"2017-11-13T06:45:28.595Z\",\"src\":\"https://static.pexels.com/photos/461198/pexels-photo-461198.jpeg\",\"restaurantId\":1,\"id\":1}"
+    },
     "Order": {},
-    "Review": {},
+    "Review": {
+      "1": "{\"date\":\"2017-11-13T06:45:29.063Z\",\"stars\":3,\"restaurantId\":1,\"customerId\":2,\"id\":1}",
+      "2": "{\"date\":\"2017-11-14T23:27:26.118Z\",\"stars\":3,\"restaurantId\":1,\"customerId\":1,\"id\":2}",
+      "3": "{\"date\":\"2017-11-14T23:27:26.118Z\",\"stars\":4,\"restaurantId\":1,\"customerId\":2,\"id\":3}",
+      "4": "{\"date\":\"2017-11-14T23:27:26.118Z\",\"stars\":5,\"restaurantId\":2,\"customerId\":1,\"id\":4}",
+      "5": "{\"date\":\"2017-11-14T23:27:26.118Z\",\"stars\":2,\"restaurantId\":2,\"customerId\":2,\"id\":5}"
+    },
     "Customer": {
-      "1": "{\"name\":\"test\",\"email\":\"test@gmail.com\",\"password\":\"string\",\"phoneNumber\":\"string\",\"address\":{\"street\":\"101 broadway\"},\"id\":1}",
-      "2": "{\"name\":\"test1\",\"email\":\"test1@gmail.com\",\"password\":\"string\",\"phoneNumber\":\"string\",\"address\":{},\"id\":2}",
-      "3": "{\"name\":\"hello goodbye\",\"email\":\"test2@gmail.com\",\"password\":\"jfsadk;j\",\"phoneNumber\":\"231241241221\",\"address\":{\"street\":\"gfsga\",\"town\":\"reraf\",\"state\":\"AL\",\"zipcode\":\"23213\"},\"id\":3}",
-      "4": "{\"name\":\"what why\",\"email\":\"test3@gmail.com\",\"password\":\"ffdkjasd;jk\",\"phoneNumber\":\"43750987098\",\"address\":{\"street\":\"kjl;gfskdjo\",\"town\":\"gufkn\",\"state\":\"AL\",\"zipcode\":\"43245\"},\"id\":4}",
-      "5": "{\"name\":\"test4 test4\",\"email\":\"test4@gmail.com\",\"password\":\"dfjsad;kj\",\"phoneNumber\":\"o8098-9\",\"address\":{\"street\":\"afdjk\",\"town\":\"monijio\",\"state\":\"AL\",\"zipcode\":\"43537\"},\"id\":5}"
+      "0": "{\"name\":\"Mickael Roberts\",\"email\":\"mike@gmail.com\",\"password\":\"string\",\"phoneNumber\":\"string\",\"address\":{\"street\":\"101 Broadway\",\"city\":\"San Diego\",\"state\":\"CA\",\"zip\":\"92101\",\"place_id\":\"ChIJQWk5R6hU2YARYd3JEN8iEsg\"},\"id\":0}",
+      "1": "{\"id\":1,\"name\":\"Harry Hudson\",\"email\":\"harry@gmail.com\",\"password\":\"lmoinoio\",\"phoneNumber\":\"098654474\",\"address\":{\"street\":\"123 Main\",\"town\":\"Chicago\",\"state\":\"MN\",\"zipcode\":\"56216\"}}",
+      "2": "{\"name\":\"testing testing\",\"email\":\"hello@gmail.com\",\"password\":\"fdsfion\",\"phoneNumber\":\"467890876\",\"address\":{\"street\":\"123 Main\",\"town\":\"Boston\",\"state\":\"AL\",\"zipcode\":\"87654\"},\"id\":2}",
+      "3": "{\"name\":\"harry mister\",\"email\":\"harry@gmail.com\",\"password\":\"lmoinoio\",\"phoneNumber\":\"098654474\",\"address\":{\"street\":\"123 Main\",\"town\":\"Chicago\",\"state\":\"MN\",\"zipcode\":\"56216\"},\"id\":3}",
+      "4": "{\"name\":\"Christoph Christopherson\",\"email\":\"chris@chris.com\",\"password\":\"christopher\",\"phoneNumber\":\"1-760-666-6666\",\"address\":{\"street\":\"101 birmingham way\",\"state\":\"CA\",\"zipcode\":\"92083\"},\"id\":4}",
+      "5": "{\"name\":\"blah dalah\",\"email\":\"blah@dalah.com\",\"password\":\"kjanwdkjqwn\",\"phoneNumber\":\"17605555555\",\"address\":{\"street\":\"102 blah rd\",\"state\":\"IL\",\"zipcode\":\"92222\"},\"id\":5}",
+      "6": "{\"name\":\"sdfsdfsdf sdfsdfsdf\",\"email\":\"sdfsdf@dass.com\",\"password\":\"dfsdfsdf\",\"phoneNumber\":\"17606854545\",\"address\":{\"street\":\"adasdasd2132\",\"state\":\"FL\",\"zipcode\":\"95236\"},\"id\":6}",
+      "7": "{\"name\":\"sdfsdf kjbkqj\",\"email\":\"asdasd\",\"password\":\"123qe\",\"phoneNumber\":\"17778889999\",\"address\":{\"street\":\"123 sdasd\",\"state\":\"IA\",\"zipcode\":\"98520\"},\"id\":7}"
     }
   }
 }

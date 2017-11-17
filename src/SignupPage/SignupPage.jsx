@@ -1,6 +1,5 @@
 import axios from "axios";
 import Navbar from "../Navbar";
-import LoginModal from '../LoginModal.jsx';
 import React, { Component } from 'react';
 
 import CustomerSignUpForm from './CustomerSignUpForm'
@@ -24,14 +23,13 @@ class SignupPage extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="SignupPage">
         <header className="App-header">
           <Navbar />
-          <LoginModal/>
         </header>
 
         <div className="container">
-          <div className="btn-group" data-toggle="buttons">
+          <div className="btn-group justify-content-center col-4" data-toggle="buttons">
             <label className="btn btn-primary active">
               <button type="radio" name="options" id="customer-button" autoComplete="off" value={'true'} onClick={this.handleSelectType} />
               Customer
