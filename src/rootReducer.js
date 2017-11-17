@@ -4,6 +4,8 @@ import restaurantSign from './SignupPage/RestaurantReducer';
 import search from './SearchReducer';
 import SearchResultsReducer from './ResultsPage/ResultsReducer';
 import restaurantProfile from './RestaurantProfile/RestaurantReducer';
+import editMenu from './EditMenu/MenuReducer'; 
+import orderList from './OrderPage/OrderReducer';
 
 
 const rootReducer = combineReducers({
@@ -11,7 +13,9 @@ const rootReducer = combineReducers({
     restaurantSign,
     search,
     SearchResultsReducer,
-    restaurantProfile
+    restaurantProfile,
+    editMenu,
+    orderList
 });
 
 export default rootReducer;

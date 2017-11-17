@@ -2,72 +2,62 @@ import React, { Component } from "react";
 import Items from "./items";
 import axios from "axios";
 import Navbar from "../Navbar";
+import {userInput, menuList} from "./MenuAction";
+import { connect } from "react-redux";
+
+function mapStateToProps(store) {
+  return {
+    name: store.editMenu.name,
+    price: store.editMenu.price,
+    type: store.editMenu.type,
+    description: store.editMenu.description,
+    active: store.editMenu.active,
+    items: store.editMenu.items
+  }
+}
 
 class EditMenu extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      key: 0,
-      name: "",
-      price: "",
-      type:"Appetizer",
-      description:"",
-      items: [],
-      active: true
-    };
+
     this.additem = this.additem.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handlePrice = this.handlePrice.bind(this);
-    this.handleType = this.handleType.bind(this);
-    this.handleDescription = this.handleDescription.bind(this);
     this.deleteInfo = this.deleteInfo.bind(this);
+    this.renderTodos = this.renderTodos.bind(this)
   }
 
   
-
-  
-
-  handlePrice(event) {
-    this.setState({ price: event.target.value });
-  }
-  
-  handleType(event) {
-    this.setState({ type: event.target.value });
-  }
-
-  handleDescription(event) {
-    this.setState({ description: event.target.value });
-  }
 
   deleteInfo(index, id) {
-    let items = [...this.state.items];
+    let item = [...this.props.items];
 
+    const {dispatch} = this.props;
     axios.put(`/api/MenuItems/${id}`,{
-      name: items[index].name,
-      price: items[index].price,
-      type: items[index].type,
+      name: item[index].name,
+      price: item[index].price,
+      type: item[index].type,
       active: false
     })
 
-    items.splice(index, 1);
+    item.splice(index, 1);
 
-    this.setState({
-      items: items
-    });
+    dispatch(menuList(item))
 
   }
 
   handleChange(event) {
-    this.setState({ name: event.target.value });
+    const { dispatch } = this.props;
+    dispatch(userInput(event.target.value, event.target.id));  
   }
   additem() {
-    var itemArray = this.state.items;
-    const namevalue = this.state.name;
-    var pricevalue = this.state.price;
-    var typevalue = this.state.type;
-    var descriptionvalue = this.state.description;
+    const {dispatch} = this.props;
+    var itemArray = [...this.props.items];
+    const namevalue = this.props.name;
+    var pricevalue = this.props.price;
+    var typevalue = this.props.type;
+    var descriptionvalue = this.props.description;
     var restaurantIdvalue = 1;
-    var activevalue = this.state.active;
+    var activevalue = this.props.active;
     
     itemArray.push({
       name: namevalue,
@@ -78,10 +68,9 @@ class EditMenu extends Component {
       active: activevalue
     });
 
-    this.setState({
-      items: itemArray
-    });
-    
+
+    dispatch(menuList(itemArray));
+
     axios.post('/api/MenuItems', {
       name: namevalue,
       price: pricevalue,
@@ -97,7 +86,7 @@ class EditMenu extends Component {
 
   }
   renderTodos() {
-    return this.state.items.map((item, index) => (
+    return this.props.items.map((item, index) =>  (
       <Items
         key={item.name + index}
         price={item.price}
@@ -112,14 +101,17 @@ class EditMenu extends Component {
   }
 
   componentWillMount(){
-    axios.get('/api/MenuItems')
-  .then(response => this.setState({
-    items: response.data
-  }))
-  .catch(err => {console.log(err)})
+      const {dispatch} = this.props;
+        axios.get('/api/MenuItems')
+      .then(response => {
+        console.log("13")
+        dispatch(menuList(response.data)) 
+      })
+      .catch(err => {console.log(err)})
   }
 
   render() {
+    console.log("rendering")
     return (
         
       <div className="container">
@@ -132,36 +124,36 @@ class EditMenu extends Component {
             <div className="card">
               <div className="card-header">Add New Items</div>
               <div className="card-body">
-                <label htmlFor="inputbox">Item Name</label>
+                <label htmlFor="name">Item Name</label>
                 <textarea
                   className="form-control create-todo-text"
-                  id="inputbox"
+                  id="name"
                   rows="1"
-                  value={this.state.name}
+                  value={this.props.name}
                   onChange={this.handleChange}
                 />
-                <label htmlFor="inputbox">Description</label>
+                <label htmlFor="description">Description</label>
                 <textarea
                   className="form-control create-todo-text"
-                  id="inputbox"
+                  id="description"
                   rows="3"
-                  value={this.state.description}
-                  onChange={this.handleDescription}
+                  value={this.props.description}
+                  onChange={this.handleChange}
                 />
-                <label htmlFor="priority">
+                <label htmlFor="price">
                   Price
                 </label>
                 <div className="form-group row">
                   <div className="col-md-6">  
                     <div className="input-group">
                         <span className="input-group-addon">$</span>
-                        <input type="number" className="form-control" value={this.state.price} onChange={this.handlePrice}/>
+                        <input type="number" id="price"className="form-control" value={this.props.price} onChange={this.handleChange}/>
                     </div>
                   </div>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="exampleFormControlSelect2">Item Type</label>
-                  <select className="form-control" id="exampleFormControlSelect2" onChange={this.handleType}>
+                  <label htmlFor="type">Item Type</label>
+                  <select className="form-control" id="type" onChange={this.handleChange}>
                     <option value="Appetizer">Appetizer</option>
                     <option value="Entree">Entree</option>
                     <option value="Beverage">Beverage</option>
@@ -186,7 +178,6 @@ class EditMenu extends Component {
                 <ul className="list-group">
                   {this.renderTodos()}
                 </ul>
-                <button type="button" className="btn btn-primary btn-block">Update List</button>
               </div>
             </div>
           </div>
@@ -196,4 +187,5 @@ class EditMenu extends Component {
   }
 }
 
-export default EditMenu;
+
+export default connect(mapStateToProps)(EditMenu);

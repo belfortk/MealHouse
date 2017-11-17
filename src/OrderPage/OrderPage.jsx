@@ -2,52 +2,55 @@ import React, { Component } from "react";
 import axios from "axios";
 import Navbar from "../Navbar";
 import OrderedItems from "./OrderedItems";
-import {OrderItemList} from "./OrderAction";
+import {OrderList, DataList, ShowTotal} from "./OrderAction";
+import { connect } from "react-redux";
+
+function mapStateToProps(store) {
+  return {
+    subtotal: store.orderList.subtotal,
+    total: store.orderList.total,
+    dataList: store.orderList.dataList,
+    orderList: store.orderList.orderList
+  }
+}
 
 class OrderPage extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      data:[],
-      orderList:[],
-      subtotal:0,
-      deliveryfee: 5,
-      total:5
-    };
+    
     this.renderAppetizer = this.renderAppetizer.bind(this);
     this.handleClickAdd = this.handleClickAdd.bind(this);
     this.renderItems = this.renderItems.bind(this);
   }
 
   componentWillMount(){
+      const {dispatch} = this.props;
       axios.get("http://localhost:3000/api/Restaurants/1?filter=%7B%22include%22%3A%20%22menuItems%22%7D&access_token=Al3bIEhsGQq664HkRHjJd3HDtm3oUK8wkznAj9V7yoWAuUN2H2wLcdseMAY1nRTF")
       .then(response => {
-        this.setState({
-          data: response.data
-      })
+          console.log(response.data)
+        dispatch(DataList(response.data))
     })
     .catch(err => console.log(err))
     
   }
 
   deleteInfo(index, price) {
-    let list = [...this.state.orderList];
-    let subtotalvalue = this.state.subtotal;
-    let totalvalue = this.state.total;
-    let salestaxvalue = this.state.salestax;
+    const {dispatch} = this.props;
+    let orderArray = [...this.props.orderList];
+    let subtotalvalue = this.props.subtotal;
+    let totalvalue = this.props.total;
 
-    list.splice(index, 1);
+    orderArray.splice(index, 1);
+    subtotalvalue = Math.round((subtotalvalue - price)*100)/100;
+    totalvalue = Math.round((totalvalue - price)*100)/100;
 
-    this.setState({
-      orderList: list,
-      subtotal: Math.round((subtotalvalue - price)*100)/100,
-      total: Math.round((totalvalue - price)*100)/100 
-    });
+    dispatch(OrderList(orderArray));
+    dispatch(ShowTotal(subtotalvalue, totalvalue))
 
   }
 
   renderItems(){
-      return this.state.orderList.map((list, index) => (
+      return this.props.orderList.map((list, index) => (
       <OrderedItems
         key={list.name + index}
         price={list.price}
@@ -57,33 +60,32 @@ class OrderPage extends Component {
     ));
   }
   handleClickAdd(name, price){
-    let orderArray = this.state.orderList;
+    const { dispatch } = this.props;
+    let orderArray = [...this.props.orderList];
     let namevalue = name;
     let pricevalue = price;
-    let subtotalvalue = this.state.subtotal;
-    let salestaxvalue = this.state.salestax;
-    let totalvalue = this.state.total;
+    let subtotalvalue = this.props.subtotal;
+    let totalvalue = this.props.total;
 
     orderArray.push({
       name: namevalue,
       price: pricevalue,
     });
+    subtotalvalue = Math.round((subtotalvalue + price)*100)/100;
+    totalvalue = Math.round((totalvalue + price)*100)/100;
 
-    this.setState({
-      orderList: orderArray,
-      subtotal: Math.round((subtotalvalue + price)*100)/100,
-      total: Math.round((totalvalue + price)*100)/100
-    });
+    dispatch(OrderList(orderArray))
+    dispatch(ShowTotal(subtotalvalue, totalvalue))
+    
 
-    console.log(this.state.orderList)
   }
 
 
 
 
   renderAppetizer(){
-      if (this.state.data.menuItems !== undefined){
-      return this.state.data.menuItems.map((item) => {
+      if (this.props.dataList.menuItems !== undefined){
+      return this.props.dataList.menuItems.map((item) => {
         if (item.type === "Appetizer"){
         return(
             <div className="card" style={{width:250, display:"inline-flex", marginRight:10}}key={item.id}>
@@ -105,8 +107,8 @@ class OrderPage extends Component {
       )}};
 
     renderEntree(){
-      if (this.state.data.menuItems !== undefined){
-      return this.state.data.menuItems.map((item) => {
+      if (this.props.dataList.menuItems !== undefined){
+      return this.props.dataList.menuItems.map((item) => {
         if (item.type === "Entree"){
         return(
             <div className="card" style={{width:250, display:"inline-flex", marginRight:10}}key={item.id}>
@@ -128,8 +130,8 @@ class OrderPage extends Component {
       )}};
 
     renderBeverage(){
-      if (this.state.data.menuItems !== undefined){
-      return this.state.data.menuItems.map((item) => {
+      if (this.props.dataList.menuItems !== undefined){
+      return this.props.dataList.menuItems.map((item) => {
         if (item.type === "Beverage"){
         return(
             <div className="card" style={{width:250, display:"inline-flex", marginRight:10}}key={item.id}>
@@ -151,12 +153,12 @@ class OrderPage extends Component {
       )}};
 
   render(){
-      let data = this.state.data;
+      let data = this.props.dataList;
       return(
           <div>
               <div className="row">
                 <div className="col-sm-7 offset-sm-2" style={{height:"100px"}}>
-                    <h1>{data.restaurantName}</h1>
+                    <h1>{data.restaurantName && data.restaurantName}</h1>
                     <p>{data.location && data.location.place_formatted} - {data.restaurantPhone}</p>
                 </div>
               </div>
@@ -190,13 +192,13 @@ class OrderPage extends Component {
 
                             <div className="card-footer cart-footer">
                                 <div className="flexbox1">
-                                    <p className="random1">Items Subtotal:</p><p className="random2">${this.state.subtotal}</p>
+                                    <p className="random1">Items Subtotal:</p><p className="random2">${this.props.subtotal}</p>
                                 </div>
                                 <div className="flexbox1">
-                                    <p className="random1">Delivery Fee:</p><p className="random2">${this.state.deliveryfee}</p>
+                                    <p className="random1">Delivery Fee:</p><p className="random2">$5</p>
                                 </div>
                                 <div className="flexbox1">
-                                    <p className="random1">Total:</p><p className="random2">${this.state.total}</p>
+                                    <p className="random1">Total:</p><p className="random2">${this.props.total}</p>
                                 </div>
                                 <button type="button" className="btn btn-primary btn-block">Checkout</button>
                             </div>
@@ -209,4 +211,4 @@ class OrderPage extends Component {
 
 }
 
-export default OrderPage;
+export default connect(mapStateToProps)(OrderPage);

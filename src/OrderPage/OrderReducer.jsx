@@ -1,14 +1,34 @@
 const defaultState = {
-   itemList:[]
+    subtotal: 0,
+    deliveryfee: 5,
+    total: 5,
+    orderList:[],
+    dataList:[]
+
 }
 
-export default function orderItemList(state = defaultState, action) {
+export default function orderList(state = defaultState, action) {
     const { type, payload } = action;
     switch(type) {
-        case 'order_itemList': {
+        case 'order_List': {
             return {
                 ...state,
-                itemList: payload
+                orderList: payload
+            }
+        }
+
+        case 'data_List': {
+            return {
+                ...state,
+                dataList: payload
+            }
+        }
+
+        case 'show_Total':{
+            return {
+                ...state,
+                subtotal: payload.subtotal,
+                total: payload.total
             }
         }
 

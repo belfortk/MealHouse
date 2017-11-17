@@ -124,7 +124,7 @@ footer {
   text-align: center;
 }
 
-<<<<<<< HEAD
+
 .orderPageItemList{
   overflow: scroll;
 }
@@ -151,7 +151,7 @@ footer {
 
 .random2 {
   flex:1;
-=======
+}
 
 #house {
   position: absolute;
@@ -177,7 +177,7 @@ footer {
   position: absolute;
   top: 178px;
   left: 116px;
-  width: 8px;  
+  width: 8px;
   height: 0;
   background-color: white;
   border-top-left-radius: 25px;
@@ -215,7 +215,7 @@ footer {
   position: absolute;
   top: 178px;
   right: 116px;
-  width: 8px;  
+  width: 8px;
   height: 0;
   background-color: white;
   border-top-left-radius: 25px;
@@ -431,5 +431,16 @@ footer {
     right: 0;
     width: 0;
   }
->>>>>>> master
 }
+
+
+.resultRow{
+  display: flex;
+  justify-content: space-between;
+}
+
+.searchResultContainer{
+  background-color: #d3d3d3;
+
+
+
