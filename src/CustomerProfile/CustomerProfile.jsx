@@ -1,6 +1,7 @@
 import React from "react";
 import axios from 'axios';
 import NavBar from "../Navbar";
+import { readCookie } from '../Cookie/CookieFunction';
 
 class CustomerProfilePage extends React.Component {
   constructor(props) {
@@ -40,8 +41,11 @@ class CustomerProfilePage extends React.Component {
 
 
   componentWillMount() {
+    let authChecker = readCookie('auth');
+    let idChecker = readCookie('id');
+
     axios
-    .get("http://localhost:3000/api/Customers/3")
+    .get(`http://localhost:3000/api/Customers/${idChecker}`)
     .then(response => {
       let customerPhone = response.data.phoneNumber;
       let customerEmail = response.data.email;
@@ -84,7 +88,10 @@ class CustomerProfilePage extends React.Component {
       }
     }
 
-    axios.put('http://localhost:3000/api/Customers/1', updatedUser)
+    let authChecker = readCookie('auth');
+    let idChecker = readCookie('id');
+
+    axios.put(`http://localhost:3000/api/Customers/${idChecker}`, updatedUser)
     .then( data => {
       console.log("Update Success");
       window.location = 'http://localhost:3000/#/';

@@ -441,6 +441,8 @@ footer {
 
 .searchResultContainer{
   background-color: #d3d3d3;
+}
 
-
-
+.invalid {
+  color: red;
+}

@@ -1,6 +1,7 @@
 const defaultState = {
     email: "",
-    password: ""
+    password: "",
+    invalid: ""
 }
 
 export default function cookie(state = defaultState, action) {

@@ -27,13 +27,36 @@ class Navbar extends React.Component {
     .get('/api/customers')
     .then(data => {
       console.log(data);
-      let auth;
+      var auth;
       for (let i = 0; i < data.data.length; i++) {
         if(data.data[i].email === this.props.email && data.data[i].password === this.props.password) {
           auth = true;
           createCookie('id', data.data[i].id, 0 );
           createCookie('auth', randomstring.generate(), 0 );
+          document.getElementById('close-button').click();
+          document.location = '/';
         }
+      }
+      if(auth != true) {
+        axios
+          .get('/api/restaurants')
+          .then(rest => {
+            for (let i = 0; i < rest.data.length; i++) {
+              if(rest.data[i].restaurantEmail === this.props.email && rest.data[i].password === this.props.password) {
+                auth = true;
+                createCookie('id', rest.data[i].id, 0 );
+                createCookie('auth', randomstring.generate(), 0 );
+                document.getElementById('close-button').click();
+                document.location = 'http://localhost:3000/#/profile/restaurant';
+              }
+            }
+
+            if(auth === undefined) {
+              const { dispatch } = this.props;
+              dispatch(cookieInput('The username or password your entered is incorrect.', 'invalid'));
+            }
+          })
+          .catch(err => console.log(err));
       }
       console.log(auth);
     });
@@ -64,6 +87,7 @@ class Navbar extends React.Component {
           className="nav-item nav-link active"
           data-toggle="modal"
           data-target="#myModal"
+          id="dismiss-modal"
         >
           Login
         </a>
@@ -81,6 +105,7 @@ class Navbar extends React.Component {
             </div>
             <div className="modal-body">
               <div className="form-group">
+              <strong className="invalid">{this.props.invalid}</strong>
                 <label htmlFor="exampleInputEmail1">Email address</label>
                 <input
                   className="form-control"
@@ -112,6 +137,7 @@ class Navbar extends React.Component {
                 type="button"
                 className="btn btn-default"
                 data-dismiss="modal"
+                id="close-button"
               >
                 Close
               </button>
@@ -127,7 +153,8 @@ class Navbar extends React.Component {
 function mapStateToProps(state) {
   return {
     email: state.login.email,
-    password: state.login.password
+    password: state.login.password,
+    invalid: state.login.invalid
   }
 }
 
