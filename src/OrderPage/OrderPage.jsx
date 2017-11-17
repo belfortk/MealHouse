@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import Navbar from "../Navbar";
 import OrderedItems from "./OrderedItems";
+import {OrderItemList} from "./OrderAction";
 
 class OrderPage extends Component {
   constructor(props) {
@@ -14,10 +15,19 @@ class OrderPage extends Component {
       total:5
     };
     this.renderAppetizer = this.renderAppetizer.bind(this);
-    this.handleQuantity = this.handleQuantity.bind(this);
     this.handleClickAdd = this.handleClickAdd.bind(this);
     this.renderItems = this.renderItems.bind(this);
-    this.calculateSub = this.calculateSub.bind(this);
+  }
+
+  componentWillMount(){
+      axios.get("http://localhost:3000/api/Restaurants/1?filter=%7B%22include%22%3A%20%22menuItems%22%7D&access_token=Al3bIEhsGQq664HkRHjJd3HDtm3oUK8wkznAj9V7yoWAuUN2H2wLcdseMAY1nRTF")
+      .then(response => {
+        this.setState({
+          data: response.data
+      })
+    })
+    .catch(err => console.log(err))
+    
   }
 
   deleteInfo(index, price) {
@@ -36,10 +46,6 @@ class OrderPage extends Component {
 
   }
 
-  handleQuantity(event){
-      this.setState({ quantity: event.target.value });
-  }
-
   renderItems(){
       return this.state.orderList.map((list, index) => (
       <OrderedItems
@@ -51,6 +57,7 @@ class OrderPage extends Component {
     ));
   }
   handleClickAdd(name, price){
+    const { dispatch } = this.props;
     let orderArray = this.state.orderList;
     let namevalue = name;
     let pricevalue = price;
@@ -62,7 +69,8 @@ class OrderPage extends Component {
       name: namevalue,
       price: pricevalue,
     });
-
+    
+    
     this.setState({
       orderList: orderArray,
       subtotal: Math.round((subtotalvalue + price)*100)/100,
@@ -72,16 +80,6 @@ class OrderPage extends Component {
     console.log(this.state.orderList)
   }
 
-  componentWillMount(){
-      axios.get("http://localhost:3000/api/Restaurants/1?filter=%7B%22include%22%3A%20%22menuItems%22%7D&access_token=Al3bIEhsGQq664HkRHjJd3HDtm3oUK8wkznAj9V7yoWAuUN2H2wLcdseMAY1nRTF")
-      .then(response => {
-        this.setState({
-          data: response.data
-      })
-    })
-    .catch(err => console.log(err))
-    
-  }
 
 
 
