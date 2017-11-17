@@ -3,10 +3,6 @@ import React, { Component } from "react";
 class Items extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      dentry: "",
-      dprice: "",
-    };
 
   }
 

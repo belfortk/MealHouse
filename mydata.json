@@ -5,7 +5,7 @@
     "ACL": 1,
     "RoleMapping": 1,
     "Role": 1,
-    "MenuItem": 14,
+    "MenuItem": 26,
     "Tag": 1,
     "Restaurant": 9,
     "Picture": 2,
@@ -24,7 +24,11 @@
       "10": "{\"id\":10,\"name\":\"Burger\",\"description\":\"1/4 Pound\",\"price\":3.99,\"type\":\"Entree\",\"active\":false,\"restaurantId\":1}",
       "11": "{\"name\":\"Fries\",\"description\":\"\",\"price\":2.55,\"type\":\"Appetizer\",\"active\":true,\"restaurantId\":1,\"id\":11}",
       "12": "{\"name\":\"Fried Rice\",\"description\":\"Shrimp\",\"price\":9.99,\"type\":\"Entree\",\"active\":true,\"restaurantId\":1,\"id\":12}",
-      "13": "{\"name\":\"Hot Dog\",\"description\":\"1/4 Pound\",\"price\":1.99,\"type\":\"Entree\",\"active\":true,\"restaurantId\":2,\"id\":13}"
+      "13": "{\"name\":\"Hot Dog\",\"description\":\"1/4 Pound\",\"price\":1.99,\"type\":\"Entree\",\"active\":true,\"restaurantId\":2,\"id\":13}",
+      "14": "{\"name\":\"noodle\",\"description\":\"japanese\",\"price\":10,\"type\":\"Entree\",\"active\":true,\"restaurantId\":1,\"id\":14}",
+      "15": "{\"name\":\"tacos\",\"description\":\"carne asada\",\"price\":2,\"type\":\"Appetizer\",\"active\":true,\"restaurantId\":1,\"id\":15}",
+      "16": "{\"name\":\"coke\",\"description\":\"pepsi\",\"price\":2,\"type\":\"Beverage\",\"active\":true,\"restaurantId\":1,\"id\":16}",
+      "17": "{\"id\":17,\"name\":\"boba milk tea\",\"price\":300,\"type\":\"Beverage\",\"active\":false}"
     },
     "Tag": {},
     "Restaurant": {
