@@ -4,6 +4,7 @@ import restaurantSign from './SignupPage/RestaurantReducer';
 import search from './SearchReducer';
 import SearchResultsReducer from './ResultsPage/ResultsReducer';
 import restaurantProfile from './RestaurantProfile/RestaurantReducer';
+import login from './Cookie/CookieReducer';
 
 
 const rootReducer = combineReducers({
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
     restaurantSign,
     search,
     SearchResultsReducer,
-    restaurantProfile
+    restaurantProfile,
+    login
 });
 
 export default rootReducer;

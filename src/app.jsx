@@ -1,6 +1,5 @@
 import axios from "axios";
 import Navbar from "./Navbar";
-import LoginModal from "./LoginModal.jsx";
 import SearchBar from "./SearchBar";
 import React, { Component } from "react";
 import RestaurantProfile from "./RestaurantProfile/RestaurantProfile";
