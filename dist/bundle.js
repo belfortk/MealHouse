@@ -52085,13 +52085,17 @@ var RestaurantProfile = function (_Component) {
               },
               "Update Profile"
             ),
-            _react2.default.createElement("input", {
-              id: "editMenu",
-              className: "btn btn-primary",
-              type: "button",
-              value: "Edit Menu",
-              style: { marginLeft: 20 }
-            })
+            _react2.default.createElement(
+              "a",
+              {
+                id: "editMenu",
+                className: "btn btn-primary",
+                type: "button",
+                href: "/#/editmenu",
+                style: { marginLeft: 20 }
+              },
+              "Edit Menu"
+            )
           )
         )
       );
