@@ -6164,6 +6164,10 @@ var Navbar = function (_React$Component) {
 
     _this.handleChange = _this.handleChange.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
+    _this.loginAccount = _this.loginAccount.bind(_this);
+    _this.signUp = _this.signUp.bind(_this);
+    _this.logout = _this.logout.bind(_this);
+    _this.logoutCookies = _this.logoutCookies.bind(_this);
     return _this;
   }
 
@@ -6178,38 +6182,118 @@ var Navbar = function (_React$Component) {
       console.log(this.props);
     }
   }, {
+    key: "signUp",
+    value: function signUp() {
+      var auth = (0, _CookieFunction.readCookie)("auth");
+      if (auth === null) {
+        return _react2.default.createElement(
+          _reactRouterDom.Link,
+          { className: "nav-item nav-link active", to: "/signup" },
+          "Sign Up ",
+          _react2.default.createElement(
+            "span",
+            { className: "sr-only" },
+            "(current)"
+          )
+        );
+      }
+    }
+  }, {
+    key: "logoutCookies",
+    value: function logoutCookies() {
+      (0, _CookieFunction.eraseCookie)('auth');
+      (0, _CookieFunction.eraseCookie)('id');
+      (0, _CookieFunction.eraseCookie)('type');
+    }
+  }, {
+    key: "logout",
+    value: function logout() {
+      var auth = (0, _CookieFunction.readCookie)('auth');
+      if (auth != null) {
+        return _react2.default.createElement(
+          "a",
+          {
+            href: "http://localhost:3000/#/",
+            className: "nav-item nav-link active",
+            onClick: this.logoutCookies
+          },
+          "Logout"
+        );
+      }
+    }
+  }, {
+    key: "loginAccount",
+    value: function loginAccount() {
+      var auth = (0, _CookieFunction.readCookie)("auth");
+      var type = (0, _CookieFunction.readCookie)("type");
+
+      if (auth === null) {
+        return _react2.default.createElement(
+          "a",
+          {
+            href: "#",
+            className: "nav-item nav-link active",
+            "data-toggle": "modal",
+            "data-target": "#myModal",
+            id: "dismiss-modal"
+          },
+          "Login"
+        );
+      } else if (type === "customer") {
+        return _react2.default.createElement(
+          "a",
+          {
+            href: "http://localhost:3000/#/profile/customer",
+            className: "nav-item nav-link active"
+          },
+          "Account"
+        );
+      } else if (type === "restaurant") {
+        return _react2.default.createElement(
+          "a",
+          {
+            href: "http://localhost:3000/#/profile/restaurant",
+            className: "nav-item nav-link active"
+          },
+          "Account"
+        );
+      }
+    }
+  }, {
     key: "handleSubmit",
     value: function handleSubmit() {
       var _this2 = this;
 
-      _axios2.default.get('/api/customers').then(function (data) {
+      _axios2.default.get("/api/customers").then(function (data) {
         console.log(data);
         var auth;
         for (var i = 0; i < data.data.length; i++) {
           if (data.data[i].email === _this2.props.email && data.data[i].password === _this2.props.password) {
             auth = true;
-            (0, _CookieFunction.createCookie)('id', data.data[i].id, 0);
-            (0, _CookieFunction.createCookie)('auth', _randomstring2.default.generate(), 0);
-            document.getElementById('close-button').click();
-            document.location = '/';
+            (0, _CookieFunction.createCookie)("id", data.data[i].id, 0);
+            (0, _CookieFunction.createCookie)("auth", _randomstring2.default.generate(), 0);
+            (0, _CookieFunction.createCookie)("type", "customer", 0);
+            document.getElementById("close-button").click();
+            document.location = "/";
           }
         }
         if (auth != true) {
-          _axios2.default.get('/api/restaurants').then(function (rest) {
+          _axios2.default.get("/api/restaurants").then(function (rest) {
             for (var _i = 0; _i < rest.data.length; _i++) {
               if (rest.data[_i].restaurantEmail === _this2.props.email && rest.data[_i].password === _this2.props.password) {
                 auth = true;
-                (0, _CookieFunction.createCookie)('id', rest.data[_i].id, 0);
-                (0, _CookieFunction.createCookie)('auth', _randomstring2.default.generate(), 0);
-                document.getElementById('close-button').click();
-                document.location = 'http://localhost:3000/#/profile/restaurant';
+                (0, _CookieFunction.createCookie)("id", rest.data[_i].id, 0);
+                (0, _CookieFunction.createCookie)("auth", _randomstring2.default.generate(), 0);
+                (0, _CookieFunction.createCookie)("type", "restaurant", 0);
+                document.getElementById("close-button").click();
+                document.location = "http://localhost:3000/#/profile/restaurant";
               }
             }
 
             if (auth === undefined) {
               var dispatch = _this2.props.dispatch;
 
-              dispatch((0, _CookieAction.cookieInput)('The username or password your entered is incorrect.', 'invalid'));
+              dispatch((0, _CookieAction.cookieInput)("The username or password your entered is incorrect.", "invalid"));
             }
           }).catch(function (err) {
             return console.log(err);
@@ -6244,31 +6328,16 @@ var Navbar = function (_React$Component) {
           ),
           _react2.default.createElement(
             "div",
-            { className: "collapse navbar-collapse justify-content-end", id: "navbarNavAltMarkup" },
+            {
+              className: "collapse navbar-collapse justify-content-end",
+              id: "navbarNavAltMarkup"
+            },
             _react2.default.createElement(
               "div",
               { className: "navbar-nav" },
-              _react2.default.createElement(
-                _reactRouterDom.Link,
-                { className: "nav-item nav-link active", to: "/signup" },
-                "Sign Up ",
-                _react2.default.createElement(
-                  "span",
-                  { className: "sr-only" },
-                  "(current)"
-                )
-              ),
-              _react2.default.createElement(
-                "a",
-                {
-                  href: "#",
-                  className: "nav-item nav-link active",
-                  "data-toggle": "modal",
-                  "data-target": "#myModal",
-                  id: "dismiss-modal"
-                },
-                "Login"
-              )
+              this.signUp(),
+              this.loginAccount(),
+              this.logout()
             )
           )
         ),
@@ -6350,7 +6419,11 @@ var Navbar = function (_React$Component) {
                 { className: "modal-footer" },
                 _react2.default.createElement(
                   "button",
-                  { onClick: this.handleSubmit, type: "button", className: "btn btn-default" },
+                  {
+                    onClick: this.handleSubmit,
+                    type: "button",
+                    className: "btn btn-default"
+                  },
                   "Submit"
                 ),
                 _react2.default.createElement(
@@ -52346,6 +52419,8 @@ var _RestaurantSignUpForm2 = _interopRequireDefault(_RestaurantSignUpForm);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -52378,6 +52453,8 @@ var SignupPage = function (_Component) {
   }, {
     key: "render",
     value: function render() {
+      var _React$createElement, _React$createElement2;
+
       return _react2.default.createElement(
         "div",
         { className: "SignupPage" },
@@ -52391,18 +52468,16 @@ var SignupPage = function (_Component) {
           { className: "container" },
           _react2.default.createElement(
             "div",
-            { className: "btn-group justify-content-center col-4", "data-toggle": "buttons" },
+            { className: "btn-group justify-content-center col-4", id: "signup-button-group", "data-toggle": "buttons" },
             _react2.default.createElement(
-              "label",
-              { className: "btn btn-primary active" },
-              _react2.default.createElement("button", { type: "radio", name: "options", id: "customer-button", autoComplete: "off", value: 'true', onClick: this.handleSelectType }),
-              "Customer"
+              "button",
+              (_React$createElement = { className: "btn btn-primary signup-type-button", id: "signup-customer-button", type: "button", name: "options" }, _defineProperty(_React$createElement, "id", "customer-button"), _defineProperty(_React$createElement, "autoComplete", "off"), _defineProperty(_React$createElement, "value", 'true'), _defineProperty(_React$createElement, "onClick", this.handleSelectType), _React$createElement),
+              " Customer "
             ),
             _react2.default.createElement(
-              "label",
-              { className: "btn btn-primary" },
-              _react2.default.createElement("button", { type: "radio", name: "options", id: "restaurant-button", autoComplete: "off", value: "false", onClick: this.handleSelectType }),
-              " Restaurant"
+              "button",
+              (_React$createElement2 = { className: "btn btn-primary", id: "signup-restaurant-button", type: "button", name: "options" }, _defineProperty(_React$createElement2, "id", "restaurant-button"), _defineProperty(_React$createElement2, "autoComplete", "off"), _defineProperty(_React$createElement2, "value", "false"), _defineProperty(_React$createElement2, "onClick", this.handleSelectType), _React$createElement2),
+              " Restaurant "
             )
           ),
           this.state.isCustomer == "true" ? _react2.default.createElement(_CustomerSignUpForm2.default, null) : _react2.default.createElement(_RestaurantSignUpForm2.default, null)
@@ -53520,7 +53595,8 @@ var SearchResult = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (SearchResult.__proto__ || Object.getPrototypeOf(SearchResult)).call(this, props));
 
     _this.state = {
-      avgStar: 0
+      avgStar: 0,
+      pictureURL: ''
     };
     return _this;
   }
@@ -53530,7 +53606,6 @@ var SearchResult = function (_React$Component) {
     value: function componentWillMount() {
       var _this2 = this;
 
-      console.log(this.props.id);
       _axios2.default.get("http://localhost:3000/api/Restaurants/" + this.props.id + "?filter=%7B%22include%22%3A%22reviews%22%7D").then(function (response) {
         var starAvg = 0;
         response.data.reviews.forEach(function (review) {
@@ -53544,13 +53619,24 @@ var SearchResult = function (_React$Component) {
         console.log("Restaurant data not found");
         console.log(error);
       });
+
+      _axios2.default.get('http://localhost:3000/api/Restaurants/' + this.props.id + '/pictures').then(function (response) {
+
+        console.log(response.data[0].src);
+        _this2.setState({
+          pictureURL: response.data[0].src
+        });
+      }).catch(function (error) {
+        console.log("Picture not found");
+        console.log(error);
+      });
     }
   }, {
     key: "render",
     value: function render() {
       var fiveStars = _react2.default.createElement(
         "div",
-        { "class": "rating" },
+        { className: "rating" },
         _react2.default.createElement(
           "span",
           null,
@@ -53716,7 +53802,12 @@ var SearchResult = function (_React$Component) {
         { className: "row" },
         _react2.default.createElement(
           "div",
-          { className: "col-md-8" },
+          { className: "col-md-3" },
+          _react2.default.createElement("img", { src: this.state.pictureURL, alt: "no picture found", style: { width: '70px', height: '75px' } })
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "col-md-6" },
           _react2.default.createElement(
             "p",
             null,
@@ -53735,7 +53826,7 @@ var SearchResult = function (_React$Component) {
         ),
         _react2.default.createElement(
           "div",
-          { className: "col-md-4" },
+          { className: "col-md-3" },
           _react2.default.createElement(
             "div",
             { className: "row" },
@@ -55224,7 +55315,7 @@ var Footer = function (_React$Component) {
             { className: "" },
             _react2.default.createElement(
               _reactRouterDom.Link,
-              { className: "active text-black", to: "/aboutus" },
+              { className: "active text-black footer-link", to: "/aboutus" },
               "About Us ",
               _react2.default.createElement(
                 "span",
@@ -55234,7 +55325,7 @@ var Footer = function (_React$Component) {
             ),
             _react2.default.createElement(
               _reactRouterDom.Link,
-              { className: "active text-black", to: "/contactus" },
+              { className: "active text-black footer-link", to: "/contactus" },
               "Contact Us ",
               _react2.default.createElement(
                 "span",
