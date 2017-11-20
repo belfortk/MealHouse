@@ -495,13 +495,17 @@ footer {
     margin-bottom: 1em;
   }
 
-  #signup-customer-button{
+  #customer-button{
     margin-right: 1em;
-    border-radius: 15px;
-    border-left: 2px solid black;
+    border-radius: 10px;
+
   }
 
-  #signup-restaurant-button{
-    margin-right: 1em;
-    border-radius: 15px;
+  #restaurant-button{
+
+    border-radius: 10px;
+  }
+
+  #sign-up-form-submit{
+    margin-top: 2em;
   }
