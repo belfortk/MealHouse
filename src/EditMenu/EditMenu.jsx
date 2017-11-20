@@ -119,16 +119,14 @@ class EditMenu extends Component {
     console.log("rendering")
     return (
         
-      <div className="container">
+      <div className="EditMenu">
         <Navbar />
-        <div className="titleheader">
-          <h1>Editing Menu</h1>
-        </div>
+       
         <div className="row">
           <div className="col-md-4">
             <div className="card">
-              <div className="card-header">Add New Items</div>
-              <div className="card-body">
+              <div className="card-header"><h3>Add New Item to Your Menu</h3></div>
+              <div className="card-body" style={{padding:20}}>
                 <label htmlFor="name">Item Name</label>
                 <textarea
                   className="form-control create-todo-text"
@@ -170,7 +168,7 @@ class EditMenu extends Component {
                   className="btn btn-success btn-block create-todo"
                   onClick={this.additem}
                 >
-                  Add
+                  Add to Current List
                 </button>
               </div>
             </div>
@@ -178,8 +176,8 @@ class EditMenu extends Component {
 
           <div className="col-md-8">
             <div className="card">
-              <div className="card-header">Current Menu List</div>
-              <div className="card-body">
+              <div className="card-header"><h3>Current Menu List</h3></div>
+              <div className="card-body" style={{padding:10}}>
                 <ul className="list-group">
                   {this.renderTodos()}
                 </ul>

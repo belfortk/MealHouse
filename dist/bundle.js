@@ -54041,17 +54041,8 @@ var EditMenu = function (_Component) {
       console.log("rendering");
       return _react2.default.createElement(
         "div",
-        { className: "container" },
+        { className: "EditMenu" },
         _react2.default.createElement(_Navbar2.default, null),
-        _react2.default.createElement(
-          "div",
-          { className: "titleheader" },
-          _react2.default.createElement(
-            "h1",
-            null,
-            "Editing Menu"
-          )
-        ),
         _react2.default.createElement(
           "div",
           { className: "row" },
@@ -54064,11 +54055,15 @@ var EditMenu = function (_Component) {
               _react2.default.createElement(
                 "div",
                 { className: "card-header" },
-                "Add New Items"
+                _react2.default.createElement(
+                  "h3",
+                  null,
+                  "Add New Item to Your Menu"
+                )
               ),
               _react2.default.createElement(
                 "div",
-                { className: "card-body" },
+                { className: "card-body", style: { padding: 20 } },
                 _react2.default.createElement(
                   "label",
                   { htmlFor: "name" },
@@ -54154,7 +54149,7 @@ var EditMenu = function (_Component) {
                     className: "btn btn-success btn-block create-todo",
                     onClick: this.additem
                   },
-                  "Add"
+                  "Add to Current List"
                 )
               )
             )
@@ -54168,11 +54163,15 @@ var EditMenu = function (_Component) {
               _react2.default.createElement(
                 "div",
                 { className: "card-header" },
-                "Current Menu List"
+                _react2.default.createElement(
+                  "h3",
+                  null,
+                  "Current Menu List"
+                )
               ),
               _react2.default.createElement(
                 "div",
-                { className: "card-body" },
+                { className: "card-body", style: { padding: 10 } },
                 _react2.default.createElement(
                   "ul",
                   { className: "list-group" },
@@ -54237,8 +54236,8 @@ var Items = function (_Component) {
           "li",
           { className: "list-group-item list-group-item-primary" },
           _react2.default.createElement(
-            "div",
-            { className: "row" },
+            "span",
+            null,
             _react2.default.createElement(
               "strong",
               null,
@@ -54249,13 +54248,6 @@ var Items = function (_Component) {
               this.props.type,
               ")"
             ),
-            _react2.default.createElement("br", null),
-            _react2.default.createElement(
-              "p",
-              null,
-              "--",
-              this.props.description
-            ),
             _react2.default.createElement(
               "a",
               {
@@ -54264,7 +54256,14 @@ var Items = function (_Component) {
                   return _this2.props.onClick();
                 }
               },
-              _react2.default.createElement("i", { className: "fa fa-trash", "aria-hidden": "true" })
+              _react2.default.createElement("i", { className: "fa fa-trash", "aria-hidden": "true", style: { marginLeft: 15 } })
+            ),
+            _react2.default.createElement("br", null),
+            _react2.default.createElement(
+              "p",
+              null,
+              "--",
+              this.props.description
             )
           )
         )

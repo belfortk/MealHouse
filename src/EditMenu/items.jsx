@@ -11,17 +11,18 @@ class Items extends Component {
     return (
     <div style={{ display: this.props.active ? "block" : "none" }}>
       <li className="list-group-item list-group-item-primary">
-        <div className="row">
+       <span>
           <strong>{this.props.name} - ${this.props.price} - ({this.props.type})</strong>
-          <br/>
-          <p>--{this.props.description}</p>
           <a
             href="#/editmenu"
             onClick={() => this.props.onClick()}
           >
-          <i className="fa fa-trash" aria-hidden="true"></i>
+          <i className="fa fa-trash" aria-hidden="true" style={{marginLeft:15}}></i>
           </a>
-        </div>
+          <br/>
+          <p>--{this.props.description}</p>
+          </span>
+        
       </li>
     </div>
     );
