@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { cookieInput } from "./Cookie/CookieAction";
-import { createCookie } from "./Cookie/CookieFunction";
+import { createCookie,  readCookie } from "./Cookie/CookieFunction";
 import axios from 'axios';
 import randomstring from 'randomstring';
 
@@ -20,6 +20,32 @@ class Navbar extends React.Component {
 
     dispatch(cookieInput(e.target.value, e.target.id));
     console.log(this.props);
+  }
+
+  loginAccount() {
+    let auth = readCookie('auth');
+    if(auth === null) {
+      return (
+        <a
+        href="#"
+        className="nav-item nav-link active"
+        data-toggle="modal"
+        data-target="#myModal"
+        id="dismiss-modal"
+      >
+        Login
+      </a>
+      )
+    } else {
+      return (
+        <a
+        href="http://localhost:3000/#/profile/customer"
+        className="nav-item nav-link active"
+      >
+        Account
+      </a>
+      )
+    }
   }
 
   handleSubmit() {
@@ -82,15 +108,7 @@ class Navbar extends React.Component {
             <Link className="nav-item nav-link active" to="/signup">
               Sign Up <span className="sr-only">(current)</span>
             </Link>
-            <a
-          href="#"
-          className="nav-item nav-link active"
-          data-toggle="modal"
-          data-target="#myModal"
-          id="dismiss-modal"
-        >
-          Login
-        </a>
+            {this.loginAccount()}
           </div>
         </div>
       </nav>
