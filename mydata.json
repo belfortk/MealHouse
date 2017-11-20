@@ -5,7 +5,7 @@
     "ACL": 1,
     "RoleMapping": 1,
     "Role": 1,
-    "MenuItem": 28,
+    "MenuItem": 32,
     "Tag": 1,
     "Restaurant": 9,
     "Picture": 6,
@@ -30,7 +30,11 @@
       "16": "{\"name\":\"coke\",\"description\":\"pepsi\",\"price\":2,\"type\":\"Beverage\",\"active\":true,\"restaurantId\":1,\"id\":16}",
       "17": "{\"id\":17,\"name\":\"boba milk tea\",\"price\":300,\"type\":\"Beverage\",\"active\":false}",
       "26": "{\"id\":26,\"name\":\"Fried Rice\",\"price\":12,\"type\":\"Entree\",\"active\":false}",
-      "27": "{\"name\":\"milk tea\",\"description\":\"boba\",\"price\":2,\"type\":\"Beverage\",\"active\":true,\"restaurantId\":7,\"id\":27}"
+      "27": "{\"id\":27,\"name\":\"milk tea\",\"price\":2,\"type\":\"Beverage\",\"active\":false}",
+      "28": "{\"id\":28,\"name\":\"Coke\",\"price\":2,\"type\":\"Beverage\",\"active\":false}",
+      "29": "{\"name\":\"Fried Rice\",\"description\":\"Shrimp\",\"price\":12,\"type\":\"Entree\",\"active\":true,\"restaurantId\":7,\"id\":29}",
+      "30": "{\"id\":30,\"name\":\"milk\",\"price\":2,\"type\":\"Beverage\",\"active\":false}",
+      "31": "{\"name\":\"hotdog\",\"description\":\"asdf\",\"price\":13,\"type\":\"Entree\",\"active\":true,\"restaurantId\":7,\"id\":31}"
     },
     "Tag": {},
     "Restaurant": {

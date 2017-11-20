@@ -653,13 +653,15 @@ class RestaurantProfile extends Component {
               Update Profile
             </button>
 
-            <input
+            <a
               id="editMenu"
               className="btn btn-primary"
               type="button"
-              value="Edit Menu"
+              href="/#/editmenu"
               style={{ marginLeft: 20 }}
-            />
+            >
+            Edit Menu
+            </a>
           </div>
         </div>
       </div>
