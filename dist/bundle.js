@@ -44734,7 +44734,7 @@ module.exports.makeKey = makeKey
 /* 272 */
 /***/ (function(module, exports) {
 
-module.exports = {"_from":"elliptic@^6.0.0","_id":"elliptic@6.4.0","_inBundle":false,"_integrity":"sha1-ysmvh2LIWDYYcAPI3+GT5eLq5d8=","_location":"/elliptic","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"elliptic@^6.0.0","name":"elliptic","escapedName":"elliptic","rawSpec":"^6.0.0","saveSpec":null,"fetchSpec":"^6.0.0"},"_requiredBy":["/browserify-sign","/create-ecdh"],"_resolved":"https://registry.npmjs.org/elliptic/-/elliptic-6.4.0.tgz","_shasum":"cac9af8762c85836187003c8dfe193e5e2eae5df","_spec":"elliptic@^6.0.0","_where":"/Users/Jason/oca/MealHouse/node_modules/browserify-sign","author":{"name":"Fedor Indutny","email":"fedor@indutny.com"},"bugs":{"url":"https://github.com/indutny/elliptic/issues"},"bundleDependencies":false,"dependencies":{"bn.js":"^4.4.0","brorand":"^1.0.1","hash.js":"^1.0.0","hmac-drbg":"^1.0.0","inherits":"^2.0.1","minimalistic-assert":"^1.0.0","minimalistic-crypto-utils":"^1.0.0"},"deprecated":false,"description":"EC cryptography","devDependencies":{"brfs":"^1.4.3","coveralls":"^2.11.3","grunt":"^0.4.5","grunt-browserify":"^5.0.0","grunt-cli":"^1.2.0","grunt-contrib-connect":"^1.0.0","grunt-contrib-copy":"^1.0.0","grunt-contrib-uglify":"^1.0.1","grunt-mocha-istanbul":"^3.0.1","grunt-saucelabs":"^8.6.2","istanbul":"^0.4.2","jscs":"^2.9.0","jshint":"^2.6.0","mocha":"^2.1.0"},"files":["lib"],"homepage":"https://github.com/indutny/elliptic","keywords":["EC","Elliptic","curve","Cryptography"],"license":"MIT","main":"lib/elliptic.js","name":"elliptic","repository":{"type":"git","url":"git+ssh://git@github.com/indutny/elliptic.git"},"scripts":{"jscs":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","jshint":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","lint":"npm run jscs && npm run jshint","test":"npm run lint && npm run unit","unit":"istanbul test _mocha --reporter=spec test/index.js","version":"grunt dist && git add dist/"},"version":"6.4.0"}
+module.exports = {"_from":"elliptic@^6.0.0","_id":"elliptic@6.4.0","_inBundle":false,"_integrity":"sha1-ysmvh2LIWDYYcAPI3+GT5eLq5d8=","_location":"/elliptic","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"elliptic@^6.0.0","name":"elliptic","escapedName":"elliptic","rawSpec":"^6.0.0","saveSpec":null,"fetchSpec":"^6.0.0"},"_requiredBy":["/browserify-sign","/create-ecdh"],"_resolved":"https://registry.npmjs.org/elliptic/-/elliptic-6.4.0.tgz","_shasum":"cac9af8762c85836187003c8dfe193e5e2eae5df","_spec":"elliptic@^6.0.0","_where":"/Users/kyle/oca/mealhouse/node_modules/browserify-sign","author":{"name":"Fedor Indutny","email":"fedor@indutny.com"},"bugs":{"url":"https://github.com/indutny/elliptic/issues"},"bundleDependencies":false,"dependencies":{"bn.js":"^4.4.0","brorand":"^1.0.1","hash.js":"^1.0.0","hmac-drbg":"^1.0.0","inherits":"^2.0.1","minimalistic-assert":"^1.0.0","minimalistic-crypto-utils":"^1.0.0"},"deprecated":false,"description":"EC cryptography","devDependencies":{"brfs":"^1.4.3","coveralls":"^2.11.3","grunt":"^0.4.5","grunt-browserify":"^5.0.0","grunt-cli":"^1.2.0","grunt-contrib-connect":"^1.0.0","grunt-contrib-copy":"^1.0.0","grunt-contrib-uglify":"^1.0.1","grunt-mocha-istanbul":"^3.0.1","grunt-saucelabs":"^8.6.2","istanbul":"^0.4.2","jscs":"^2.9.0","jshint":"^2.6.0","mocha":"^2.1.0"},"files":["lib"],"homepage":"https://github.com/indutny/elliptic","keywords":["EC","Elliptic","curve","Cryptography"],"license":"MIT","main":"lib/elliptic.js","name":"elliptic","repository":{"type":"git","url":"git+ssh://git@github.com/indutny/elliptic.git"},"scripts":{"jscs":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","jshint":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","lint":"npm run jscs && npm run jshint","test":"npm run lint && npm run unit","unit":"istanbul test _mocha --reporter=spec test/index.js","version":"grunt dist && git add dist/"},"version":"6.4.0"}
 
 /***/ }),
 /* 273 */
@@ -52516,6 +52516,12 @@ var _reactRedux = __webpack_require__(7);
 
 var _CustomerAction = __webpack_require__(322);
 
+var _CookieFunction = __webpack_require__(27);
+
+var _randomstring = __webpack_require__(222);
+
+var _randomstring2 = _interopRequireDefault(_randomstring);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -52572,9 +52578,12 @@ var CustomerSignUpForm = function (_React$Component) {
         console.log("existing user? " + existingUser);
 
         _axios2.default.post("http://localhost:3000/api/Customers", newCustomer).then(function (response) {
+          console.log(response);
           console.log("new customer added");
-          console.log(newCustomer);
-          window.location = "http://localhost:3000/";
+          (0, _CookieFunction.createCookie)('id', response.data.id, 0);
+          (0, _CookieFunction.createCookie)('auth', _randomstring2.default.generate(), 0);
+          (0, _CookieFunction.createCookie)('type', 'customer', 0);
+          window.location = "http://localhost:3000/#/";
         }).catch(function (error) {
           console.log("unable to add new customer");
           console.log(error);
@@ -53126,6 +53135,9 @@ var RestaurantSignUpForm = function (_React$Component) {
         _axios2.default.post("http://localhost:3000/api/Restaurants", newRestaurant).then(function (response) {
           console.log("new restaurant added");
           console.log(newRestaurant);
+          createCookie('id', response.data.id, 0);
+          createCookie('auth', randomString.generate(), 0);
+          createCookie('type', 'restaurant', 0);
           window.location = "http://localhost:3000/#/profile/restaurant";
         }).catch(function (error) {
           console.log("unable to add new restaurant");
@@ -53435,81 +53447,78 @@ var ResultsList = function (_Component) {
                 "Sort By: "
               ),
               _react2.default.createElement(
-                "div",
-                { className: "row" },
+                "p",
+                null,
                 _react2.default.createElement(
                   "div",
-                  { className: "col-md-4" },
-                  "Price"
+                  { className: "sortBy-label" },
+                  _react2.default.createElement(
+                    "strong",
+                    { style: { width: '20px' } },
+                    "Price:"
+                  ),
+                  " "
                 ),
                 _react2.default.createElement(
                   "button",
-                  { type: "button", className: "btn btn-primary col-md-4" },
-                  "Lo"
+                  { className: "btn btn-info" },
+                  "Low"
                 ),
                 _react2.default.createElement(
                   "button",
-                  { type: "button", className: "btn btn-primary col-md-4" },
-                  "Hi"
+                  { className: "btn btn-info" },
+                  "High"
+                ),
+                " "
+              ),
+              _react2.default.createElement(
+                "p",
+                null,
+                _react2.default.createElement(
+                  "div",
+                  { className: "sortBy-label" },
+                  _react2.default.createElement(
+                    "strong",
+                    { style: { width: '20px' } },
+                    "Distance:"
+                  ),
+                  " "
+                ),
+                _react2.default.createElement(
+                  "button",
+                  { className: "btn btn-info" },
+                  "Low"
+                ),
+                _react2.default.createElement(
+                  "button",
+                  { className: "btn btn-info" },
+                  "High"
                 )
               ),
               _react2.default.createElement(
-                "div",
-                { className: "row" },
+                "p",
+                null,
                 _react2.default.createElement(
                   "div",
-                  { className: "col-md-4" },
-                  "Distance"
+                  { className: "sortBy-label" },
+                  " ",
+                  _react2.default.createElement(
+                    "strong",
+                    { style: { width: '20px' } },
+                    "Ratings:"
+                  ),
+                  " "
                 ),
                 _react2.default.createElement(
                   "button",
-                  { type: "button", className: "btn btn-primary col-md-4" },
-                  "Lo"
+                  { className: "btn btn-info" },
+                  "Low"
                 ),
                 _react2.default.createElement(
                   "button",
-                  { type: "button", className: "btn btn-primary col-md-4" },
-                  "Hi"
+                  { className: "btn btn-info" },
+                  "High"
                 )
-              ),
-              _react2.default.createElement(
-                "div",
-                { className: "row" },
-                _react2.default.createElement(
-                  "div",
-                  { className: "col-md-4" },
-                  "Ratings"
-                ),
-                _react2.default.createElement(
-                  "button",
-                  { type: "button", className: "btn btn-primary col-md-4" },
-                  "Lo"
-                ),
-                _react2.default.createElement(
-                  "button",
-                  { type: "button", className: "btn btn-primary col-md-4" },
-                  "Hi"
-                )
-              ),
-              _react2.default.createElement(
-                "div",
-                { className: "row" },
-                "Filter"
-              ),
-              _react2.default.createElement(
-                "div",
-                { className: "row" },
-                "rating"
-              ),
-              _react2.default.createElement(
-                "div",
-                { className: "row" },
-                "price"
-              ),
-              _react2.default.createElement(
-                "div",
-                { className: "row" },
-                "distance"
               )
             ),
             _react2.default.createElement(
@@ -53531,7 +53540,8 @@ var ResultsList = function (_Component) {
                         location: restaurant.location.place_formatted,
                         prepTime: restaurant.prepTime,
                         priceRange: restaurant.priceRange,
-                        minDeliveryCharge: restaurant.minDeliveryCharge })
+                        minDeliveryCharge: restaurant.minDeliveryCharge
+                      })
                     );
                   })
                 )
