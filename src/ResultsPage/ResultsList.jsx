@@ -58,56 +58,44 @@ class ResultsList extends Component {
             <div className="col-md-3" style={{ borderRight: "thick solid black" }} id="filter-sort-col">
               <div className="row">Sort By: </div>
 
-              <div className="row">
-                <div className="col-md-4">Price</div>
-                <button type="button" className="btn btn-primary col-md-4">
-                  Lo
-                </button>
-                <button type="button" className="btn btn-primary col-md-4">
-                  Hi
-                </button>
-              </div>
+              <p>
+                <div className='sortBy-label'><strong style={{width: '20px'}}>Price:</strong> </div><button className="btn btn-info">Low</button>
+                <button className="btn btn-info">High</button>{" "}
+              </p>
 
-              <div className="row">
-                <div className="col-md-4">Distance</div>
-                <button type="button" className="btn btn-primary col-md-4">
-                  Lo
-                </button>
-                <button type="button" className="btn btn-primary col-md-4">
-                  Hi
-                </button>
-              </div>
 
-              <div className="row">
-                <div className="col-md-4">Ratings</div>
-                <button type="button" className="btn btn-primary col-md-4">
-                  Lo
-                </button>
-                <button type="button" className="btn btn-primary col-md-4">
-                  Hi
-                </button>
-              </div>
+              <p>
 
-              <div className="row">Filter</div>
+                <div className='sortBy-label'><strong style={{width: '20px'}}>Distance:</strong> </div><button className="btn btn-info">Low</button>
+                <button className="btn btn-info">High</button>
+              </p>
+
+              <p>
+
+               <div className='sortBy-label'> <strong style={{width: '20px'}}>Ratings:</strong> </div><button className="btn btn-info">Low</button>
+                <button className="btn btn-info">High</button>
+              </p>
+
+              {/* <div className="row">Filter</div>
               <div className="row">rating</div>
               <div className="row">price</div>
-              <div className="row">distance</div>
+              <div className="row">distance</div> */}
             </div>
 
             <div className="col-md-9">
               <div className="card">
                 <ul className="list-group list-group-flush">
-
                   {this.props.listStore.map(restaurant => {
                     return (
                       <li className="list-group-item searchResultContainer">
                         <SearchResult
-                        id={restaurant.id}
-                        name={restaurant.restaurantName}
-                        location={restaurant.location.place_formatted}
-                        prepTime={restaurant.prepTime}
-                        priceRange= {restaurant.priceRange}
-                        minDeliveryCharge={restaurant.minDeliveryCharge} />
+                          id={restaurant.id}
+                          name={restaurant.restaurantName}
+                          location={restaurant.location.place_formatted}
+                          prepTime={restaurant.prepTime}
+                          priceRange={restaurant.priceRange}
+                          minDeliveryCharge={restaurant.minDeliveryCharge}
+                        />
                       </li>
                     );
                   })}

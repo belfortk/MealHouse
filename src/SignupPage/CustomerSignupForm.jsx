@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import { customerInput } from './CustomerAction';
+import { createCookie } from '../Cookie/CookieFunction';
+import randomString from 'randomstring';
 
 class CustomerSignUpForm extends React.Component {
   constructor(props) {
@@ -51,9 +53,12 @@ class CustomerSignUpForm extends React.Component {
         axios
           .post("http://localhost:3000/api/Customers", newCustomer)
           .then(function(response) {
+            console.log(response);
             console.log("new customer added");
-            console.log(newCustomer);
-            window.location = "http://localhost:3000/";
+            createCookie('id', response.data.id, 0);
+            createCookie('auth', randomString.generate(), 0);
+            createCookie('type', 'customer', 0);
+            window.location = "http://localhost:3000/#/";
           })
           .catch(function(error) {
             console.log("unable to add new customer");
