@@ -7,10 +7,10 @@ class Footer extends React.Component {
       <footer className="navbar navbar-fixed-bottom">
         <div className="navbar navbar-fixed-bottom" id="">
           <div className="">
-            <Link className="active text-black" to="/aboutus">
+            <Link className="active text-black footer-link" to="/aboutus">
               About Us <span className="sr-only">(current)</span>
             </Link>
-            <Link className="active text-black" to="/contactus">
+            <Link className="active text-black footer-link" to="/contactus">
               Contact Us <span className="sr-only">(current)</span>
             </Link>
           </div>
