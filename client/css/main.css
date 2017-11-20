@@ -82,15 +82,20 @@ body {
 }
 
 footer {
-  position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
-  bottom: 10px;
   right:0px;
   height:120px;
   width:100%;
   color: black;
+  background-color: white;
+  opacity: .6;
+  margin: 0;
+  padding: 0;
+  position:absolute;
+  bottom:0;
+  width:100%;
 }
 
 .text-black{
@@ -462,4 +467,45 @@ footer {
 
   .grow:hover {
     transform: scale(1.1);
+  }
+
+
+  #searchCont{
+    margin-top: 55px;
+  }
+
+
+  #basic-addon2{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background-color: #4aa64a;
+    color: white;
+  }
+
+  #basic-addon2:hover{
+    text-decoration: none;
+
+  }
+
+  .footer-link{
+    margin: 0px 20px;
+  }
+
+  #signup-button-group{
+    margin-bottom: 1em;
+  }
+
+  #customer-button{
+    margin-right: 1em;
+    border-radius: 10px;
+
+  }
+
+  #restaurant-button{
+
+    border-radius: 10px;
+  }
+
+  #sign-up-form-submit{
+    margin-top: 2em;
   }

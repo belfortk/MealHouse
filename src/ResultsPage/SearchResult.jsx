@@ -5,12 +5,13 @@ class SearchResult extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      avgStar: 0
+      avgStar: 0,
+      pictureURL: ''
     };
   }
 
   componentWillMount() {
-    console.log(this.props.id);
+
     axios
       .get("http://localhost:3000/api/Restaurants/" + this.props.id + "?filter=%7B%22include%22%3A%22reviews%22%7D")
       .then(response => {
@@ -25,11 +26,24 @@ class SearchResult extends React.Component {
         console.log("Restaurant data not found");
         console.log(error);
       });
+
+      axios.get('http://localhost:3000/api/Restaurants/'+ this.props.id+ '/pictures')
+      .then(response => {
+
+        console.log(response.data[0].src)
+        this.setState({
+          pictureURL: response.data[0].src
+        });
+      })
+      .catch(error => {
+        console.log("Picture not found");
+        console.log(error);
+      })
   }
 
   render() {
     const fiveStars = (
-      <div class="rating">
+      <div className="rating">
         <span>★</span>
         <span>★</span>
         <span>★</span>
@@ -94,14 +108,17 @@ class SearchResult extends React.Component {
     return (
 
         <div className="row">
-          <div className="col-md-8">
+        <div className='col-md-3'>
+        <img src={this.state.pictureURL} alt='no picture found' style={{width:'70px', height:'75px'}}/>
+        </div>
+          <div className="col-md-6">
             <p>{this.props.name}</p>
             <p>
               <small>{this.props.location} </small>
             </p>
           </div>
 
-          <div className="col-md-4">
+          <div className="col-md-3">
             <div className="row">{star}</div>
             <div className="row">
               <p>{this.props.priceRange} </p>

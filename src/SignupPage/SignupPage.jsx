@@ -29,14 +29,14 @@ class SignupPage extends Component {
         </header>
 
         <div className="container">
-          <div className="btn-group justify-content-center col-4" data-toggle="buttons">
-            <label className="btn btn-primary active">
-              <button type="radio" name="options" id="customer-button" autoComplete="off" value={'true'} onClick={this.handleSelectType} />
-              Customer
-            </label>
-            <label className="btn btn-primary">
-              <button type="radio" name="options" id="restaurant-button" autoComplete="off"  value={"false"} onClick={this.handleSelectType}/> Restaurant
-            </label>
+          <div className="btn-group justify-content-center col-4" id='signup-button-group' data-toggle="buttons">
+
+              <button className='btn btn-primary signup-type-button' id='signup-customer-button' type='button' name="options" id="customer-button" autoComplete="off" value={'true'} onClick={this.handleSelectType} > Customer </button>
+
+
+
+              <button className='btn btn-primary' id='signup-restaurant-button' type='button' name="options" id="restaurant-button" autoComplete="off"  value={"false"} onClick={this.handleSelectType}> Restaurant </button>
+
           </div>
 
           { (this.state.isCustomer == "true")? <CustomerSignUpForm /> : <RestaurantSignUpForm /> }
