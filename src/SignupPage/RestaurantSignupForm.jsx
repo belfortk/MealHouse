@@ -74,6 +74,9 @@ class RestaurantSignUpForm extends React.Component {
           .then(function(response) {
             console.log("new restaurant added");
             console.log(newRestaurant);
+            createCookie('id', response.data.id, 0);
+            createCookie('auth', randomString.generate(), 0);
+            createCookie('type', 'restaurant', 0);
             window.location = "http://localhost:3000/#/profile/restaurant";
           })
           .catch(function(error) {
