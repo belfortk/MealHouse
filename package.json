@@ -9,8 +9,9 @@
     "lint": "eslint .",
     "start": "nodemon .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack -w",
-    "posttest": "npm run lint && nsp check"
+    "build": "webpack",
+    "posttest": "npm run lint && nsp check",
+    "postinstall": "npm run less && webpack"
   },
   "dependencies": {
     "axios": "^0.17.0",
