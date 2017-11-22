@@ -21,12 +21,12 @@ class ThankYouPage extends React.Component{
       </header>
       <div className="container" id='thankyou-container'>
 
-      <p>Thank you for ordering from 'RESTAURANT NAME'</p>
+      <p>Thank you for ordering from {this.props.store.dataList.restaurantName}</p>
 
       <p>Order Time: 'TIME OF ORDER'</p>
       <p>Estimated Delivery Time: 'TIME OF ORDER + PREP TIME + TRAVEL TIME'</p>
 
-      <p>If you have any questions about your order, please call 'BUSINESS PHONE'</p>
+      <p>If you have any questions about your order, please call {this.props.store.dataList.restaurantPhone}</p>
 
       <button className="btn btn-primary" onClick={ this.handleClick } > Back to Search </button>
 
@@ -39,7 +39,7 @@ class ThankYouPage extends React.Component{
 
 function mapStateToProps(store) {
   return {
-    store: store.orderInfo
+    store: store.orderList
   };
 }
 
