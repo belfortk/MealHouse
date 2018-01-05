@@ -91,10 +91,10 @@ class CustomerProfilePage extends React.Component {
     let authChecker = readCookie('auth');
     let idChecker = readCookie('id');
 
-    axios.put(`http://localhost:3000/api/Customers/${idChecker}`, updatedUser)
+    axios.put(`https://localhost:3000/api/Customers/${idChecker}`, updatedUser)
     .then( data => {
       console.log("Update Success");
-      window.location = 'http://localhost:3000/#/';
+      window.location = 'https://localhost:3000/#/';
     })
     .catch(error =>{
       console.log("Update Failed");

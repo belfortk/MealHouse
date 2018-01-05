@@ -21,7 +21,7 @@ class ThankYouPage extends React.Component{
       </header>
       <div className="container" id='thankyou-container'>
 
-      <p>Thank you for ordering from {this.props.store.dataList.restaurantName}</p>
+      <h3>Thank you for ordering from {this.props.store.dataList.restaurantName}</h3>
 
       <p>Order Time: 'TIME OF ORDER'</p>
       <p>Estimated Delivery Time: 'TIME OF ORDER + PREP TIME + TRAVEL TIME'</p>

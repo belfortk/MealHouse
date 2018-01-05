@@ -12603,7 +12603,7 @@ var defaultState = {
     place_formatted: "",
     place_location: "",
     password: "",
-    updatePic: "http://is1.mzstatic.com/image/thumb/Purple128/v4/76/61/fc/7661fcae-4ea8-b877-3b51-225ec1a0c47c/source/1200x630bb.jpg",
+    updatePic: "https://is1.mzstatic.com/image/thumb/Purple128/v4/76/61/fc/7661fcae-4ea8-b877-3b51-225ec1a0c47c/source/1200x630bb.jpg",
     urlField: ""
 };
 
@@ -54376,7 +54376,7 @@ var ThankYouPage = function (_React$Component) {
           'div',
           { className: 'container', id: 'thankyou-container' },
           _react2.default.createElement(
-            'p',
+            'h3',
             null,
             'Thank you for ordering from ',
             this.props.store.dataList.restaurantName
@@ -54780,9 +54780,9 @@ var CustomerProfilePage = function (_React$Component) {
       var authChecker = (0, _CookieFunction.readCookie)('auth');
       var idChecker = (0, _CookieFunction.readCookie)('id');
 
-      _axios2.default.put("http://localhost:3000/api/Customers/" + idChecker, updatedUser).then(function (data) {
+      _axios2.default.put("https://localhost:3000/api/Customers/" + idChecker, updatedUser).then(function (data) {
         console.log("Update Success");
-        window.location = 'http://localhost:3000/#/';
+        window.location = 'https://localhost:3000/#/';
       }).catch(function (error) {
         console.log("Update Failed");
         console.log(error);
@@ -55671,7 +55671,7 @@ var OrderPage = function (_Component) {
                         _react2.default.createElement("img", {
                             className: "card-img-top",
                             style: { height: 150 },
-                            src: "http://is1.mzstatic.com/image/thumb/Purple128/v4/76/61/fc/7661fcae-4ea8-b877-3b51-225ec1a0c47c/source/1200x630bb.jpg",
+                            src: "https://is1.mzstatic.com/image/thumb/Purple128/v4/76/61/fc/7661fcae-4ea8-b877-3b51-225ec1a0c47c/source/1200x630bb.jpg",
                             alt: "Card image cap"
                         })
                     ),

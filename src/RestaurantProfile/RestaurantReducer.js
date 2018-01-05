@@ -26,7 +26,7 @@ const defaultState = {
     place_formatted: "",
     place_location: "",
     password: "",
-    updatePic:"http://is1.mzstatic.com/image/thumb/Purple128/v4/76/61/fc/7661fcae-4ea8-b877-3b51-225ec1a0c47c/source/1200x630bb.jpg",
+    updatePic:"https://is1.mzstatic.com/image/thumb/Purple128/v4/76/61/fc/7661fcae-4ea8-b877-3b51-225ec1a0c47c/source/1200x630bb.jpg",
     urlField:""
 }
 
