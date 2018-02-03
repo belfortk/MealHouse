@@ -6130,7 +6130,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(19);
+var _reactRouterDom = __webpack_require__(18);
 
 var _reactRedux = __webpack_require__(7);
 
@@ -6213,7 +6213,7 @@ var Navbar = function (_React$Component) {
         return _react2.default.createElement(
           "a",
           {
-            href: "http://localhost:3000/#/",
+            href: "http://mealhouse.herokuapp.com/#/",
             className: "nav-item nav-link active",
             onClick: this.logoutCookies
           },
@@ -6243,7 +6243,7 @@ var Navbar = function (_React$Component) {
         return _react2.default.createElement(
           "a",
           {
-            href: "http://localhost:3000/#/profile/customer",
+            href: "http://mealhouse.herokuapp.com/#/profile/customer",
             className: "nav-item nav-link active"
           },
           "Account"
@@ -6252,7 +6252,7 @@ var Navbar = function (_React$Component) {
         return _react2.default.createElement(
           "a",
           {
-            href: "http://localhost:3000/#/profile/restaurant",
+            href: "http://mealhouse.herokuapp.com/#/profile/restaurant",
             className: "nav-item nav-link active"
           },
           "Account"
@@ -6286,7 +6286,7 @@ var Navbar = function (_React$Component) {
                 (0, _CookieFunction.createCookie)("auth", _randomstring2.default.generate(), 0);
                 (0, _CookieFunction.createCookie)("type", "restaurant", 0);
                 document.getElementById("close-button").click();
-                document.location = "http://localhost:3000/#/profile/restaurant";
+                document.location = "http://mealhouse.herokuapp.com/#/profile/restaurant";
               }
             }
 
@@ -6805,6 +6805,65 @@ module.exports = emptyFunction;
 
 /***/ }),
 /* 18 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__ = __webpack_require__(198);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "BrowserRouter", function() { return __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HashRouter__ = __webpack_require__(200);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "HashRouter", function() { return __WEBPACK_IMPORTED_MODULE_1__HashRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Link__ = __webpack_require__(93);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Link", function() { return __WEBPACK_IMPORTED_MODULE_2__Link__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__ = __webpack_require__(202);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "MemoryRouter", function() { return __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__NavLink__ = __webpack_require__(205);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "NavLink", function() { return __WEBPACK_IMPORTED_MODULE_4__NavLink__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Prompt__ = __webpack_require__(208);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Prompt", function() { return __WEBPACK_IMPORTED_MODULE_5__Prompt__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(210);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Redirect", function() { return __WEBPACK_IMPORTED_MODULE_6__Redirect__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(94);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return __WEBPACK_IMPORTED_MODULE_7__Route__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Router__ = __webpack_require__(51);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Router", function() { return __WEBPACK_IMPORTED_MODULE_8__Router__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__StaticRouter__ = __webpack_require__(216);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "StaticRouter", function() { return __WEBPACK_IMPORTED_MODULE_9__StaticRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Switch__ = __webpack_require__(218);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Switch", function() { return __WEBPACK_IMPORTED_MODULE_10__Switch__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__matchPath__ = __webpack_require__(220);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "matchPath", function() { return __WEBPACK_IMPORTED_MODULE_11__matchPath__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__withRouter__ = __webpack_require__(221);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "withRouter", function() { return __WEBPACK_IMPORTED_MODULE_12__withRouter__["a"]; });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Buffer = __webpack_require__(3).Buffer
@@ -6906,65 +6965,6 @@ CipherBase.prototype._toString = function (value, enc, fin) {
 }
 
 module.exports = CipherBase
-
-
-/***/ }),
-/* 19 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__ = __webpack_require__(198);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "BrowserRouter", function() { return __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HashRouter__ = __webpack_require__(200);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "HashRouter", function() { return __WEBPACK_IMPORTED_MODULE_1__HashRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Link__ = __webpack_require__(93);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Link", function() { return __WEBPACK_IMPORTED_MODULE_2__Link__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__ = __webpack_require__(202);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "MemoryRouter", function() { return __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__NavLink__ = __webpack_require__(205);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "NavLink", function() { return __WEBPACK_IMPORTED_MODULE_4__NavLink__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Prompt__ = __webpack_require__(208);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Prompt", function() { return __WEBPACK_IMPORTED_MODULE_5__Prompt__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(210);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Redirect", function() { return __WEBPACK_IMPORTED_MODULE_6__Redirect__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(94);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return __WEBPACK_IMPORTED_MODULE_7__Route__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Router__ = __webpack_require__(51);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Router", function() { return __WEBPACK_IMPORTED_MODULE_8__Router__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__StaticRouter__ = __webpack_require__(216);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "StaticRouter", function() { return __WEBPACK_IMPORTED_MODULE_9__StaticRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Switch__ = __webpack_require__(218);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Switch", function() { return __WEBPACK_IMPORTED_MODULE_10__Switch__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__matchPath__ = __webpack_require__(220);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "matchPath", function() { return __WEBPACK_IMPORTED_MODULE_11__matchPath__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__withRouter__ = __webpack_require__(221);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "withRouter", function() { return __WEBPACK_IMPORTED_MODULE_12__withRouter__["a"]; });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /***/ }),
@@ -7574,7 +7574,7 @@ var md5 = __webpack_require__(55)
 var RIPEMD160 = __webpack_require__(56)
 var sha = __webpack_require__(61)
 
-var Base = __webpack_require__(18)
+var Base = __webpack_require__(19)
 
 function HashNoConstructor (hash) {
   Base.call(this, 'digest')
@@ -11279,7 +11279,7 @@ var _reactRedux = __webpack_require__(7);
 
 var _SearchAction = __webpack_require__(315);
 
-var _reactRouterDom = __webpack_require__(19);
+var _reactRouterDom = __webpack_require__(18);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15225,7 +15225,7 @@ module.exports = Sha512
 
 var inherits = __webpack_require__(0)
 var Legacy = __webpack_require__(243)
-var Base = __webpack_require__(18)
+var Base = __webpack_require__(19)
 var Buffer = __webpack_require__(3).Buffer
 var md5 = __webpack_require__(55)
 var RIPEMD160 = __webpack_require__(56)
@@ -15519,7 +15519,7 @@ module.exports = {"aes-128-ecb":{"cipher":"AES","key":128,"iv":0,"mode":"ECB","t
 
 var aes = __webpack_require__(40)
 var Buffer = __webpack_require__(3).Buffer
-var Transform = __webpack_require__(18)
+var Transform = __webpack_require__(19)
 var inherits = __webpack_require__(0)
 var GHASH = __webpack_require__(256)
 var xor = __webpack_require__(30)
@@ -15642,7 +15642,7 @@ module.exports = StreamCipher
 
 var aes = __webpack_require__(40)
 var Buffer = __webpack_require__(3).Buffer
-var Transform = __webpack_require__(18)
+var Transform = __webpack_require__(19)
 var inherits = __webpack_require__(0)
 
 function StreamCipher (mode, key, iv, decrypt) {
@@ -36930,7 +36930,7 @@ var initialState = {
         "end": "11:11"
       }
     }],
-    "priceRange": 1,
+    "priceRange": 2,
     "minDeliveryCharge": 16,
     "id": 1
   }, {
@@ -36952,8 +36952,8 @@ var initialState = {
     "hoursOfOperation": [{
       "willAddLater": true
     }],
-    "priceRange": 0,
-    "minDeliveryCharge": 0,
+    "priceRange": 1,
+    "minDeliveryCharge": 5,
     "id": 2
   }]
 };
@@ -37166,7 +37166,7 @@ var _RestaurantProfile = __webpack_require__(316);
 
 var _RestaurantProfile2 = _interopRequireDefault(_RestaurantProfile);
 
-var _reactRouterDom = __webpack_require__(19);
+var _reactRouterDom = __webpack_require__(18);
 
 var _HomePage = __webpack_require__(318);
 
@@ -42458,7 +42458,7 @@ module.exports = Sha384
 var inherits = __webpack_require__(0)
 var Buffer = __webpack_require__(3).Buffer
 
-var Base = __webpack_require__(18)
+var Base = __webpack_require__(19)
 
 var ZEROS = Buffer.alloc(128)
 var blocksize = 64
@@ -42956,7 +42956,7 @@ var MODES = __webpack_require__(63)
 var AuthCipher = __webpack_require__(115)
 var Buffer = __webpack_require__(3).Buffer
 var StreamCipher = __webpack_require__(116)
-var Transform = __webpack_require__(18)
+var Transform = __webpack_require__(19)
 var aes = __webpack_require__(40)
 var ebtk = __webpack_require__(39)
 var inherits = __webpack_require__(0)
@@ -43348,7 +43348,7 @@ var AuthCipher = __webpack_require__(115)
 var Buffer = __webpack_require__(3).Buffer
 var MODES = __webpack_require__(63)
 var StreamCipher = __webpack_require__(116)
-var Transform = __webpack_require__(18)
+var Transform = __webpack_require__(19)
 var aes = __webpack_require__(40)
 var ebtk = __webpack_require__(39)
 var inherits = __webpack_require__(0)
@@ -43471,7 +43471,7 @@ exports.createDecipheriv = createDecipheriv
 /* 258 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var CipherBase = __webpack_require__(18)
+/* WEBPACK VAR INJECTION */(function(Buffer) {var CipherBase = __webpack_require__(19)
 var des = __webpack_require__(64)
 var inherits = __webpack_require__(0)
 
@@ -51299,7 +51299,7 @@ var _Navbar2 = _interopRequireDefault(_Navbar);
 
 var _CookieFunction = __webpack_require__(21);
 
-var _reactRouterDom = __webpack_require__(19);
+var _reactRouterDom = __webpack_require__(18);
 
 var _reactRedux = __webpack_require__(7);
 
@@ -51486,7 +51486,7 @@ var RestaurantProfile = function (_Component) {
         password: this.props.password
       }).then(function (data) {
         console.log("Update Success");
-        window.location = "http://localhost:3000/#/editMenu";
+        window.location = "http://mealhouse.herokuapp.com/#/editMenu";
       }).catch(function (err) {
         console.log(err);
       });
@@ -52343,7 +52343,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(7);
 
-var _reactRouterDom = __webpack_require__(19);
+var _reactRouterDom = __webpack_require__(18);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -52568,7 +52568,7 @@ var CustomerSignUpForm = function (_React$Component) {
         }
       };
 
-      _axios2.default.get("http://localhost:3000/api/Customers/findOne?filter=%7B%22where%22%3A%20%7B%22email%22%3A%22" + this.props.email + "%22%7D%7D").then(function (response) {
+      _axios2.default.get("http://mealhouse.herokuapp.com/api/Customers/findOne?filter=%7B%22where%22%3A%20%7B%22email%22%3A%22" + this.props.email + "%22%7D%7D").then(function (response) {
         console.log("email already taken");
         existingUser = true;
         console.log("existing user? " + existingUser);
@@ -52577,13 +52577,13 @@ var CustomerSignUpForm = function (_React$Component) {
         existingUser = false;
         console.log("existing user? " + existingUser);
 
-        _axios2.default.post("http://localhost:3000/api/Customers", newCustomer).then(function (response) {
+        _axios2.default.post("http://mealhouse.herokuapp.com/api/Customers", newCustomer).then(function (response) {
           console.log(response);
           console.log("new customer added");
           (0, _CookieFunction.createCookie)('id', response.data.id, 0);
           (0, _CookieFunction.createCookie)('auth', _randomstring2.default.generate(), 0);
           (0, _CookieFunction.createCookie)('type', 'customer', 0);
-          window.location = "http://localhost:3000/#/";
+          window.location = "http://mealhouse.herokuapp.com/#/";
         }).catch(function (error) {
           console.log("unable to add new customer");
           console.log(error);
@@ -53123,7 +53123,7 @@ var RestaurantSignUpForm = function (_React$Component) {
         minDeliveryCharge: 0
       };
 
-      _axios2.default.get("http://localhost:3000/api/Restaurants/findOne?filter=%7B%22where%22%3A%20%7B%22email%22%3A%22" + this.props.email + "%22%7D%7D").then(function (response) {
+      _axios2.default.get("http://mealhouse.herokuapp.com/api/Restaurants/findOne?filter=%7B%22where%22%3A%20%7B%22email%22%3A%22" + this.props.email + "%22%7D%7D").then(function (response) {
         console.log("email already taken");
         existingRestaurant = true;
         console.log("existing restaurant? " + existingRestaurant);
@@ -53132,13 +53132,13 @@ var RestaurantSignUpForm = function (_React$Component) {
         existingRestaurant = false;
         console.log("existing restaurant? " + existingRestaurant);
 
-        _axios2.default.post("http://localhost:3000/api/Restaurants", newRestaurant).then(function (response) {
+        _axios2.default.post("http://mealhouse.herokuapp.com/api/Restaurants", newRestaurant).then(function (response) {
           console.log("new restaurant added");
           console.log(newRestaurant);
           createCookie('id', response.data.id, 0);
           createCookie('auth', randomString.generate(), 0);
           createCookie('type', 'restaurant', 0);
-          window.location = "http://localhost:3000/#/profile/restaurant";
+          window.location = "http://mealhouse.herokuapp.com/#/profile/restaurant";
         }).catch(function (error) {
           console.log("unable to add new restaurant");
           console.log(error);
@@ -53437,115 +53437,73 @@ var ResultsList = function (_Component) {
           { className: "container" },
           _react2.default.createElement(
             "div",
-            { className: "row" },
+            { className: "result-sidebar" },
             _react2.default.createElement(
               "div",
-              { className: "col-md-3", style: { borderRight: "thick solid black" }, id: "filter-sort-col" },
+              { className: "form-group" },
+              "Price",
               _react2.default.createElement(
-                "div",
-                { className: "row" },
-                "Sort By: "
+                "button",
+                { type: "button", "class": "btn btn-primary btn-sm" },
+                "ascending"
               ),
               _react2.default.createElement(
-                "p",
-                null,
-                _react2.default.createElement(
-                  "div",
-                  { className: "sortBy-label" },
-                  _react2.default.createElement(
-                    "strong",
-                    { style: { width: '20px' } },
-                    "Price:"
-                  ),
-                  " "
-                ),
-                _react2.default.createElement(
-                  "button",
-                  { className: "btn btn-info" },
-                  "Low"
-                ),
-                _react2.default.createElement(
-                  "button",
-                  { className: "btn btn-info" },
-                  "High"
-                ),
-                " "
-              ),
-              _react2.default.createElement(
-                "p",
-                null,
-                _react2.default.createElement(
-                  "div",
-                  { className: "sortBy-label" },
-                  _react2.default.createElement(
-                    "strong",
-                    { style: { width: '20px' } },
-                    "Distance:"
-                  ),
-                  " "
-                ),
-                _react2.default.createElement(
-                  "button",
-                  { className: "btn btn-info" },
-                  "Low"
-                ),
-                _react2.default.createElement(
-                  "button",
-                  { className: "btn btn-info" },
-                  "High"
-                )
-              ),
-              _react2.default.createElement(
-                "p",
-                null,
-                _react2.default.createElement(
-                  "div",
-                  { className: "sortBy-label" },
-                  " ",
-                  _react2.default.createElement(
-                    "strong",
-                    { style: { width: '20px' } },
-                    "Ratings:"
-                  ),
-                  " "
-                ),
-                _react2.default.createElement(
-                  "button",
-                  { className: "btn btn-info" },
-                  "Low"
-                ),
-                _react2.default.createElement(
-                  "button",
-                  { className: "btn btn-info" },
-                  "High"
-                )
+                "button",
+                { type: "button", "class": "btn btn-primary btn-sm" },
+                "descending"
               )
             ),
             _react2.default.createElement(
               "div",
-              { className: "col-md-9" },
+              { className: "form-group" },
+              "Rating",
               _react2.default.createElement(
-                "div",
-                { className: "card" },
-                _react2.default.createElement(
-                  "ul",
-                  { className: "list-group list-group-flush" },
-                  this.props.listStore.map(function (restaurant) {
-                    return _react2.default.createElement(
-                      "li",
-                      { className: "list-group-item searchResultContainer" },
-                      _react2.default.createElement(_SearchResult2.default, {
-                        id: restaurant.id,
-                        name: restaurant.restaurantName,
-                        location: restaurant.location.place_formatted,
-                        prepTime: restaurant.prepTime,
-                        priceRange: restaurant.priceRange,
-                        minDeliveryCharge: restaurant.minDeliveryCharge
-                      })
-                    );
-                  })
-                )
+                "button",
+                { type: "button", "class": "btn btn-primary btn-sm" },
+                "ascending"
+              ),
+              _react2.default.createElement(
+                "button",
+                { type: "button", "class": "btn btn-primary btn-sm" },
+                "descending"
               )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "form-group" },
+              "Delivery Charge",
+              _react2.default.createElement(
+                "button",
+                { type: "button", "class": "btn btn-primary btn-sm" },
+                "ascending"
+              ),
+              _react2.default.createElement(
+                "button",
+                { type: "button", "class": "btn btn-primary btn-sm" },
+                "descending"
+              )
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "main-body-results" },
+            _react2.default.createElement(
+              "ul",
+              { className: "list-group list-group-flush" },
+              this.props.listStore.map(function (restaurant) {
+                return _react2.default.createElement(
+                  "li",
+                  { className: "list-group-item searchResultContainer", style: { marginBottom: "1vh" } },
+                  _react2.default.createElement(_SearchResult2.default, {
+                    id: restaurant.id,
+                    name: restaurant.restaurantName,
+                    location: restaurant.location.place_formatted,
+                    prepTime: restaurant.prepTime,
+                    priceRange: restaurant.priceRange,
+                    minDeliveryCharge: restaurant.minDeliveryCharge
+                  })
+                );
+              })
             )
           )
         )
@@ -53588,6 +53546,8 @@ var _axios = __webpack_require__(11);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _reactRouterDom = __webpack_require__(18);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -53616,7 +53576,7 @@ var SearchResult = function (_React$Component) {
     value: function componentWillMount() {
       var _this2 = this;
 
-      _axios2.default.get("http://localhost:3000/api/Restaurants/" + this.props.id + "?filter=%7B%22include%22%3A%22reviews%22%7D").then(function (response) {
+      _axios2.default.get("http://mealhouse.herokuapp.com/api/Restaurants/" + this.props.id + "?filter=%7B%22include%22%3A%22reviews%22%7D").then(function (response) {
         var starAvg = 0;
         response.data.reviews.forEach(function (review) {
           return starAvg = starAvg + review.stars;
@@ -53630,9 +53590,8 @@ var SearchResult = function (_React$Component) {
         console.log(error);
       });
 
-      _axios2.default.get('http://localhost:3000/api/Restaurants/' + this.props.id + '/pictures').then(function (response) {
+      _axios2.default.get('http://mealhouse.herokuapp.com/api/Restaurants/' + this.props.id + '/pictures').then(function (response) {
 
-        console.log(response.data[0].src);
         _this2.setState({
           pictureURL: response.data[0].src
         });
@@ -53676,7 +53635,7 @@ var SearchResult = function (_React$Component) {
 
       var fourStars = _react2.default.createElement(
         "div",
-        { "class": "rating" },
+        { className: "rating" },
         _react2.default.createElement(
           "span",
           null,
@@ -53706,7 +53665,7 @@ var SearchResult = function (_React$Component) {
 
       var threeStars = _react2.default.createElement(
         "div",
-        { "class": "rating" },
+        { className: "rating" },
         _react2.default.createElement(
           "span",
           null,
@@ -53736,7 +53695,7 @@ var SearchResult = function (_React$Component) {
 
       var twoStars = _react2.default.createElement(
         "div",
-        { "class": "rating" },
+        { className: "rating" },
         _react2.default.createElement(
           "span",
           null,
@@ -53766,7 +53725,7 @@ var SearchResult = function (_React$Component) {
 
       var oneStars = _react2.default.createElement(
         "div",
-        { "class": "rating" },
+        { className: "rating" },
         _react2.default.createElement(
           "span",
           null,
@@ -53807,9 +53766,30 @@ var SearchResult = function (_React$Component) {
         star = fiveStars;
       }
 
+      function dollarSignGenerator(expense) {
+        switch (expense) {
+          case 1:
+            {
+              return "$";
+            }
+          case 2:
+            {
+              return "$$";
+            }
+          case 3:
+            {
+              return "$$$";
+            }
+          default:
+            {
+              return "no price data";
+            }
+        }
+      }
+
       return _react2.default.createElement(
         "div",
-        { className: "row" },
+        { className: "row", style: { width: "100%" } },
         _react2.default.createElement(
           "div",
           { className: "col-md-3" },
@@ -53817,7 +53797,7 @@ var SearchResult = function (_React$Component) {
         ),
         _react2.default.createElement(
           "div",
-          { className: "col-md-6" },
+          { className: "col-md-5" },
           _react2.default.createElement(
             "p",
             null,
@@ -53848,7 +53828,7 @@ var SearchResult = function (_React$Component) {
             _react2.default.createElement(
               "p",
               null,
-              this.props.priceRange,
+              dollarSignGenerator(this.props.priceRange),
               " "
             )
           ),
@@ -53865,6 +53845,19 @@ var SearchResult = function (_React$Component) {
                 this.props.prepTime,
                 " mins"
               )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "col-md-1 result-go-button-div", style: { display: "flex", alignItems: "center" } },
+          _react2.default.createElement(
+            _reactRouterDom.Link,
+            { to: "/orderpage" },
+            _react2.default.createElement(
+              "button",
+              { type: "button", id: "go-button-" + this.props.id, className: "btn btn-primary result-go-button button-pulse", onClick: this.handleGoButtonClick },
+              "GO!"
             )
           )
         )
@@ -54359,7 +54352,7 @@ var ThankYouPage = function (_React$Component) {
   _createClass(ThankYouPage, [{
     key: 'handleClick',
     value: function handleClick() {
-      window.location = 'http://localhost:3000/';
+      window.location = 'http://mealhouse.herokuapp.com/';
     }
   }, {
     key: 'render',
@@ -54464,7 +54457,7 @@ var AboutUsPage = function (_React$Component) {
   _createClass(AboutUsPage, [{
     key: "handleClick",
     value: function handleClick() {
-      window.location = "http://localhost:3000/";
+      window.location = "http://mealhouse.herokuapp.com/";
     }
   }, {
     key: "render",
@@ -54571,7 +54564,7 @@ var ContactUs = function (_React$Component) {
   _createClass(ContactUs, [{
     key: "handleClick",
     value: function handleClick() {
-      window.location = "http://localhost:3000/";
+      window.location = "http://mealhouse.herokuapp.com/";
     }
   }, {
     key: "render",
@@ -54734,7 +54727,7 @@ var CustomerProfilePage = function (_React$Component) {
       var authChecker = (0, _CookieFunction.readCookie)('auth');
       var idChecker = (0, _CookieFunction.readCookie)('id');
 
-      _axios2.default.get("http://localhost:3000/api/Customers/" + idChecker).then(function (response) {
+      _axios2.default.get("http://mealhouse.herokuapp.com/api/Customers/" + idChecker).then(function (response) {
         var customerPhone = response.data.phoneNumber;
         var customerEmail = response.data.email;
         var fullName = response.data.name;
@@ -54780,9 +54773,9 @@ var CustomerProfilePage = function (_React$Component) {
       var authChecker = (0, _CookieFunction.readCookie)('auth');
       var idChecker = (0, _CookieFunction.readCookie)('id');
 
-      _axios2.default.put("https://localhost:3000/api/Customers/" + idChecker, updatedUser).then(function (data) {
+      _axios2.default.put("https://mealhouse.herokuapp.com/api/Customers/" + idChecker, updatedUser).then(function (data) {
         console.log("Update Success");
-        window.location = 'https://localhost:3000/#/';
+        window.location = 'https://mealhouse.herokuapp.com/#/';
       }).catch(function (error) {
         console.log("Update Failed");
         console.log(error);
@@ -55293,7 +55286,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(19);
+var _reactRouterDom = __webpack_require__(18);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55427,7 +55420,7 @@ var OrderPage = function (_Component) {
         value: function componentWillMount() {
             var dispatch = this.props.dispatch;
 
-            _axios2.default.get("http://localhost:3000/api/Restaurants/1?filter=%7B%22include%22%3A%20%22menuItems%22%7D&access_token=Al3bIEhsGQq664HkRHjJd3HDtm3oUK8wkznAj9V7yoWAuUN2H2wLcdseMAY1nRTF").then(function (response) {
+            _axios2.default.get("http://mealhouse.herokuapp.com/api/Restaurants/1?filter=%7B%22include%22%3A%20%22menuItems%22%7D&access_token=Al3bIEhsGQq664HkRHjJd3HDtm3oUK8wkznAj9V7yoWAuUN2H2wLcdseMAY1nRTF").then(function (response) {
                 dispatch((0, _OrderAction.DataList)(response.data));
             }).catch(function (err) {
                 return console.log(err);
@@ -55913,7 +55906,7 @@ var _axios = __webpack_require__(11);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _reactRouterDom = __webpack_require__(19);
+var _reactRouterDom = __webpack_require__(18);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -56047,7 +56040,7 @@ var CheckoutPage = function (_React$Component) {
   _createClass(CheckoutPage, [{
     key: "handleClick",
     value: function handleClick() {
-      window.location = "http://localhost:3000/";
+      window.location = "http://mealhouse.herokuapp.com/";
     }
   }, {
     key: "render",

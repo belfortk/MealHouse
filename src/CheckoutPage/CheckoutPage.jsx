@@ -10,7 +10,7 @@ class CheckoutPage extends React.Component {
   }
 
   handleClick() {
-    window.location = "http://localhost:3000/";
+    window.location = "http://mealhouse.herokuapp.com/";
   }
 
   render() {

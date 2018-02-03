@@ -54,54 +54,52 @@ class ResultsList extends Component {
         </header>
 
         <div className="container">
-          <div className="row">
-            <div className="col-md-3" style={{ borderRight: "thick solid black" }} id="filter-sort-col">
-              <div className="row">Sort By: </div>
-
-              <p>
-                <div className='sortBy-label'><strong style={{width: '20px'}}>Price:</strong> </div><button className="btn btn-info">Low</button>
-                <button className="btn btn-info">High</button>{" "}
-              </p>
-
-
-              <p>
-
-                <div className='sortBy-label'><strong style={{width: '20px'}}>Distance:</strong> </div><button className="btn btn-info">Low</button>
-                <button className="btn btn-info">High</button>
-              </p>
-
-              <p>
-
-               <div className='sortBy-label'> <strong style={{width: '20px'}}>Ratings:</strong> </div><button className="btn btn-info">Low</button>
-                <button className="btn btn-info">High</button>
-              </p>
-
-              {/* <div className="row">Filter</div>
-              <div className="row">rating</div>
-              <div className="row">price</div>
-              <div className="row">distance</div> */}
+          <div className="result-sidebar">
+            <div className="form-group">
+              Price
+              <button type="button" class="btn btn-primary btn-sm">
+                ascending
+              </button>
+              <button type="button" class="btn btn-primary btn-sm">
+                descending
+              </button>
             </div>
-
-            <div className="col-md-9">
-              <div className="card">
-                <ul className="list-group list-group-flush">
-                  {this.props.listStore.map(restaurant => {
-                    return (
-                      <li className="list-group-item searchResultContainer">
-                        <SearchResult
-                          id={restaurant.id}
-                          name={restaurant.restaurantName}
-                          location={restaurant.location.place_formatted}
-                          prepTime={restaurant.prepTime}
-                          priceRange={restaurant.priceRange}
-                          minDeliveryCharge={restaurant.minDeliveryCharge}
-                        />
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
+            <div className="form-group">
+              Rating
+              <button type="button" class="btn btn-primary btn-sm">
+                ascending
+              </button>
+              <button type="button" class="btn btn-primary btn-sm">
+                descending
+              </button>
             </div>
+            <div className="form-group">
+              Delivery Charge
+              <button type="button" class="btn btn-primary btn-sm">
+                ascending
+              </button>
+              <button type="button" class="btn btn-primary btn-sm">
+                descending
+              </button>
+            </div>
+          </div>
+          <div className="main-body-results">
+            <ul className="list-group list-group-flush">
+              {this.props.listStore.map(restaurant => {
+                return (
+                  <li className="list-group-item searchResultContainer" style={{ marginBottom: "1vh" }}>
+                    <SearchResult
+                      id={restaurant.id}
+                      name={restaurant.restaurantName}
+                      location={restaurant.location.place_formatted}
+                      prepTime={restaurant.prepTime}
+                      priceRange={restaurant.priceRange}
+                      minDeliveryCharge={restaurant.minDeliveryCharge}
+                    />
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         </div>
       </div>

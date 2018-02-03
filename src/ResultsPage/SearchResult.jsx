@@ -1,6 +1,9 @@
 import React from "react";
 import axios from "axios";
 
+import { Link } from "react-router-dom";
+
+
 class SearchResult extends React.Component {
   constructor(props) {
     super(props);
@@ -13,7 +16,7 @@ class SearchResult extends React.Component {
   componentWillMount() {
 
     axios
-      .get("http://localhost:3000/api/Restaurants/" + this.props.id + "?filter=%7B%22include%22%3A%22reviews%22%7D")
+      .get("http://mealhouse.herokuapp.com/api/Restaurants/" + this.props.id + "?filter=%7B%22include%22%3A%22reviews%22%7D")
       .then(response => {
         let starAvg = 0;
         response.data.reviews.forEach(review => (starAvg = starAvg + review.stars));
@@ -27,10 +30,10 @@ class SearchResult extends React.Component {
         console.log(error);
       });
 
-      axios.get('http://localhost:3000/api/Restaurants/'+ this.props.id+ '/pictures')
+      axios.get('http://mealhouse.herokuapp.com/api/Restaurants/'+ this.props.id+ '/pictures')
       .then(response => {
 
-        console.log(response.data[0].src)
+
         this.setState({
           pictureURL: response.data[0].src
         });
@@ -53,7 +56,7 @@ class SearchResult extends React.Component {
     );
 
     const fourStars = (
-      <div class="rating">
+      <div className="rating">
         <span>★</span>
         <span>★</span>
         <span>★</span>
@@ -63,7 +66,7 @@ class SearchResult extends React.Component {
     );
 
     const threeStars = (
-      <div class="rating">
+      <div className="rating">
         <span>★</span>
         <span>★</span>
         <span>★</span>
@@ -73,7 +76,7 @@ class SearchResult extends React.Component {
     );
 
     const twoStars = (
-      <div class="rating">
+      <div className="rating">
         <span>★</span>
         <span>★</span>
         <span>☆</span>
@@ -83,7 +86,7 @@ class SearchResult extends React.Component {
     );
 
     const oneStars = (
-      <div class="rating">
+      <div className="rating">
         <span>★</span>
         <span>☆</span>
         <span>☆</span>
@@ -105,13 +108,30 @@ class SearchResult extends React.Component {
       star = fiveStars;
     }
 
+    function dollarSignGenerator(expense){
+      switch (expense) {
+        case 1 : {
+          return "$";
+        }
+        case 2 : {
+          return "$$";
+        }
+        case 3 : {
+          return "$$$";
+        }
+        default: {
+          return "no price data";
+        }
+      }
+    }
+
     return (
 
-        <div className="row">
+        <div className="row" style={{ width: "100%" }}>
         <div className='col-md-3'>
         <img src={this.state.pictureURL} alt='no picture found' style={{width:'70px', height:'75px'}}/>
         </div>
-          <div className="col-md-6">
+          <div className="col-md-5">
             <p>{this.props.name}</p>
             <p>
               <small>{this.props.location} </small>
@@ -121,13 +141,20 @@ class SearchResult extends React.Component {
           <div className="col-md-3">
             <div className="row">{star}</div>
             <div className="row">
-              <p>{this.props.priceRange} </p>
+              <p>{dollarSignGenerator(this.props.priceRange)} </p>
             </div>
             <div className="row">
               <p>
                 <small>Prep Time: {this.props.prepTime} mins</small>
               </p>
             </div>
+          </div>
+          <div className="col-md-1 result-go-button-div" style={{display:"flex", alignItems:"center"}}>
+          <Link to="/orderpage">
+          <button type="button" id={`go-button-${this.props.id}`} className="btn btn-primary result-go-button button-pulse" onClick={this.handleGoButtonClick}>
+                GO!
+              </button>
+          </Link>
           </div>
         </div>
 

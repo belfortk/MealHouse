@@ -55,7 +55,7 @@ restaurants: [  {
       }
     }
   ],
-  "priceRange": 1,
+  "priceRange": 2,
   "minDeliveryCharge": 16,
   "id": 1
 },
@@ -80,8 +80,8 @@ restaurants: [  {
       "willAddLater": true
     }
   ],
-  "priceRange": 0,
-  "minDeliveryCharge": 0,
+  "priceRange": 1,
+  "minDeliveryCharge": 5,
   "id": 2
 }]
 };

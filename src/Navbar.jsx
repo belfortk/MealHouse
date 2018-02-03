@@ -48,7 +48,7 @@ class Navbar extends React.Component {
     if(auth != null) {
     return (
       <a
-      href="http://localhost:3000/#/"
+      href="http://mealhouse.herokuapp.com/#/"
       className="nav-item nav-link active"
       onClick={this.logoutCookies}
     >
@@ -77,7 +77,7 @@ class Navbar extends React.Component {
     } else if (type === "customer") {
       return (
         <a
-          href="http://localhost:3000/#/profile/customer"
+          href="http://mealhouse.herokuapp.com/#/profile/customer"
           className="nav-item nav-link active"
         >
           Account
@@ -86,7 +86,7 @@ class Navbar extends React.Component {
     } else if (type === "restaurant") {
       return (
         <a
-          href="http://localhost:3000/#/profile/restaurant"
+          href="http://mealhouse.herokuapp.com/#/profile/restaurant"
           className="nav-item nav-link active"
         >
           Account
@@ -127,7 +127,7 @@ class Navbar extends React.Component {
                 createCookie("type", "restaurant", 0);
                 document.getElementById("close-button").click();
                 document.location =
-                  "http://localhost:3000/#/profile/restaurant";
+                  "http://mealhouse.herokuapp.com/#/profile/restaurant";
               }
             }
 

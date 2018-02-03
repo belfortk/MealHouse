@@ -185,7 +185,7 @@ class RestaurantProfile extends Component {
           })
           .then(data => {
             console.log("Update Success");
-            window.location = "http://localhost:3000/#/editMenu";
+            window.location = "http://mealhouse.herokuapp.com/#/editMenu";
           })
           .catch(err => {
             console.log(err);

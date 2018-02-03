@@ -26,7 +26,7 @@ class OrderPage extends Component {
 
   componentWillMount(){
       const {dispatch} = this.props;
-      axios.get("http://localhost:3000/api/Restaurants/1?filter=%7B%22include%22%3A%20%22menuItems%22%7D&access_token=Al3bIEhsGQq664HkRHjJd3HDtm3oUK8wkznAj9V7yoWAuUN2H2wLcdseMAY1nRTF")
+      axios.get("http://mealhouse.herokuapp.com/api/Restaurants/1?filter=%7B%22include%22%3A%20%22menuItems%22%7D&access_token=Al3bIEhsGQq664HkRHjJd3HDtm3oUK8wkznAj9V7yoWAuUN2H2wLcdseMAY1nRTF")
       .then(response => {
         dispatch(DataList(response.data))
     })

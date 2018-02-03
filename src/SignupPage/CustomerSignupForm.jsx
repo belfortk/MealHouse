@@ -36,7 +36,7 @@ class CustomerSignUpForm extends React.Component {
 
     axios
       .get(
-        "http://localhost:3000/api/Customers/findOne?filter=%7B%22where%22%3A%20%7B%22email%22%3A%22" +
+        "http://mealhouse.herokuapp.com/api/Customers/findOne?filter=%7B%22where%22%3A%20%7B%22email%22%3A%22" +
           this.props.email +
           "%22%7D%7D"
       )
@@ -51,14 +51,14 @@ class CustomerSignUpForm extends React.Component {
         console.log("existing user? " + existingUser);
 
         axios
-          .post("http://localhost:3000/api/Customers", newCustomer)
+          .post("http://mealhouse.herokuapp.com/api/Customers", newCustomer)
           .then(function(response) {
             console.log(response);
             console.log("new customer added");
             createCookie('id', response.data.id, 0);
             createCookie('auth', randomString.generate(), 0);
             createCookie('type', 'customer', 0);
-            window.location = "http://localhost:3000/#/";
+            window.location = "http://mealhouse.herokuapp.com/#/";
           })
           .catch(function(error) {
             console.log("unable to add new customer");

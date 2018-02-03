@@ -45,7 +45,7 @@ class CustomerProfilePage extends React.Component {
     let idChecker = readCookie('id');
 
     axios
-    .get(`http://localhost:3000/api/Customers/${idChecker}`)
+    .get(`http://mealhouse.herokuapp.com/api/Customers/${idChecker}`)
     .then(response => {
       let customerPhone = response.data.phoneNumber;
       let customerEmail = response.data.email;
@@ -91,10 +91,10 @@ class CustomerProfilePage extends React.Component {
     let authChecker = readCookie('auth');
     let idChecker = readCookie('id');
 
-    axios.put(`https://localhost:3000/api/Customers/${idChecker}`, updatedUser)
+    axios.put(`https://mealhouse.herokuapp.com/api/Customers/${idChecker}`, updatedUser)
     .then( data => {
       console.log("Update Success");
-      window.location = 'https://localhost:3000/#/';
+      window.location = 'https://mealhouse.herokuapp.com/#/';
     })
     .catch(error =>{
       console.log("Update Failed");

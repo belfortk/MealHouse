@@ -55,7 +55,7 @@ class RestaurantSignUpForm extends React.Component {
 
     axios
       .get(
-        "http://localhost:3000/api/Restaurants/findOne?filter=%7B%22where%22%3A%20%7B%22email%22%3A%22" +
+        "http://mealhouse.herokuapp.com/api/Restaurants/findOne?filter=%7B%22where%22%3A%20%7B%22email%22%3A%22" +
           this.props.email +
           "%22%7D%7D"
       )
@@ -70,14 +70,14 @@ class RestaurantSignUpForm extends React.Component {
         console.log("existing restaurant? " + existingRestaurant);
 
         axios
-          .post("http://localhost:3000/api/Restaurants", newRestaurant)
+          .post("http://mealhouse.herokuapp.com/api/Restaurants", newRestaurant)
           .then(function(response) {
             console.log("new restaurant added");
             console.log(newRestaurant);
             createCookie('id', response.data.id, 0);
             createCookie('auth', randomString.generate(), 0);
             createCookie('type', 'restaurant', 0);
-            window.location = "http://localhost:3000/#/profile/restaurant";
+            window.location = "http://mealhouse.herokuapp.com/#/profile/restaurant";
           })
           .catch(function(error) {
             console.log("unable to add new restaurant");
